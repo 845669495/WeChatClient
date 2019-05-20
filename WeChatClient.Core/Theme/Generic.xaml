@@ -11,6 +11,8 @@
         <ResourceDictionary>
             <converter:UriToBitmapConverter x:Key="UriToBitmap"></converter:UriToBitmapConverter>
             <converter:WxResConverter x:Key="WxRes"></converter:WxResConverter>
+            <converter:BoolToVisibilityConverter x:Key="BoolToVisibility"></converter:BoolToVisibilityConverter>
+            
         </ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
     

@@ -74,6 +74,9 @@ namespace WeChatClient.UI.ViewModels
                     user.Signature = contact["Signature"].ToString();
                     user.SnsFlag = contact["SnsFlag"].ToString();
                     user.KeyWord = contact["KeyWord"].ToString();
+                    user.ContactFlag = int.Parse(contact["ContactFlag"].ToString());
+                    user.Statues = int.Parse(contact["Statues"].ToString());
+                    user.ChatNotifyClose = user.IsChatNotifyClose();
                     chatList.Add(user);
                 }
 

@@ -32,7 +32,7 @@
                                 </StackPanel>
                                 <StackPanel Grid.Column="1" Width="20">
                                     <Rectangle Height="20"></Rectangle>
-                                    <Image>
+                                    <Image Visibility="{Binding ChatNotifyClose, Converter={StaticResource BoolToVisibility}}">
                                         <Image.Source>
                                             <CroppedBitmap Source="pack://application:,,,/WeChatClient.Core;component/Resources/wx_res.png" SourceRect="311,432,20,20"></CroppedBitmap>
                                         </Image.Source>

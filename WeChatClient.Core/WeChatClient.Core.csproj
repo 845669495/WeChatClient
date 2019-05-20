@@ -77,6 +77,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\WxResConverter.cs" />
     <Compile Include="Converters\UriToBitmapConverter.cs" />
     <Compile Include="Dependency\DependencyExtension.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Http\StaticCode.cs" />
     <Compile Include="Http\StaticUrl.cs" />
     <Compile Include="Http\WeChatService.cs" />
+    <Compile Include="Models\WxStatus.cs" />
     <Compile Include="Interfaces\IChatListManager.cs" />
     <Compile Include="Models\WeChatUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

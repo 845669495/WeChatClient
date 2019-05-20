@@ -49,9 +49,9 @@ namespace WeChatClient.Core.Models
         /// </summary>
         public string RemarkPYQuanPin { get; set; }
         /// <summary>
-        /// 没发现关键性标注
+        /// 联系人标识
         /// </summary>
-        public string ContactFlag { get; set; }
+        public int ContactFlag { get; set; }
         /// <summary>
         /// 0：是公众号或者是群聊 其他值是好友   //也有特殊情况，还是不行
         /// </summary>
@@ -100,5 +100,15 @@ namespace WeChatClient.Core.Models
         /// 最后的消息
         /// </summary>
         public string LastMsg { get; set; }
+
+        /// <summary>
+        /// 如果是群聊且值为1，则代表消息免打扰
+        /// </summary>
+        public int Statues { get; set; }
+
+        /// <summary>
+        /// 消息免打扰
+        /// </summary>
+        public bool ChatNotifyClose { get; set; }
     }
 }
