@@ -6,8 +6,10 @@ using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Media;
 using WeChatClient.Core.Http;
 using WeChatClient.Core.Interfaces;
@@ -26,6 +28,8 @@ namespace WeChatClient.UI.ViewModels
         [Reactive]
         public WeChatUser WeChatUser { get; private set; }
 
+        public ICommand LoadedCommand { get; }
+
         public MainViewModel(IModuleManager moduleManager, IContainerExtension container)
         {
             _moduleManager = moduleManager;
@@ -34,54 +38,56 @@ namespace WeChatClient.UI.ViewModels
             moduleManager.LoadModule("ChatListModule");
             _chatListManager = _container.Resolve<IChatListManager>();
 
-            Init();
+            LoadedCommand = ReactiveCommand.CreateFromTask(InitAsync);
         }
 
-        private void Init()
+        /// <summary>
+        /// 异步初始化数据
+        /// </summary>
+        /// <returns></returns>
+        private async Task InitAsync()
         {
-            JObject init_result = wcs.WeChatInit();
-
-            List<object> contact_all = new List<object>();
-            if (init_result != null)
+            var list = await Task.Run(() =>
             {
-                var me = new WeChatUser();
-                me.UserName = init_result["User"]["UserName"].ToString();
-                me.City = "";
-                me.HeadImgUrl = wcs.GetIconUrl(me.UserName);
-                me.NickName = init_result["User"]["NickName"].ToString();
-                me.Province = "";
-                me.PyQuanPin = init_result["User"]["PYQuanPin"].ToString();
-                me.RemarkName = init_result["User"]["RemarkName"].ToString();
-                me.RemarkPYQuanPin = init_result["User"]["RemarkPYQuanPin"].ToString();
-                me.Sex = init_result["User"]["Sex"].ToString();
-                me.Signature = init_result["User"]["Signature"].ToString();
-                WeChatUser = me;
+                JObject init_result = wcs.WeChatInit();
+                WeChatUser = JObjectToUser(init_result["User"]);
+                return init_result["ContactList"].Select(contact=> JObjectToUser(contact));
+            });
+            //将数据传输到联系人组件
+            _chatListManager.AddChatUser(list.ToArray());
 
-                var chatList = new List<WeChatUser>();
-                //部分好友名单
-                foreach (JObject contact in init_result["ContactList"])
-                {
-                    WeChatUser user = new WeChatUser();
-                    user.UserName = contact["UserName"].ToString();
-                    user.City = contact["City"].ToString();
-                    user.HeadImgUrl = wcs.GetIconUrl(user.UserName);
-                    user.NickName = contact["NickName"].ToString();
-                    user.Province = contact["Province"].ToString();
-                    user.PyQuanPin = contact["PYQuanPin"].ToString();
-                    user.RemarkName = contact["RemarkName"].ToString();
-                    user.RemarkPYQuanPin = contact["RemarkPYQuanPin"].ToString();
-                    user.Sex = contact["Sex"].ToString();
-                    user.Signature = contact["Signature"].ToString();
-                    user.SnsFlag = contact["SnsFlag"].ToString();
-                    user.KeyWord = contact["KeyWord"].ToString();
-                    user.ContactFlag = int.Parse(contact["ContactFlag"].ToString());
-                    user.Statues = int.Parse(contact["Statues"].ToString());
-                    user.ChatNotifyClose = user.IsChatNotifyClose();
-                    chatList.Add(user);
-                }
+            await LoadAllContact();
+        }
 
-                _chatListManager.AddChatUser(chatList.ToArray());
-            }
+        /// <summary>
+        /// 加载所有通讯录
+        /// </summary>
+        /// <returns></returns>
+        private async Task LoadAllContact()
+        {
+            List<IGrouping<string, WeChatUser>> groupings = await Task.Run(() =>
+            {
+                //取到通讯录，过滤公众号，然后分组
+                JObject contact_result = wcs.GetContact();
+                List<WeChatUser> contact_all = contact_result["MemberList"]
+                .Select(contact => JObjectToUser(contact))
+                .Where(p=>p.StartChar!= "公众号")
+                .OrderBy(p => p.StartChar).ToList();
+                return contact_all.GroupBy(p => p.StartChar).OrderBy(p => p.Key).ToList();
+            });
+
+            //将数据传输到通讯录组件
+        }
+
+        private WeChatUser JObjectToUser(JToken jObject)
+        {
+            WeChatUser user = jObject.ToObject<WeChatUser>();
+
+            user.HeadImgUrl = wcs.GetIconUrl(user.UserName);
+            user.ChatNotifyClose = user.IsChatNotifyClose();
+            user.StartChar = user.GetStartChar();
+
+            return user;
         }
     }
 }

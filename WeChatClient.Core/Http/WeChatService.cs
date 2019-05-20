@@ -29,7 +29,7 @@ namespace WeChatClient.Core.Http
             if (sid != null && uin != null)
             {
                 init_json = string.Format(init_json, uin.Value, sid.Value);
-                byte[] bytes = BaseService.Request(StaticUrl.stringWx+ StaticUrl.Url_Init + TimeHelper.GetTimeStamp() + "&pass_ticket=" + LoginService.Pass_Ticket, MethodEnum.POST, init_json);
+                byte[] bytes = BaseService.Request(StaticUrl.stringWx + StaticUrl.Url_Init + TimeHelper.GetTimeStamp() + "&pass_ticket=" + LoginService.Pass_Ticket, MethodEnum.POST, init_json);
                 string init_str = Encoding.UTF8.GetString(bytes);
 
                 JObject init_result = JsonConvert.DeserializeObject(init_str) as JObject;
@@ -41,7 +41,7 @@ namespace WeChatClient.Core.Http
                 return init_result;
             }
             else
-                return null;
+                throw new Exception("sid或uin为null");
         }
         /// <summary>
         /// 获取头像 默认是个人，获取群组时需要传入URL
