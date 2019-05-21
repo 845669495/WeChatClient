@@ -12,9 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WeChatClient.UI.ViewModels;
+using WeChatClient.Main.ViewModels;
 
-namespace WeChatClient.UI.Views
+namespace WeChatClient.Main.Views
 {
     /// <summary>
     /// MainView.xaml 的交互逻辑

@@ -15,14 +15,12 @@ using WeChatClient.Core.Http;
 using WeChatClient.Core.Interfaces;
 using WeChatClient.Core.Models;
 
-namespace WeChatClient.UI.ViewModels
+namespace WeChatClient.Main.ViewModels
 {
     public class MainViewModel : ReactiveObject
     {
         private WeChatService wcs = new WeChatService();
 
-        private readonly IModuleManager _moduleManager;
-        private readonly IContainerExtension _container;
         private readonly IChatListManager _chatListManager;
 
         [Reactive]
@@ -30,13 +28,9 @@ namespace WeChatClient.UI.ViewModels
 
         public ICommand LoadedCommand { get; }
 
-        public MainViewModel(IModuleManager moduleManager, IContainerExtension container)
-        {
-            _moduleManager = moduleManager;
-            _container = container;
-
-            moduleManager.LoadModule("ChatListModule");
-            _chatListManager = _container.Resolve<IChatListManager>();
+        public MainViewModel(IContainerExtension container)
+        {           
+            _chatListManager = container.Resolve<IChatListManager>();
 
             LoadedCommand = ReactiveCommand.CreateFromTask(InitAsync);
         }

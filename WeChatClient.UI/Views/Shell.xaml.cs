@@ -1,6 +1,6 @@
 ﻿using Prism.Events;
 using Prism.Ioc;
-using Prism.Regions;
+using Prism.Modularity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +14,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WeChatClient.Core;
 using WeChatClient.Core.Events;
-using WeChatClient.UI.ViewModels;
 
 namespace WeChatClient.UI.Views
 {
@@ -37,8 +37,8 @@ namespace WeChatClient.UI.Views
         {
             _ea.GetEvent<LoginSuccessfulEvent>().Subscribe(() =>
             {
-                var regionManager = _containerProvider.Resolve<IRegionManager>();
-                regionManager.RegisterViewWithRegion("MainRegion", typeof(MainView));
+                var moduleManager = _containerProvider.Resolve<IModuleManager>();
+                moduleManager.LoadModule(WeChatClientConst.MainModuleName);  //加载主程序模块
                 SizeToContent = SizeToContent.Manual;
                 Width = 1000;
                 Height = 700;
