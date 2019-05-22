@@ -14,11 +14,11 @@ namespace WeChatClient.ContactList.ViewModels
     [ExposeServices(ServiceLifetime.Singleton, typeof(IContactListManager))]  //注册为IContactListManager接口（单例）
     public class ContactListViewModel : ReactiveObject, IContactListManager
     {
-        public ObservableCollection<IGrouping<string, WeChatUser>> ContactList { get; private set; } = new ObservableCollection<IGrouping<string, WeChatUser>>();
+        public ObservableCollection<IGrouping<string, WeChatUser>> ContactGroup { get; private set; } = new ObservableCollection<IGrouping<string, WeChatUser>>();
 
         public void AddContact(params IGrouping<string, WeChatUser>[] chat)
         {
-            ContactList.AddRange(chat);
+            ContactGroup.AddRange(chat);
         }
     }
 }

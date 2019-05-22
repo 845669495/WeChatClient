@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WeChatClient.ContactList.ViewModels;
 
 namespace WeChatClient.ContactList.Views
 {
@@ -20,9 +21,10 @@ namespace WeChatClient.ContactList.Views
     /// </summary>
     public partial class ContactListView : UserControl
     {
-        public ContactListView()
+        public ContactListView(ContactListViewModel viewModel)
         {
             InitializeComponent();
+            DataContext = viewModel;
         }
     }
 }

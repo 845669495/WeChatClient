@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:sys="clr-namespace:System.Collections;assembly=mscorlib"
              xmlns:local="clr-namespace:WeChatClient.ChatList.Views"
              xmlns:model="clr-namespace:WeChatClient.Core.Models;assembly=WeChatClient.Core"
              mc:Ignorable="d" 
@@ -13,11 +12,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/WeChatClient.Core;component/Theme/Generic.xaml"></ResourceDictionary>
                 <ResourceDictionary>
-                    <sys:ArrayList x:Key="data">
-                        <model:WeChatUser NickName="张三水水水"></model:WeChatUser>
-                        <model:WeChatUser NickName="sss的方法是"></model:WeChatUser>
-                    </sys:ArrayList>
-
                     <DataTemplate DataType="{x:Type model:WeChatUser}">
                         <StackPanel Height="64" Cursor="Hand" Background="Transparent">
                             <Line StrokeThickness="1" Stroke="#292c33" X1="0" Y1="0" X2="{Binding ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=FrameworkElement}}" Y2="0"></Line>
@@ -44,13 +38,9 @@
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-  
-    </UserControl.Resources>
-    <!--<DockPanel>
-        <ListBox DockPanel.Dock="Top" ItemsSource="{StaticResource data}" Background="Transparent" HorizontalContentAlignment="Stretch">
-        </ListBox>-->
 
-    <ListBox BorderBrush="Transparent" ItemsSource="{Binding ChatList}" Background="Transparent" HorizontalContentAlignment="Stretch">
-        </ListBox>
-    <!--</DockPanel>-->
+    </UserControl.Resources>
+
+    <ListBox BorderBrush="Transparent" ItemsSource="{Binding ChatList}" Background="Transparent" HorizontalContentAlignment="Stretch" VirtualizingPanel.IsVirtualizing="True">
+    </ListBox>
 </UserControl>
