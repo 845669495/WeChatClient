@@ -42,7 +42,6 @@ namespace WeChatClient.Main.ViewModels
             _regionManager = regionManager;
             LoadedCommand = ReactiveCommand.CreateFromTask(InitAsync);
             NavigateCommand = ReactiveCommand.Create<string>(Navigate);
-            //NavigateCommand.Execute("ChatListView");
         }
 
         private void Navigate(string navigatePath)
@@ -65,7 +64,6 @@ namespace WeChatClient.Main.ViewModels
             });
             //将数据传输到聊天列表组件
             ChatListManager.AddChat(list.ToArray());
-            //NavigateCommand.Execute("ChatListView");
 
             await LoadAllContact();
         }

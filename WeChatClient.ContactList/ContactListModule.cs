@@ -17,14 +17,12 @@ namespace WeChatClient.ContactList
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            //var regionManager = containerProvider.Resolve<IRegionManager>();
-            //regionManager.RegisterViewWithRegion("NavRegion", typeof(ContactListView));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterAssembly(Assembly.GetExecutingAssembly());
-            //containerRegistry.RegisterForNavigation<ContactListView>();
+            containerRegistry.RegisterForNavigation<ContactListView>();  //将联系人列表注册到导航
         }
     }
 }

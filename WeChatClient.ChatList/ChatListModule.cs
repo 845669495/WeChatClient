@@ -17,6 +17,7 @@ namespace WeChatClient.ChatList
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
+            //导航区域默认显示聊天列表
             var regionManager = containerProvider.Resolve<IRegionManager>();
             regionManager.RegisterViewWithRegion("NavRegion", typeof(ChatListView));
         }
@@ -24,7 +25,6 @@ namespace WeChatClient.ChatList
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterAssembly(Assembly.GetExecutingAssembly());
-            //containerRegistry.RegisterForNavigation<ChatListView>();
         }
     }
 }

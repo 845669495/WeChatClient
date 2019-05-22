@@ -28,7 +28,7 @@
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Horizontal">
                                     <Image Width="40" Height="40" Source="{Binding HeadImgUrl, IsAsync=True,Converter={StaticResource UriToBitmap}}"></Image>
-                                    <TextBlock Text="{Binding ShowName}" FontSize="13" Foreground="#fff" Margin="10,2"></TextBlock>
+                                    <TextBlock Text="{Binding ShowName}" FontSize="13" Foreground="#fff" Margin="10,2" MaxWidth="150" TextTrimming="CharacterEllipsis"></TextBlock>
                                 </StackPanel>
                                 <StackPanel Grid.Column="1" Width="20">
                                     <Rectangle Height="20"></Rectangle>
