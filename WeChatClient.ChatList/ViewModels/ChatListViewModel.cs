@@ -11,14 +11,14 @@ using WeChatClient.Core.Models;
 
 namespace WeChatClient.ChatList.ViewModels
 {
-    [ExposeServices(ServiceLifetime.Singleton, typeof(IChatListManager))]
+    [ExposeServices(ServiceLifetime.Singleton, typeof(IChatListManager))]   //注册为IChatListManager接口（单例）
     public class ChatListViewModel : ReactiveObject, IChatListManager
     {
-        public ObservableCollection<WeChatUser> ChatUserList { get; private set; } = new ObservableCollection<WeChatUser>();
+        public ObservableCollection<WeChatUser> ChatList { get; private set; } = new ObservableCollection<WeChatUser>();
 
-        public void AddChatUser(params WeChatUser[] chat)
+        public void AddChat(params WeChatUser[] chat)
         {
-            ChatUserList.AddRange(chat);
+            ChatList.AddRange(chat);
         }
     }
 }

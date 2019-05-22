@@ -7,24 +7,24 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using WeChatClient.ChatList.Views;
+using WeChatClient.ContactList.Views;
 using WeChatClient.Core.Dependency;
 
-namespace WeChatClient.ChatList
+namespace WeChatClient.ContactList
 {
     [Module(OnDemand = true)]  //按需加载模块
-    public class ChatListModule : IModule
+    public class ContactListModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            var regionManager = containerProvider.Resolve<IRegionManager>();
-            regionManager.RegisterViewWithRegion("NavRegion", typeof(ChatListView));
+            //var regionManager = containerProvider.Resolve<IRegionManager>();
+            //regionManager.RegisterViewWithRegion("NavRegion", typeof(ContactListView));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterAssembly(Assembly.GetExecutingAssembly());
-            //containerRegistry.RegisterForNavigation<ChatListView>();
+            //containerRegistry.RegisterForNavigation<ContactListView>();
         }
     }
 }

@@ -17,8 +17,12 @@ namespace WeChatClient.Core
         /// </summary>
         public const string MainModuleName = "MainModule";
         /// <summary>
-        /// 最近联系人模块
+        /// 聊天列表模块
         /// </summary>
         public const string ChatListModuleName = "ChatListModule";
+        /// <summary>
+        /// 联系人列表模块
+        /// </summary>
+        public const string ContactListModuleName = "ContactListModule";
     }
 }

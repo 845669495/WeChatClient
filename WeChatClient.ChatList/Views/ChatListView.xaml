@@ -50,7 +50,7 @@
         <ListBox DockPanel.Dock="Top" ItemsSource="{StaticResource data}" Background="Transparent" HorizontalContentAlignment="Stretch">
         </ListBox>-->
 
-        <ListBox BorderBrush="Transparent" ItemsSource="{Binding ChatUserList}" Background="Transparent" HorizontalContentAlignment="Stretch">
+    <ListBox BorderBrush="Transparent" ItemsSource="{Binding ChatList}" Background="Transparent" HorizontalContentAlignment="Stretch">
         </ListBox>
     <!--</DockPanel>-->
 </UserControl>

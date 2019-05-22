@@ -78,8 +78,8 @@ namespace WeChatClient.Login
                     Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                     {
                         region.RemoveAll();
-                    }));
-                    ea.GetEvent<LoginSuccessfulEvent>().Publish();
+                        ea.GetEvent<LoginSuccessfulEvent>().Publish();
+                    }));                    
                     break;
                 }
                 ////超时

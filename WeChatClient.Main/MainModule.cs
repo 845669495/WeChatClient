@@ -13,6 +13,7 @@ namespace WeChatClient.Main
 {
     [Module(OnDemand = true)]  //按需加载模块
     [ModuleDependency(WeChatClientConst.ChatListModuleName)]   //设置模块依赖
+    [ModuleDependency(WeChatClientConst.ContactListModuleName)]
     public class MainModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
@@ -23,7 +24,7 @@ namespace WeChatClient.Main
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            
+
         }
     }
 }

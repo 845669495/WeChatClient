@@ -7,8 +7,8 @@ using WeChatClient.Core.Models;
 
 namespace WeChatClient.Core.Interfaces
 {
-    public interface IChatListManager
+    public interface IContactListManager
     {
-        void AddChat(params WeChatUser[] chat);
+        void AddContact(params IGrouping<string, WeChatUser>[] chat);
     }
 }

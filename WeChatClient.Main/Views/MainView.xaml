@@ -67,8 +67,8 @@
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <RadioButton Grid.Column="0" Content="185,96,35,35 150,96,35,35" IsChecked="True"></RadioButton>
-                    <RadioButton Grid.Column="2" Content="304,246,35,35 220,96,35,35"></RadioButton>
+                    <RadioButton Grid.Column="0" Content="185,96,35,35 150,96,35,35" Command="{Binding NavigateCommand}" CommandParameter="ChatListView" IsChecked="True" ></RadioButton>
+                    <RadioButton Grid.Column="2" Content="304,246,35,35 220,96,35,35" Command="{Binding NavigateCommand}" CommandParameter="ContactListView"></RadioButton>
                     <Line Grid.Column="1" StrokeThickness="1" Stroke="#24272c" X1="0" Y1="7" X2="0" Y2="27"></Line>
                     <Line Grid.Column="3" StrokeThickness="1" Stroke="#24272c" X1="0" Y1="7" X2="0" Y2="27"></Line>
                 </Grid>

@@ -93,6 +93,7 @@
     <Compile Include="Http\StaticCode.cs" />
     <Compile Include="Http\StaticUrl.cs" />
     <Compile Include="Http\WeChatService.cs" />
+    <Compile Include="Interfaces\IContactListManager.cs" />
     <Compile Include="Models\WxStatus.cs" />
     <Compile Include="Interfaces\IChatListManager.cs" />
     <Compile Include="Models\WeChatUser.cs" />
