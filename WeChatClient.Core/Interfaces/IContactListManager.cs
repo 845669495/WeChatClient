@@ -9,6 +9,6 @@ namespace WeChatClient.Core.Interfaces
 {
     public interface IContactListManager
     {
-        void AddContact(params IGrouping<string, WeChatUser>[] chat);
+        void AddContact(params WeChatUser[] chat);
     }
 }

@@ -14,7 +14,6 @@
                 <ResourceDictionary>
                     <DataTemplate DataType="{x:Type model:WeChatUser}">
                         <StackPanel Height="64" Cursor="Hand" Background="Transparent">
-                            <Line StrokeThickness="1" Stroke="#292c33" X1="0" Y1="0" X2="{Binding ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=FrameworkElement}}" Y2="0"></Line>
                             <Grid Margin="18,12,18,11">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition></ColumnDefinition>
@@ -33,37 +32,9 @@
                                     </Image>
                                 </StackPanel>
                             </Grid>
+                            <Line StrokeThickness="1" Stroke="#292c33" X1="0" Y1="0" X2="{Binding ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=FrameworkElement}}" Y2="0"></Line>
                         </StackPanel>
                     </DataTemplate>
-
-                    <Style TargetType="ListBox" x:Key="ListBoxStyle">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="ListBox">
-                                    <ScrollViewer Focusable="False" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
-                                        <ItemsPresenter />
-                                    </ScrollViewer>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-
-                    <Style TargetType="ListBoxItem" x:Key="ListBoxItemStyle">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                    <Grid x:Name="grid">
-                                        <ContentPresenter></ContentPresenter>
-                                    </Grid>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="Selector.IsSelected" Value="True">
-                                            <Setter TargetName="grid" Property="Background" Value="#3a3f45"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -73,6 +44,7 @@
     <ListBox ItemsSource="{Binding ChatList}" Background="Transparent" HorizontalContentAlignment="Stretch"
              VirtualizingStackPanel.IsVirtualizing="True"
              VirtualizingStackPanel.VirtualizationMode="Recycling"
+             Style="{StaticResource ListBoxStyle}"
              ItemContainerStyle="{StaticResource ListBoxItemStyle}">
     </ListBox>
 </UserControl>

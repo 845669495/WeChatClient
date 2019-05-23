@@ -77,19 +77,18 @@ namespace WeChatClient.Main.ViewModels
         /// <returns></returns>
         private async Task LoadAllContact()
         {
-            var groupings = await Task.Run(() =>
+            var list = await Task.Run(() =>
             {
                 //取到通讯录，过滤公众号，然后分组
                 JObject contact_result = wcs.GetContact();
-                List<WeChatUser> contact_all = contact_result["MemberList"]
+                return contact_result["MemberList"]
                 .Select(contact => JObjectToUser(contact))
-                .Where(p=>p.StartChar!= "公众号")
-                .OrderBy(p => p.StartChar).ToList();
-                return contact_all.GroupBy(p => p.StartChar).OrderBy(p => p.Key).ToArray();
+                .Where(p => p.StartChar != "公众号")
+                .OrderBy(p => p.StartChar).ToArray();
             });
 
             //将数据传输到通讯录组件
-            ContactListManager.AddContact(groupings);
+            ContactListManager.AddContact(list);
         }
 
         private WeChatUser JObjectToUser(JToken jObject)

@@ -26,23 +26,36 @@
         </ResourceDictionary>
 
     </UserControl.Resources>
-    <ItemsControl BorderBrush="Transparent" ItemsSource="{Binding ContactGroup}" Background="Transparent">
-        <ItemsControl.Template>
-            <ControlTemplate>
-                <ScrollViewer Focusable="False">
-                    <ItemsPresenter />
-                </ScrollViewer>
-            </ControlTemplate>
-        </ItemsControl.Template>
-        <ItemsControl.ItemTemplate>
-            <DataTemplate>
-                <StackPanel>
-                    <Grid Height="24" Background="#292d32">
-                        <TextBlock Margin="18,1" FontSize="14" Foreground="#787b87" Text="{Binding Key}"></TextBlock>
-                    </Grid>
-                    <ItemsControl ItemsSource="{Binding}" BorderBrush="Transparent" Background="Transparent"></ItemsControl>
-                </StackPanel>
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
-    </ItemsControl>
+
+    <!--ScrollViewer.CanContentScroll="False" 分组之后需要阻止按照子项滚动-->
+    <ListBox ItemsSource="{Binding ContactList}" Background="Transparent" HorizontalContentAlignment="Stretch"
+             ScrollViewer.CanContentScroll="False"
+             Style="{StaticResource ListBoxStyle}"
+             ItemContainerStyle="{StaticResource ListBoxItemStyle}">
+        <ListBox.GroupStyle>
+            <GroupStyle>
+                <GroupStyle.HeaderTemplate>
+                    <DataTemplate DataType="CollectionViewGroup">
+                        <Grid Height="24" Background="#292d32">
+                            <TextBlock Margin="18,0" VerticalAlignment="Center" FontSize="14" Foreground="#787b87" Text="{Binding Name}"></TextBlock>
+                        </Grid>
+                    </DataTemplate>
+                </GroupStyle.HeaderTemplate>
+            </GroupStyle>
+        </ListBox.GroupStyle>
+        <ListBox.Resources>
+            <Style TargetType="GroupItem">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="GroupItem">
+                            <StackPanel>
+                                <ContentPresenter x:Name="PART_Header"></ContentPresenter>
+                                <ItemsPresenter></ItemsPresenter>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ListBox.Resources>
+    </ListBox>
 </UserControl>
