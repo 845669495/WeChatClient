@@ -41,6 +41,8 @@
 
     </UserControl.Resources>
 
-    <ListBox BorderBrush="Transparent" ItemsSource="{Binding ChatList}" Background="Transparent" HorizontalContentAlignment="Stretch">
+    <ListBox BorderBrush="Transparent" ItemsSource="{Binding ChatList}" Background="Transparent" HorizontalContentAlignment="Stretch"
+             VirtualizingStackPanel.IsVirtualizing="True"
+             VirtualizingStackPanel.VirtualizationMode="Recycling">
     </ListBox>
 </UserControl>
