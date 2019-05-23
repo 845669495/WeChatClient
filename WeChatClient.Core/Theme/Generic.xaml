@@ -31,8 +31,8 @@
                                 <ContentPresenter></ContentPresenter>
                             </Grid>
                             <ControlTemplate.Triggers>
-                                <Trigger Property="Selector.IsSelected" Value="True">
-                                    <Setter TargetName="grid" Property="Background" Value="#3a3f45"/>
+                                <Trigger Property="ListBoxItem.IsSelected" Value="True">
+                                    <Setter TargetName="grid" Property="Control.Background" Value="#3a3f45"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
