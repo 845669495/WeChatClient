@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using WeChatClient.Core.Interfaces;
 
 namespace WeChatClient.Core.Models
 {
-    public class WeChatUser
+    public class WeChatUser: INeedDownloadImageModel, INotifyPropertyChanged
     {
         /// <summary>
         /// 用户id
@@ -110,5 +114,26 @@ namespace WeChatClient.Core.Models
         /// 消息免打扰
         /// </summary>
         public bool ChatNotifyClose { get; set; }
+
+        public string Uri => HeadImgUrl;
+
+        private ImageSource _image;
+        public ImageSource Image
+        {
+            get { return _image; }
+            set
+            {
+                _image = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #region INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged([CallerMemberName]string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
     }
 }

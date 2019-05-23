@@ -8,6 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using WeChatClient.Core.Dependency;
 using WeChatClient.UI.Views;
 
 namespace WeChatClient.UI
@@ -24,7 +25,7 @@ namespace WeChatClient.UI
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            
+            containerRegistry.RegisterAssembly(typeof(Core.WeChatClientConst).Assembly);
         }
 
         protected override IModuleCatalog CreateModuleCatalog()

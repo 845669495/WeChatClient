@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity.Attributes;
 using WeChatClient.Core.Dependency;
 using WeChatClient.Core.Interfaces;
 using WeChatClient.Core.Models;
@@ -16,9 +17,13 @@ namespace WeChatClient.ChatList.ViewModels
     {
         public ObservableCollection<WeChatUser> ChatList { get; private set; } = new ObservableCollection<WeChatUser>();
 
+        [Dependency]
+        protected IImageDownloadService ImageDownloadService { get; set; }
+
         public void AddChat(params WeChatUser[] chat)
         {
             ChatList.AddRange(chat);
+            ImageDownloadService.Add(chat);
         }
     }
 }

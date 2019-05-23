@@ -29,6 +29,8 @@ namespace WeChatClient.Main.ViewModels
         protected IContactListManager ContactListManager { get; set; }
         [Dependency]  //属性注入，相比构造注入使用比较方便
         protected IChatListManager ChatListManager { get; set; }
+        [Dependency]
+        protected IImageDownloadService ImageDownloadService { get; set; }
 
         [Reactive]
         public WeChatUser WeChatUser { get; private set; }
@@ -60,6 +62,7 @@ namespace WeChatClient.Main.ViewModels
             {
                 JObject init_result = wcs.WeChatInit();
                 WeChatUser = JObjectToUser(init_result["User"]);
+                ImageDownloadService.Add(WeChatUser);
                 return init_result["ContactList"].Select(contact=> JObjectToUser(contact));
             });
             //将数据传输到聊天列表组件

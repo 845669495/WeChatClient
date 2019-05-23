@@ -9,10 +9,31 @@
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />-->
 
         <ResourceDictionary>
-            <converter:UriToBitmapConverter x:Key="UriToBitmap"></converter:UriToBitmapConverter>
             <converter:WxResConverter x:Key="WxRes"></converter:WxResConverter>
             <converter:BoolToVisibilityConverter x:Key="BoolToVisibility"></converter:BoolToVisibilityConverter>
             
+            <!--Virtualised ItemsControl-->
+            <Style x:Key="ItemsControlVirtualizedStyle" TargetType="ItemsControl">
+                <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True"/>
+                <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling"/>
+                <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ItemsControl">
+                            <ScrollViewer Focusable="False">
+                                <ItemsPresenter />
+                            </ScrollViewer>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
     

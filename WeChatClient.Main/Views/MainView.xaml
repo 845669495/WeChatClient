@@ -57,7 +57,7 @@
             </Grid.RowDefinitions>
             <StackPanel Margin="18,18,18,0">
                 <StackPanel Orientation="Horizontal">
-                    <Image Width="40" Height="40" Source="{Binding WeChatUser.HeadImgUrl, IsAsync=True,Converter={StaticResource UriToBitmap}}"></Image>
+                    <Image Width="40" Height="40" Source="{Binding WeChatUser.Image, IsAsync=True}"></Image>
                     <TextBlock Margin="10,0" Text="{Binding WeChatUser.NickName}" FontSize="18" VerticalAlignment="Center" Foreground="White"></TextBlock>
                 </StackPanel>
                 <Rectangle Height="18"></Rectangle>

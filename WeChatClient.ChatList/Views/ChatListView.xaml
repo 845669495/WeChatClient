@@ -21,7 +21,7 @@
                                     <ColumnDefinition Width="auto"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Width="40" Height="40" Source="{Binding HeadImgUrl, IsAsync=True,Converter={StaticResource UriToBitmap}}"></Image>
+                                    <Image Width="40" Height="40" Source="{Binding Image}"></Image>
                                     <TextBlock Text="{Binding ShowName}" FontSize="13" Foreground="#fff" Margin="10,2" MaxWidth="150" TextTrimming="CharacterEllipsis"></TextBlock>
                                 </StackPanel>
                                 <StackPanel Grid.Column="1" Width="20">
@@ -41,6 +41,6 @@
 
     </UserControl.Resources>
 
-    <ListBox BorderBrush="Transparent" ItemsSource="{Binding ChatList}" Background="Transparent" HorizontalContentAlignment="Stretch" VirtualizingPanel.IsVirtualizing="True">
+    <ListBox BorderBrush="Transparent" ItemsSource="{Binding ChatList}" Background="Transparent" HorizontalContentAlignment="Stretch">
     </ListBox>
 </UserControl>

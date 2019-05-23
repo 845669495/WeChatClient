@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity.Attributes;
 using WeChatClient.Core.Dependency;
 using WeChatClient.Core.Interfaces;
 using WeChatClient.Core.Models;
@@ -16,9 +17,13 @@ namespace WeChatClient.ContactList.ViewModels
     {
         public ObservableCollection<IGrouping<string, WeChatUser>> ContactGroup { get; private set; } = new ObservableCollection<IGrouping<string, WeChatUser>>();
 
-        public void AddContact(params IGrouping<string, WeChatUser>[] chat)
+        [Dependency]
+        protected IImageDownloadService ImageDownloadService { get; set; }
+
+        public void AddContact(params IGrouping<string, WeChatUser>[] chatGroup)
         {
-            ContactGroup.AddRange(chat);
+            ContactGroup.AddRange(chatGroup);
+            ImageDownloadService.Add(chatGroup.SelectMany(p => p).ToArray());
         }
     }
 }
