@@ -62,10 +62,17 @@ namespace WeChatClient.Core.Http
                             //这里赋值ImageSource时，需要在UI线程上执行，才能绑定到界面
                             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                             {
-                                model.Image = ImageHelper.MemoryToImageSourceOther(new MemoryStream(bytes));
+                                try
+                                {
+                                    model.Image = ImageHelper.MemoryToImageSourceOther(new MemoryStream(bytes));
+                                }
+                                catch (Exception)
+                                {
+                                    
+                                }
                             }));
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
 
                         }

@@ -43,21 +43,6 @@ namespace WeChatClient.Core.Http
             else
                 throw new Exception("sid或uin为null");
         }
-        /// <summary>
-        /// 获取头像 默认是个人，获取群组时需要传入URL
-        /// </summary>
-        /// <param name="username">用户名或群组名</param>
-        /// <param name="url">个人或群组URL</param>
-        /// <returns></returns>
-        public ImageSource GetIcon(string username, string url = "")
-        {
-            if (string.IsNullOrEmpty(url))
-            {
-                url =StaticUrl.stringWx+ StaticUrl.Url_GetIcon;
-            }
-            byte[] bytes = BaseService.Request(url + username, MethodEnum.GET);
-            return ImageHelper.MemoryToImageSourceOther(new MemoryStream(bytes));
-        }
 
         /// <summary>
         /// 获取图片地址

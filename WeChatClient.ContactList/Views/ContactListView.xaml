@@ -14,7 +14,7 @@
                 <ResourceDictionary>
                     <DataTemplate DataType="{x:Type model:WeChatUser}">
                         <StackPanel Height="50" Cursor="Hand" Background="Transparent">
-                            <StackPanel Orientation="Horizontal" Margin="18,10">
+                            <StackPanel Orientation="Horizontal" Margin="18,10,18,9">
                                 <Image Width="30" Height="30" Source="{Binding Image}"></Image>
                                 <TextBlock Text="{Binding ShowName}" VerticalAlignment="Center" FontSize="13" Foreground="#fff" Margin="10,0" MaxWidth="150" TextTrimming="CharacterEllipsis"></TextBlock>
                             </StackPanel>
