@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:local="clr-namespace:WeChatClient.Main.Views"
+             xmlns:const="clr-namespace:WeChatClient;assembly=WeChatClient.Core"
              xmlns:prism="http://prismlibrary.com/"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1000">
@@ -74,8 +74,8 @@
                 </Grid>
             </StackPanel>
             <Line Grid.Row="1" StrokeThickness="1" Stroke="#24272c" X1="0" Y1="0" X2="{Binding ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=FrameworkElement}}" Y2="0"></Line>
-            <ContentControl Grid.Row="2" prism:RegionManager.RegionName="NavRegion"></ContentControl>
+            <ContentControl Grid.Row="2" prism:RegionManager.RegionName="{x:Static const:WeChatClientConst.NavRegionName}"></ContentControl>
         </Grid>
-        <ContentControl Grid.Column="1" prism:RegionManager.RegionName="ChatRegion"></ContentControl>
+        <ContentControl Grid.Column="1" prism:RegionManager.RegionName="{x:Static const:WeChatClientConst.ContentRegionName}"></ContentControl>
     </Grid>
 </UserControl>

@@ -24,7 +24,7 @@ namespace WeChatClient.Login
             var regionManager = containerProvider.Resolve<IRegionManager>();
             var ea = containerProvider.Resolve<IEventAggregator>();
 
-            IRegion region = regionManager.Regions["MainRegion"];
+            IRegion region = regionManager.Regions[WeChatClientConst.MainRegionName];
 
             var qrView = containerProvider.Resolve<QRCodeView>();
             region.Add(qrView);

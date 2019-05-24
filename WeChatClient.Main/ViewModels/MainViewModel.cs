@@ -49,7 +49,7 @@ namespace WeChatClient.Main.ViewModels
         private void Navigate(string navigatePath)
         {
             if (navigatePath != null)
-                _regionManager.RequestNavigate("NavRegion", navigatePath);
+                _regionManager.RequestNavigate(WeChatClientConst.NavRegionName, navigatePath);
         }
 
         /// <summary>

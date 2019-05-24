@@ -25,7 +25,7 @@ namespace WeChatClient.UI
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterAssembly(typeof(Core.WeChatClientConst).Assembly);
+            containerRegistry.RegisterAssembly(typeof(WeChatClientConst).Assembly);
         }
 
         protected override IModuleCatalog CreateModuleCatalog()

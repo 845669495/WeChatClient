@@ -19,7 +19,7 @@ namespace WeChatClient.Main
         public void OnInitialized(IContainerProvider containerProvider)
         {
             var regionManager = containerProvider.Resolve<IRegionManager>();
-            regionManager.RegisterViewWithRegion("MainRegion", typeof(MainView));
+            regionManager.RegisterViewWithRegion(WeChatClientConst.MainRegionName, typeof(MainView));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
