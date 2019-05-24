@@ -13,6 +13,7 @@ using WeChatClient.Core.Dependency;
 namespace WeChatClient.ChatList
 {
     [Module(OnDemand = true)]  //按需加载模块
+    [ModuleDependency(WeChatClientConst.ChatContentModuleName)]
     public class ChatListModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)

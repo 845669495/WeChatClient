@@ -6,18 +6,41 @@
              xmlns:local="clr-namespace:WeChatClient.ChatContent.Views"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="720" Background="#eee">
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/WeChatClient.Core;component/Theme/Generic.xaml"></ResourceDictionary>
+    </UserControl.Resources>
     <Grid Margin="19,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="180"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0"></Grid>
         <Line Grid.Row="1" StrokeThickness="1" Stroke="#c3c3c3" X1="0" Y1="0" X2="{Binding ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=FrameworkElement}}" Y2="0"></Line>
-        <Grid Grid.Row="2"></Grid>
-        <Line Grid.Row="3" StrokeThickness="1" Stroke="#c3c3c3" X1="-19" Y1="0" X2="{Binding ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=FrameworkElement}}" Y2="0"></Line>
-        <Grid Grid.Row="4"></Grid>
+        <Grid Grid.Row="2">
+            <StackPanel Visibility="Visible">
+                <Rectangle Height="130"></Rectangle>
+                <Image Width="100" Height="90">
+                    <Image.Source>
+                        <CroppedBitmap Source="pack://application:,,,/WeChatClient.Core;component/Resources/wx_res.png" SourceRect="96 150,100,90"></CroppedBitmap>
+                    </Image.Source>
+                </Image>
+                <Grid Height="20"  HorizontalAlignment="Center">
+                    <TextBlock Text="未选择聊天" Foreground="#ccc" FontSize="13" VerticalAlignment="Center"></TextBlock>
+                </Grid>
+            </StackPanel>
+            <Grid Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="180"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    
+                </Grid>
+                <Line Grid.Row="1" StrokeThickness="1" Stroke="#c3c3c3" X1="-19" Y1="0" X2="{Binding ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=FrameworkElement}}" Y2="0"></Line>
+                <Grid Grid.Row="2"></Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>
