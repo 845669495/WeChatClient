@@ -14,6 +14,16 @@
             <converter:BoolToVisibilityConverter x:Key="BoolToVisibility" Inverse="False"></converter:BoolToVisibilityConverter>
             <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityInverse" Inverse="True"></converter:BoolToVisibilityConverter>
 
+            <Style TargetType="ContentControl" x:Key="WxResImgStyle">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Image Source="{Binding Content,RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource WxRes}}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
             <Style TargetType="ListBox" x:Key="ListBoxStyle">
                 <Setter Property="Template">
                     <Setter.Value>

@@ -29,11 +29,7 @@
         <Grid Grid.Row="2">
             <StackPanel Visibility="{Binding HasChatSelected,Converter={StaticResource BoolToVisibilityInverse}}">
                 <Rectangle Height="130"></Rectangle>
-                <Image Width="100" Height="90">
-                    <Image.Source>
-                        <CroppedBitmap Source="pack://application:,,,/WeChatClient.Core;component/Resources/wx_res.png" SourceRect="96 150,100,90"></CroppedBitmap>
-                    </Image.Source>
-                </Image>
+                <ContentControl Style="{StaticResource WxResImgStyle}" Content="96,150,100,90" Width="100" Height="90"></ContentControl>
                 <Grid Height="20"  HorizontalAlignment="Center">
                     <TextBlock Text="未选择聊天" Foreground="#ccc" FontSize="13" VerticalAlignment="Center"></TextBlock>
                 </Grid>
@@ -53,7 +49,31 @@
                     </StackPanel>
                 </Grid>
                 <Line Grid.Row="1" StrokeThickness="1" Stroke="#c3c3c3" X1="-19" Y1="0" X2="{Binding ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=FrameworkElement}}" Y2="0"></Line>
-                <Grid Grid.Row="2"></Grid>
+                <Grid Grid.Row="2">
+                    <StackPanel>
+                        <StackPanel Height="30" Margin="0,10" Orientation="Horizontal">
+                            <ContentControl Style="{StaticResource WxResImgStyle}" Content="404,398,30,30" Width="30" Height="30"></ContentControl>
+                            <ContentControl Style="{StaticResource WxResImgStyle}" Content="30,432,30,30" Width="30" Height="30"></ContentControl>
+                            <ContentControl Style="{StaticResource WxResImgStyle}" Content="120,432,30,30" Width="30" Height="30"></ContentControl>
+                        </StackPanel>
+                        <RichTextBox Height="84" Background="Transparent" BorderBrush="Transparent"></RichTextBox>
+                        <Rectangle Height="5"></Rectangle>
+                        <StackPanel Height="30" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock Text="按下Ctrl+Enter换行" VerticalAlignment="Center" FontSize="12" Foreground="#888" Margin="7,0"></TextBlock>
+                            <Button Content="发送">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Grid Background="#fff" Cursor="Hand">
+                                            <Border BorderThickness="1" BorderBrush="#c1c1c1" CornerRadius="4">
+                                                <TextBlock VerticalAlignment="Center" Margin="30,3" FontSize="14" Foreground="#222" Text="{TemplateBinding Content}"></TextBlock>
+                                            </Border>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>
