@@ -38,11 +38,18 @@ namespace WeChatClient.Core.Models
 
         public DateTime CreateDateTime { get; set; }
 
-        public string CreateShortTime { get; set; }
+        public DateTime GroupDateTime { get; set; }
+
+        public string GroupShortTime { get; set; }
 
         /// <summary>
         /// 是否为收到的消息
         /// </summary>
         public bool IsReceive { get; set; }
+
+        /// <summary>
+        /// 当前消息发送人
+        /// </summary>
+        public WeChatUser FromUser { get; set; }
     }
 }

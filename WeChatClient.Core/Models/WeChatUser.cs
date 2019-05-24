@@ -11,7 +11,7 @@ using WeChatClient.Core.Interfaces;
 
 namespace WeChatClient.Core.Models
 {
-    public class WeChatUser: INeedDownloadImageModel, INotifyPropertyChanged
+    public class WeChatUser : INeedDownloadImageModel, INotifyPropertyChanged
     {
         /// <summary>
         /// 用户id
@@ -85,7 +85,7 @@ namespace WeChatClient.Core.Models
                 return string.IsNullOrEmpty(RemarkPYQuanPin) ? PyQuanPin : RemarkPYQuanPin;
             }
         }
-       
+
         /// <summary>
         /// 分组的头
         /// </summary>
@@ -100,7 +100,7 @@ namespace WeChatClient.Core.Models
         /// 最后消息时间
         /// </summary>
         public string LastShortTime { get; set; }
-        
+
         /// <summary>
         /// 最后的消息
         /// </summary>
@@ -160,5 +160,18 @@ namespace WeChatClient.Core.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
+    }
+
+    public class WeChatUserComparer : IEqualityComparer<WeChatUser>
+    {
+        public bool Equals(WeChatUser x, WeChatUser y)
+        {
+            return x.UserName == y.UserName;
+        }
+
+        public int GetHashCode(WeChatUser obj)
+        {
+            return obj.UserName.GetHashCode();
+        }
     }
 }

@@ -4,9 +4,11 @@ using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using WeChatClient.Core;
+using WeChatClient.Core.Dependency;
 using WeChatClient.Main.Views;
 
 namespace WeChatClient.Main
@@ -23,7 +25,7 @@ namespace WeChatClient.Main
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            containerRegistry.RegisterAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }

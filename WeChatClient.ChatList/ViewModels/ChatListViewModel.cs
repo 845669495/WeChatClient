@@ -25,6 +25,9 @@ namespace WeChatClient.ChatList.ViewModels
         protected IImageDownloadService ImageDownloadService { get; set; }
         [Dependency]
         protected IContactListManager ContactListManager { get; set; }
+        
+        [Dependency]
+        protected Lazy<IMainManager> MainManager { get; set; }
 
         public ChatListViewModel(IChatContentManager chatContentManager)
         {
@@ -39,12 +42,14 @@ namespace WeChatClient.ChatList.ViewModels
 
         public void SyncMessage(params WeChatMessage[] messages)
         {
+            var selected = SelectedItem;
             foreach (var msg in messages)
             {
                 string userName = msg.IsReceive ? msg.FromUserName : msg.ToUserName;
                 var chat = ChatList.FirstOrDefault(p => p.UserName == userName);
                 if (chat != null)
                 {
+                    //消息在当前聊天列表中产生
                     ChatList.Move(ChatList.IndexOf(chat), 0);
                 }
                 else
@@ -55,11 +60,23 @@ namespace WeChatClient.ChatList.ViewModels
                         continue;
                     ChatList.Insert(0, chat);
                 }
-                //消息在当前聊天列表中产生
-                if (msg.MsgType != 51)
+                if (msg.MsgType != 51)  //如果不是系统消息
+                {
+                    chat.LastMessage = msg.Content;
+                    chat.LastShortTime = msg.GroupShortTime;
+
+                    msg.FromUser = msg.IsReceive ? chat : MainManager.Value.WeChatUser;
+                    var last = chat.MessageList.LastOrDefault();
+                    if (last != null && (msg.CreateDateTime - last.GroupDateTime).Minutes <= 3)
+                    {
+                        msg.GroupShortTime = last.GroupShortTime;
+                        msg.GroupDateTime = last.GroupDateTime;
+                    }
                     chat.MessageList.Add(msg);
+                }                    
                 ImageDownloadService.Add(chat);
             }
+            SelectedItem = selected;
         }
     }
 }

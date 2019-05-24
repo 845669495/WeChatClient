@@ -97,6 +97,7 @@
     <Compile Include="Interfaces\IChatContentManager.cs" />
     <Compile Include="Interfaces\IContactListManager.cs" />
     <Compile Include="Interfaces\IImageDownloadService.cs" />
+    <Compile Include="Interfaces\IMainManager.cs" />
     <Compile Include="Interfaces\INeedDownloadImageModel.cs" />
     <Compile Include="Models\WeChatMessage.cs" />
     <Compile Include="Models\WxStatus.cs" />

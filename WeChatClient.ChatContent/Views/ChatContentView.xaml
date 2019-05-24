@@ -4,10 +4,30 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WeChatClient.ChatContent.Views"
+             xmlns:model="clr-namespace:WeChatClient.Core.Models;assembly=WeChatClient.Core"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="720" Background="#eee">
     <UserControl.Resources>
-        <ResourceDictionary Source="pack://application:,,,/WeChatClient.Core;component/Theme/Generic.xaml"></ResourceDictionary>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/WeChatClient.Core;component/Theme/Generic.xaml"></ResourceDictionary>
+
+                <ResourceDictionary>
+                    <DataTemplate DataType="{x:Type model:WeChatMessage}">
+                        <StackPanel Height="70" Cursor="Hand" Background="Transparent">
+                            <StackPanel Orientation="Horizontal" Margin="18,10,18,9">
+                                <Image Width="30" Height="30" Source="{Binding FromUser.Image}"></Image>
+                                <TextBlock Text="{Binding FromUser.ShowName}" VerticalAlignment="Center" FontSize="13" Foreground="#fff" Margin="10,0" MaxWidth="150" TextTrimming="CharacterEllipsis"></TextBlock>
+                            </StackPanel>
+                            <Grid Height="20">
+                                <TextBlock Text="{Binding Content}" VerticalAlignment="Center" FontSize="13" Foreground="#fff"></TextBlock>
+                            </Grid>
+                            <Line StrokeThickness="1" Stroke="#292c33" X1="0" Y1="0" X2="{Binding ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=FrameworkElement}}" Y2="0"></Line>
+                        </StackPanel>
+                    </DataTemplate>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
     <Grid Margin="19,0">
         <Grid.RowDefinitions>
@@ -41,12 +61,43 @@
                     <RowDefinition Height="180"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <StackPanel>
+                    <StackPanel Visibility="{Binding SelectedChat.MessageList.Count,Converter={StaticResource BoolToVisibilityInverse}}">
                         <Rectangle Height="130"></Rectangle>
-                        <Grid Height="20" HorizontalAlignment="Center" Visibility="{Binding SelectedChat.MessageList.Count,Converter={StaticResource BoolToVisibilityInverse}}">
+                        <Grid Height="20" HorizontalAlignment="Center">
                             <TextBlock Text="暂时没有新消息" Foreground="#ccc" FontSize="13" VerticalAlignment="Center"></TextBlock>
                         </Grid>
                     </StackPanel>
+                    <Grid Visibility="{Binding SelectedChat.MessageList.Count,Converter={StaticResource BoolToVisibility}}">
+                        <!--ScrollViewer.CanContentScroll="False" 分组之后需要阻止按照子项滚动-->
+                        <ItemsControl ItemsSource="{Binding SelectedChat.MessageList}" Background="Transparent"
+                                 Style="{StaticResource ItemsControlScrollViewerStyle}">
+                            <ItemsControl.GroupStyle>
+                                <GroupStyle>
+                                    <GroupStyle.HeaderTemplate>
+                                        <DataTemplate DataType="CollectionViewGroup">
+                                            <Grid Height="24" Background="#292d32">
+                                                <TextBlock Margin="18,0" VerticalAlignment="Center" FontSize="14" Foreground="#787b87" Text="{Binding Name}"></TextBlock>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GroupStyle.HeaderTemplate>
+                                </GroupStyle>
+                            </ItemsControl.GroupStyle>
+                            <ItemsControl.Resources>
+                                <Style TargetType="GroupItem">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="GroupItem">
+                                                <StackPanel>
+                                                    <ContentPresenter x:Name="PART_Header"></ContentPresenter>
+                                                    <ItemsPresenter></ItemsPresenter>
+                                                </StackPanel>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ItemsControl.Resources>
+                        </ItemsControl>
+                    </Grid>
                 </Grid>
                 <Line Grid.Row="1" StrokeThickness="1" Stroke="#c3c3c3" X1="-19" Y1="0" X2="{Binding ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=FrameworkElement}}" Y2="0"></Line>
                 <Grid Grid.Row="2">

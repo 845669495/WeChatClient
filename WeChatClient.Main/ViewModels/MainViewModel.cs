@@ -15,6 +15,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using Unity.Attributes;
+using WeChatClient.Core.Dependency;
 using WeChatClient.Core.Helpers;
 using WeChatClient.Core.Http;
 using WeChatClient.Core.Interfaces;
@@ -22,7 +23,8 @@ using WeChatClient.Core.Models;
 
 namespace WeChatClient.Main.ViewModels
 {
-    public class MainViewModel : ReactiveObject
+    [ExposeServices(ServiceLifetime.Singleton,typeof(IMainManager))]
+    public class MainViewModel : ReactiveObject, IMainManager
     {
         private WeChatService wcs = new WeChatService();
 
@@ -69,7 +71,7 @@ namespace WeChatClient.Main.ViewModels
                 return init_result["ContactList"].Select(contact=> JObjectToUser(contact));
             });
             //将数据传输到聊天列表组件
-            ChatListManager.AddChat(list.ToArray());
+            ChatListManager.AddChat(list.Distinct(new WeChatUserComparer()).ToArray());
 
             await LoadAllContact();
 
@@ -110,7 +112,8 @@ namespace WeChatClient.Main.ViewModels
             WeChatMessage message = jObject.ToObject<WeChatMessage>();
             message.Content = message.MsgType == 1 ? message.Content : "请在其他设备上查看消息";//只接受文本消息
             message.CreateDateTime = message.CreateTime.ToTime();
-            message.CreateShortTime = message.CreateDateTime.ToString("HH:mm");
+            message.GroupDateTime = message.CreateDateTime;
+            message.GroupShortTime = message.CreateDateTime.ToString("HH:mm");
             message.IsReceive = message.ToUserName == WeChatUser.UserName;
             return message;
         }
