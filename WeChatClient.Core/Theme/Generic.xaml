@@ -8,6 +8,7 @@
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />-->
 
+        <ResourceDictionary Source="pack://application:,,,/WeChatClient.Core;component/Theme/ScrollViewerStyle.xaml"></ResourceDictionary>
         <ResourceDictionary>
             <converter:WxResConverter x:Key="WxRes"></converter:WxResConverter>
             <converter:BoolToVisibilityConverter x:Key="BoolToVisibility"></converter:BoolToVisibilityConverter>
@@ -16,7 +17,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="ListBox">
-                            <ScrollViewer Focusable="False" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                            <ScrollViewer Focusable="False" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                                 <ItemsPresenter />
                             </ScrollViewer>
                         </ControlTemplate>
