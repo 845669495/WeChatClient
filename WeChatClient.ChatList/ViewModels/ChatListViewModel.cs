@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,8 +18,16 @@ namespace WeChatClient.ChatList.ViewModels
     {
         public ObservableCollection<WeChatUser> ChatList { get; private set; } = new ObservableCollection<WeChatUser>();
 
+        [Reactive]
+        public WeChatUser SelectedItem { get; set; }
+
         [Dependency]
         protected IImageDownloadService ImageDownloadService { get; set; }
+
+        public ChatListViewModel(IChatContentManager chatContentManager)
+        {
+            this.WhenAnyValue(p => p.SelectedItem).Subscribe(p => chatContentManager.SelectedChat = p);
+        }
 
         public void AddChat(params WeChatUser[] chat)
         {

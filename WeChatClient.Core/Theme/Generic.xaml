@@ -11,7 +11,8 @@
         <ResourceDictionary Source="pack://application:,,,/WeChatClient.Core;component/Theme/ScrollViewerStyle.xaml"></ResourceDictionary>
         <ResourceDictionary>
             <converter:WxResConverter x:Key="WxRes"></converter:WxResConverter>
-            <converter:BoolToVisibilityConverter x:Key="BoolToVisibility"></converter:BoolToVisibilityConverter>
+            <converter:BoolToVisibilityConverter x:Key="BoolToVisibility" Inverse="False"></converter:BoolToVisibilityConverter>
+            <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityInverse" Inverse="True"></converter:BoolToVisibilityConverter>
 
             <Style TargetType="ListBox" x:Key="ListBoxStyle">
                 <Setter Property="Template">

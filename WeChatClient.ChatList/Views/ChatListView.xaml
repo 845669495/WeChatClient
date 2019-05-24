@@ -45,6 +45,7 @@
              VirtualizingStackPanel.IsVirtualizing="True"
              VirtualizingStackPanel.VirtualizationMode="Recycling"
              Style="{StaticResource ListBoxStyle}"
-             ItemContainerStyle="{StaticResource ListBoxItemStyle}">
+             ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+             SelectedItem="{Binding SelectedItem}">
     </ListBox>
 </UserControl>

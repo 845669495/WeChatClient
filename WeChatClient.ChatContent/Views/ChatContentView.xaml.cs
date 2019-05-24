@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WeChatClient.ChatContent.ViewModels;
 
 namespace WeChatClient.ChatContent.Views
 {
@@ -20,9 +21,10 @@ namespace WeChatClient.ChatContent.Views
     /// </summary>
     public partial class ChatContentView : UserControl
     {
-        public ChatContentView()
+        public ChatContentView(ChatContentViewModel viewModel)
         {
             InitializeComponent();
+            DataContext = viewModel;
         }
     }
 }

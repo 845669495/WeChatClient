@@ -115,6 +115,25 @@ namespace WeChatClient.Core.Models
         /// </summary>
         public bool ChatNotifyClose { get; set; }
 
+        /// <summary>
+        /// 群聊成员人数（群聊大于0）
+        /// </summary>
+        public int MemberCount { get; set; }
+
+        /// <summary>
+        /// 内容区域显示的名称
+        /// </summary>
+        public string ContentShowName
+        {
+            get
+            {
+                string name = ShowName;
+                if (MemberCount > 0)
+                    name += $"({MemberCount})";
+                return name;
+            }
+        }
+
         public string Uri => HeadImgUrl;
 
         private ImageSource _image;

@@ -15,10 +15,19 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0"></Grid>
+        <Grid Grid.Row="0" Visibility="{Binding HasChatSelected,Converter={StaticResource BoolToVisibility}}">
+            <!--<ToggleButton Height="25">
+                <ToggleButton.Template>
+                    <ControlTemplate></ControlTemplate>
+                </ToggleButton.Template>
+            </ToggleButton>-->
+            <Grid Height="25" HorizontalAlignment="Center">
+                <TextBlock Text="{Binding SelectedChat.ContentShowName}" FontSize="14" VerticalAlignment="Center"></TextBlock>
+            </Grid>
+        </Grid>
         <Line Grid.Row="1" StrokeThickness="1" Stroke="#c3c3c3" X1="0" Y1="0" X2="{Binding ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=FrameworkElement}}" Y2="0"></Line>
         <Grid Grid.Row="2">
-            <StackPanel Visibility="Visible">
+            <StackPanel Visibility="{Binding HasChatSelected,Converter={StaticResource BoolToVisibilityInverse}}">
                 <Rectangle Height="130"></Rectangle>
                 <Image Width="100" Height="90">
                     <Image.Source>
@@ -29,14 +38,19 @@
                     <TextBlock Text="未选择聊天" Foreground="#ccc" FontSize="13" VerticalAlignment="Center"></TextBlock>
                 </Grid>
             </StackPanel>
-            <Grid Visibility="Hidden">
+            <Grid Visibility="{Binding HasChatSelected,Converter={StaticResource BoolToVisibility}}">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="180"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    
+                    <StackPanel>
+                        <Rectangle Height="130"></Rectangle>
+                        <Grid Height="20" HorizontalAlignment="Center">
+                            <TextBlock Text="暂时没有新消息" Foreground="#ccc" FontSize="13" VerticalAlignment="Center"></TextBlock>
+                        </Grid>
+                    </StackPanel>
                 </Grid>
                 <Line Grid.Row="1" StrokeThickness="1" Stroke="#c3c3c3" X1="-19" Y1="0" X2="{Binding ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=FrameworkElement}}" Y2="0"></Line>
                 <Grid Grid.Row="2"></Grid>
