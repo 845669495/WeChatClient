@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WeChatClient.Core.Helpers
 {
-    public class NumHelper
+    public class RandomHelper
     {
         /// <summary>
         /// 返回一个随机数

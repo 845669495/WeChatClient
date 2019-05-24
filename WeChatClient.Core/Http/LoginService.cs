@@ -24,7 +24,7 @@ namespace WeChatClient.Core.Http
         public ImageSource GetQRCode()
         {
             //请求UUID
-            byte[] bytes = BaseService.Request(StaticUrl.Url_GetUUID + TimeHelper.GetTimeStamp(), MethodEnum.GET);
+            byte[] bytes = BaseService.Request(StaticUrl.Url_GetUUID + DateTime.Now.ToTimeStamp(), MethodEnum.GET);
             //得到session
             session_id = Encoding.UTF8.GetString(bytes).Split(new string[] { "\"" }, StringSplitOptions.None)[1];
             //请求二维码
@@ -41,7 +41,7 @@ namespace WeChatClient.Core.Http
             if (session_id == null)
                 return null;
             //查看是否扫码登录了
-            byte[] bytes = BaseService.Request(StaticUrl.Url_WaitLogin + session_id + "&tip=0&r=" + TimeHelper.GetTimeStamp_TakeBack() + "&_=" + TimeHelper.GetTimeStamp(), MethodEnum.GET);
+            byte[] bytes = BaseService.Request(StaticUrl.Url_WaitLogin + session_id + "&tip=0&r=" + ~DateTime.Now.ToTimeStamp() + "&_=" + DateTime.Now.ToTimeStamp(), MethodEnum.GET);
 
             string login_result = Encoding.UTF8.GetString(bytes);
 

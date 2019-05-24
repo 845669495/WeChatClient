@@ -23,13 +23,13 @@ namespace WeChatClient.Core.Http
         /// <returns></returns>
         public JObject WeChatInit()
         {
-            string init_json = "{{\"BaseRequest\":{{\"Uin\":\"{0}\",\"Sid\":\"{1}\",\"Skey\":\"\",\"DeviceID\":\"e" + NumHelper.RandomNum(15) + "\"}}}}";
+            string init_json = "{{\"BaseRequest\":{{\"Uin\":\"{0}\",\"Sid\":\"{1}\",\"Skey\":\"\",\"DeviceID\":\"e" + RandomHelper.RandomNum(15) + "\"}}}}";
             Cookie sid = BaseService.GetCookie("wxsid");
             Cookie uin = BaseService.GetCookie("wxuin");
             if (sid != null && uin != null)
             {
                 init_json = string.Format(init_json, uin.Value, sid.Value);
-                byte[] bytes = BaseService.Request(StaticUrl.stringWx + StaticUrl.Url_Init + TimeHelper.GetTimeStamp() + "&pass_ticket=" + LoginService.Pass_Ticket, MethodEnum.POST, init_json);
+                byte[] bytes = BaseService.Request(StaticUrl.stringWx + StaticUrl.Url_Init + DateTime.Now.ToTimeStamp() + "&pass_ticket=" + LoginService.Pass_Ticket, MethodEnum.POST, init_json);
                 string init_str = Encoding.UTF8.GetString(bytes);
 
                 JObject init_result = JsonConvert.DeserializeObject(init_str) as JObject;
@@ -101,7 +101,7 @@ namespace WeChatClient.Core.Http
 
             if (sid != null && uin != null)
             {
-                StaticUrl.Url_SyncCheck_ext = string.Format(StaticUrl.Url_SyncCheck_ext, sid.Value, uin.Value, sync_key, TimeHelper.GetTimeStamp(), LoginService.SKey.Replace("@", "%40"), "e" + NumHelper.RandomNum(15));
+                StaticUrl.Url_SyncCheck_ext = string.Format(StaticUrl.Url_SyncCheck_ext, sid.Value, uin.Value, sync_key, DateTime.Now.ToTimeStamp(), LoginService.SKey.Replace("@", "%40"), "e" + RandomHelper.RandomNum(15));
                 byte[] bytes = BaseService.Request(StaticUrl.stringWebPush+ StaticUrl.Url_SyncCheck + StaticUrl.Url_SyncCheck_ext + DateTime.Now.Ticks, MethodEnum.GET);
                 if (bytes != null)
                 {
@@ -111,7 +111,7 @@ namespace WeChatClient.Core.Http
                     return null;
             }
             else
-                return null;
+                throw new Exception("sid或uin为null");
         }
         /// <summary>
         /// 微信同步
@@ -119,7 +119,7 @@ namespace WeChatClient.Core.Http
         /// <returns></returns>
         public JObject WeChatSync()
         {
-            string sync_json = "{{\"BaseRequest\" : {{\"DeviceID\":\"e" + NumHelper.RandomNum(15) + "\",\"Sid\":\"{1}\", \"Skey\":\"{5}\", \"Uin\":\"{0}\"}},\"SyncKey\" : {{\"Count\":{2},\"List\":[{3}]}},\"rr\" :{4}}}";
+            string sync_json = "{{\"BaseRequest\" : {{\"DeviceID\":\"e" + RandomHelper.RandomNum(15) + "\",\"Sid\":\"{1}\", \"Skey\":\"{5}\", \"Uin\":\"{0}\"}},\"SyncKey\" : {{\"Count\":{2},\"List\":[{3}]}},\"rr\" :{4}}}";
             Cookie sid = BaseService.GetCookie("wxsid");
             Cookie uin = BaseService.GetCookie("wxuin");
 
@@ -129,7 +129,7 @@ namespace WeChatClient.Core.Http
                 sync_keys += "{\"Key\":" + p.Key + ",\"Val\":" + p.Value + "},";
             }
             sync_keys = sync_keys.TrimEnd(',');
-            sync_json = string.Format(sync_json, uin.Value, sid.Value, _syncKey.Count, sync_keys, TimeHelper.GetTimeStamp(), LoginService.SKey);
+            sync_json = string.Format(sync_json, uin.Value, sid.Value, _syncKey.Count, sync_keys, DateTime.Now.ToTimeStamp(), LoginService.SKey);
 
             if (sid != null && uin != null)
             {
@@ -149,7 +149,7 @@ namespace WeChatClient.Core.Http
                 return sync_result;
             }
             else
-                return null;
+                throw new Exception("sid或uin为null");
         }
         /// <summary>
         /// 发送消息
@@ -162,7 +162,7 @@ namespace WeChatClient.Core.Http
         {
             string msg_json = "{{" +
             "\"BaseRequest\":{{" +
-                "\"DeviceID\" : \"e" + NumHelper.RandomNum(15) + "\"," +
+                "\"DeviceID\" : \"e" + RandomHelper.RandomNum(15) + "\"," +
                 "\"Sid\" : \"{0}\"," +
                 "\"Skey\" : \"{6}\"," +
                 "\"Uin\" : \"{1}\"" +

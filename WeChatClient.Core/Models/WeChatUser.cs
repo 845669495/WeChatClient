@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -98,12 +99,12 @@ namespace WeChatClient.Core.Models
         /// <summary>
         /// 最后消息时间
         /// </summary>
-        public string LastTime { get; set; }
+        public string LastShortTime { get; set; }
         
         /// <summary>
         /// 最后的消息
         /// </summary>
-        public string LastMsg { get; set; }
+        public string LastMessage { get; set; }
 
         /// <summary>
         /// 如果是群聊且值为1，则代表消息免打扰
@@ -146,6 +147,11 @@ namespace WeChatClient.Core.Models
                 OnPropertyChanged();
             }
         }
+
+        /// <summary>
+        /// 消息列表
+        /// </summary>
+        public ObservableCollection<WeChatMessage> MessageList { get; private set; } = new ObservableCollection<WeChatMessage>();
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

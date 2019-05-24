@@ -19,6 +19,6 @@ namespace WeChatClient.Core.Interfaces
         /// <summary>
         /// 图片对象
         /// </summary>
-        ImageSource Image { set; }
+        ImageSource Image { set; get; }
     }
 }

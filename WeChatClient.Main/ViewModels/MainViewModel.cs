@@ -9,10 +9,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using Unity.Attributes;
+using WeChatClient.Core.Helpers;
 using WeChatClient.Core.Http;
 using WeChatClient.Core.Interfaces;
 using WeChatClient.Core.Models;
@@ -69,6 +72,8 @@ namespace WeChatClient.Main.ViewModels
             ChatListManager.AddChat(list.ToArray());
 
             await LoadAllContact();
+
+            StartWeChatSyncTask();
         }
 
         /// <summary>
@@ -82,9 +87,7 @@ namespace WeChatClient.Main.ViewModels
                 //取到通讯录，过滤公众号，然后分组
                 JObject contact_result = wcs.GetContact();
                 return contact_result["MemberList"]
-                .Select(contact => JObjectToUser(contact))
-                .Where(p => p.StartChar != "公众号")
-                .OrderBy(p => p.StartChar).ToArray();
+                .Select(contact => JObjectToUser(contact)).OrderBy(p => p.StartChar).ToArray();
             });
 
             //将数据传输到通讯录组件
@@ -100,6 +103,50 @@ namespace WeChatClient.Main.ViewModels
             user.StartChar = user.GetStartChar();
 
             return user;
+        }
+
+        private WeChatMessage JObjectToMessage(JToken jObject)
+        {
+            WeChatMessage message = jObject.ToObject<WeChatMessage>();
+            message.Content = message.MsgType == 1 ? message.Content : "请在其他设备上查看消息";//只接受文本消息
+            message.CreateDateTime = message.CreateTime.ToTime();
+            message.CreateShortTime = message.CreateDateTime.ToString("HH:mm");
+            message.IsReceive = message.ToUserName == WeChatUser.UserName;
+            return message;
+        }
+
+        private void StartWeChatSyncTask()
+        {
+            Task.Run(() =>
+            {
+                while (true)
+                {
+                    //同步检查
+                    string sync_flag = wcs.WeChatSyncCheck();
+                    if (sync_flag == null)
+                    {
+                        Thread.Sleep(100);
+                        continue;
+                    }
+                    //这里应该判断sync_flag中Selector的值
+                    else
+                    {
+                        JObject sync_result = wcs.WeChatSync();//进行同步
+                        if (sync_result != null)
+                        {
+                            if (sync_result["AddMsgCount"] != null && sync_result["AddMsgCount"].ToString() != "0")
+                            {
+                                var messageList = sync_result["AddMsgList"].Select(p => JObjectToMessage(p)).Where(p => p.MsgType != 51);  //51是系统消息
+                                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                                {
+                                    ChatListManager.SyncMessage(messageList.ToArray());
+                                }));      
+                            }
+                        }
+                    }
+                    Thread.Sleep(100);
+                }
+            });
         }
     }
 }

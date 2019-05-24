@@ -23,6 +23,8 @@ namespace WeChatClient.ChatList.ViewModels
 
         [Dependency]
         protected IImageDownloadService ImageDownloadService { get; set; }
+        [Dependency]
+        protected IContactListManager ContactListManager { get; set; }
 
         public ChatListViewModel(IChatContentManager chatContentManager)
         {
@@ -33,6 +35,30 @@ namespace WeChatClient.ChatList.ViewModels
         {
             ChatList.AddRange(chat);
             ImageDownloadService.Add(chat);
+        }
+
+        public void SyncMessage(params WeChatMessage[] messages)
+        {
+            foreach (var msg in messages)
+            {
+                string userName = msg.IsReceive ? msg.FromUserName : msg.ToUserName;
+                var chat = ChatList.FirstOrDefault(p => p.UserName == userName);
+                if (chat != null)
+                {
+                    ChatList.Remove(chat);
+                }
+                else
+                {
+                    //当前列表没有找到
+                    chat = ContactListManager.FindContact(userName);
+                    if (chat == null)
+                        continue;
+                }
+                //消息在当前聊天列表中产生
+                chat.MessageList.Add(msg);
+                ImageDownloadService.Add(chat);
+                ChatList.Insert(0, chat);
+            }
         }
     }
 }

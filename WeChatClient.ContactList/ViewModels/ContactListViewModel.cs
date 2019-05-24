@@ -17,6 +17,8 @@ namespace WeChatClient.ContactList.ViewModels
     [ExposeServices(ServiceLifetime.Singleton, typeof(IContactListManager))]  //注册为IContactListManager接口（单例）
     public class ContactListViewModel : ReactiveObject, IContactListManager
     {
+        private readonly List<WeChatUser> _allContactList = new List<WeChatUser>();
+
         public ObservableCollection<WeChatUser> ContactList { get; private set; } = new ObservableCollection<WeChatUser>();
 
         [Dependency]
@@ -30,8 +32,14 @@ namespace WeChatClient.ContactList.ViewModels
 
         public void AddContact(params WeChatUser[] chat)
         {
-            ContactList.AddRange(chat);
-            ImageDownloadService.Add(chat);
+            _allContactList.AddRange(chat);
+            ContactList.AddRange(chat.Where(p => p.StartChar != "公众号"));
+            ImageDownloadService.Add(ContactList.ToArray());
+        }
+
+        public WeChatUser FindContact(string userName)
+        {
+            return _allContactList.FirstOrDefault(p => p.UserName == userName);
         }
     }
 }

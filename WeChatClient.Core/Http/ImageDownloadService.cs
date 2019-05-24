@@ -58,6 +58,8 @@ namespace WeChatClient.Core.Http
                         }
                         try
                         {
+                            if (model.Image != null)
+                                continue;
                             byte[] bytes = BaseService.Request(model.Uri, MethodEnum.GET);
                             //这里赋值ImageSource时，需要在UI线程上执行，才能绑定到界面
                             Application.Current.Dispatcher.BeginInvoke(new Action(() =>

@@ -85,8 +85,8 @@
     <Compile Include="Dependency\ServiceLifetime.cs" />
     <Compile Include="Events\LoginSuccessfulEvent.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
-    <Compile Include="Helpers\NumHelper.cs" />
-    <Compile Include="Helpers\TimeHelper.cs" />
+    <Compile Include="Helpers\RandomHelper.cs" />
+    <Compile Include="Helpers\TimeStampHelper.cs" />
     <Compile Include="Http\BaseService.cs" />
     <Compile Include="Http\ImageDownloadService.cs" />
     <Compile Include="Http\LoginService.cs" />
@@ -98,6 +98,7 @@
     <Compile Include="Interfaces\IContactListManager.cs" />
     <Compile Include="Interfaces\IImageDownloadService.cs" />
     <Compile Include="Interfaces\INeedDownloadImageModel.cs" />
+    <Compile Include="Models\WeChatMessage.cs" />
     <Compile Include="Models\WxStatus.cs" />
     <Compile Include="Interfaces\IChatListManager.cs" />
     <Compile Include="Models\WeChatUser.cs" />
