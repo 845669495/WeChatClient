@@ -136,7 +136,7 @@ namespace WeChatClient.Main.ViewModels
                         {
                             if (sync_result["AddMsgCount"] != null && sync_result["AddMsgCount"].ToString() != "0")
                             {
-                                var messageList = sync_result["AddMsgList"].Select(p => JObjectToMessage(p)).Where(p => p.MsgType != 51);  //51是系统消息
+                                var messageList = sync_result["AddMsgList"].Select(p => JObjectToMessage(p)); //.Where(p => p.MsgType != 51);  //51是系统消息
                                 Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                                 {
                                     ChatListManager.SyncMessage(messageList.ToArray());

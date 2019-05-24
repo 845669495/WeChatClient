@@ -45,7 +45,7 @@ namespace WeChatClient.ChatList.ViewModels
                 var chat = ChatList.FirstOrDefault(p => p.UserName == userName);
                 if (chat != null)
                 {
-                    ChatList.Remove(chat);
+                    ChatList.Move(ChatList.IndexOf(chat), 0);
                 }
                 else
                 {
@@ -53,11 +53,12 @@ namespace WeChatClient.ChatList.ViewModels
                     chat = ContactListManager.FindContact(userName);
                     if (chat == null)
                         continue;
+                    ChatList.Insert(0, chat);
                 }
                 //消息在当前聊天列表中产生
-                chat.MessageList.Add(msg);
+                if (msg.MsgType != 51)
+                    chat.MessageList.Add(msg);
                 ImageDownloadService.Add(chat);
-                ChatList.Insert(0, chat);
             }
         }
     }
