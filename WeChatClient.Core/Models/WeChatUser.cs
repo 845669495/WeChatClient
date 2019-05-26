@@ -138,6 +138,10 @@ namespace WeChatClient.Core.Models
         /// 群聊成员人数（群聊大于0）
         /// </summary>
         public int MemberCount { get; set; }
+        /// <summary>
+        /// 群聊成员对象数组
+        /// </summary>
+        public List<ChatRoomMember> MemberList { get; set; }
 
         /// <summary>
         /// 内容区域显示的名称

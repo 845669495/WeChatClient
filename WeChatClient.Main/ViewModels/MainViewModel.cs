@@ -103,6 +103,9 @@ namespace WeChatClient.Main.ViewModels
             user.HeadImgUrl = wcs.GetIconUrl(user.UserName);
             user.ChatNotifyClose = user.IsChatNotifyClose();
             user.StartChar = user.GetStartChar();
+            //user.MemberList = jObject["MemberList"].Select(p => p.ToObject<ChatRoomMember>()).ToList();
+            if (string.IsNullOrEmpty(user.NickName) && user.MemberList != null)
+                user.NickName = string.Join(",", user.MemberList.Select(p => p.NickName));
 
             return user;
         }
@@ -137,9 +140,17 @@ namespace WeChatClient.Main.ViewModels
                         JObject sync_result = wcs.WeChatSync();//进行同步
                         if (sync_result != null)
                         {
+                            if (sync_result["ModContactCount"] != null && sync_result["ModContactCount"].ToString() != "0")
+                            {
+                                var addChatList = sync_result["ModContactList"].Select(p => JObjectToUser(p));
+                                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                                {
+                                    ChatListManager.AddChat(addChatList.ToArray());
+                                }));
+                            }
                             if (sync_result["AddMsgCount"] != null && sync_result["AddMsgCount"].ToString() != "0")
                             {
-                                var messageList = sync_result["AddMsgList"].Select(p => JObjectToMessage(p)); //.Where(p => p.MsgType != 51);  //51是系统消息
+                                var messageList = sync_result["AddMsgList"].Select(p => JObjectToMessage(p));
                                 Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                                 {
                                     ChatListManager.SyncMessage(messageList.ToArray());

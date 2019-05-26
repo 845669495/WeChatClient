@@ -36,8 +36,13 @@ namespace WeChatClient.ChatList.ViewModels
 
         public void AddChat(params WeChatUser[] chat)
         {
-            ChatList.AddRange(chat);
-            ImageDownloadService.Add(chat);
+            foreach (var item in chat)
+            {
+                if (ChatList.Any(p => p.UserName == item.UserName))
+                    continue;
+                ChatList.Add(item);
+                ImageDownloadService.Add(item);
+            }          
         }
 
         public void SyncMessage(params WeChatMessage[] messages)
