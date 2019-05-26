@@ -21,10 +21,24 @@
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Horizontal">
                                     <Image Width="40" Height="40" Source="{Binding Image}"></Image>
-                                    <TextBlock Text="{Binding ShowName}" FontSize="13" Foreground="#fff" Margin="10,2" MaxWidth="150" TextTrimming="CharacterEllipsis"></TextBlock>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" Text="{Binding ShowName}" FontSize="13" Foreground="#fff" Margin="10,0" MaxWidth="150" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"></TextBlock>
+                                        <TextBlock Grid.Row="1" Text="{Binding LastMessage}" FontSize="13" Margin="10,0" MaxWidth="150" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"
+                                                   Foreground="{Binding IsSelected ,RelativeSource={RelativeSource AncestorType=ListBoxItem,Mode=FindAncestor},
+                                                                Converter={StaticResource BoolToValue},ConverterParameter=#fff,FallbackValue=#989898}"></TextBlock>
+                                    </Grid>
                                 </StackPanel>
-                                <StackPanel Grid.Column="1" Width="20">
-                                    <Rectangle Height="20"></Rectangle>
+                                <StackPanel Grid.Column="1">
+                                    <ContentControl Height="20">
+                                        <TextBlock Text="{Binding LastShortTime}" FontSize="13" VerticalAlignment="Center"
+                                                   Foreground="{Binding IsSelected ,RelativeSource={RelativeSource AncestorType=ListBoxItem,Mode=FindAncestor},
+                                                                Converter={StaticResource BoolToValue},ConverterParameter=#fff,FallbackValue=#6b6f7c}">
+                                        </TextBlock>
+                                    </ContentControl>
                                     <ContentControl Content="311,432,20,20 401,357,20,20"
                                                     Visibility="{Binding ChatNotifyClose, Converter={StaticResource BoolToVisibility}}">
                                         <ContentControl.Template>

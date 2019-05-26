@@ -96,15 +96,33 @@ namespace WeChatClient.Core.Models
         /// </summary>
         public int UnReadCount { get; set; }
 
+        private string _lastShortTime;
         /// <summary>
         /// 最后消息时间
         /// </summary>
-        public string LastShortTime { get; set; }
+        public string LastShortTime
+        {
+            get { return _lastShortTime; }
+            set
+            {
+                _lastShortTime = value;
+                OnPropertyChanged();
+            }
+        }
 
+        private string _lastMessage;
         /// <summary>
         /// 最后的消息
         /// </summary>
-        public string LastMessage { get; set; }
+        public string LastMessage
+        {
+            get { return _lastMessage; }
+            set
+            {
+                _lastMessage = value;
+                OnPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// 如果是群聊且值为1，则代表消息免打扰

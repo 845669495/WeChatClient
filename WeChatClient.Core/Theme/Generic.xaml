@@ -13,6 +13,7 @@
             <converter:WxResConverter x:Key="WxRes"></converter:WxResConverter>
             <converter:BoolToVisibilityConverter x:Key="BoolToVisibility" Inverse="False"></converter:BoolToVisibilityConverter>
             <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityInverse" Inverse="True"></converter:BoolToVisibilityConverter>
+            <converter:BoolToValueConverter x:Key="BoolToValue"></converter:BoolToValueConverter>
 
             <Style TargetType="ContentControl" x:Key="WxResImgStyle">
                 <Setter Property="Template">
