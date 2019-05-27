@@ -45,32 +45,43 @@ namespace WeChatClient.Core.Http
         }
 
         /// <summary>
-        /// 获取图片地址
+        /// 获取指定用户或群组列表
         /// </summary>
-        /// <param name="_userName"></param>
+        /// <param name="userNames"></param>
         /// <returns></returns>
-        public string GetIconUrl(string _userName)
+        public JObject WxBatchGetContact(string[] userNames)
         {
-            if (string.IsNullOrEmpty(_userName))
+            if (userNames == null || userNames.Length == 0)
+                throw new Exception("没有传入userNames");
+
+            Cookie sid = BaseService.GetCookie("wxsid");
+            Cookie uin = BaseService.GetCookie("wxuin");
+            if (sid != null && uin != null)
             {
-                return null;
-            }
-            string _iconUrl;
-            //讨论组
-            if (_userName.Contains("@@"))
-            {
-                _iconUrl = StaticUrl.stringWx + StaticUrl.Url_GetHeadImg + _userName;
-            }
-            //好友
-            else if (_userName.Contains("@"))
-            {
-                _iconUrl = StaticUrl.stringWx + StaticUrl.Url_GetIcon + _userName;
+                var body = new
+                {
+                    BaseRequest = new BaseRequest
+                    {
+                        DeviceID = "e" + RandomHelper.RandomNum(15),
+                        Sid = sid.Value,
+                        Uin = int.Parse(uin.Value),
+                        Skey = LoginService.SKey
+                    },
+                    Count = userNames.Length,
+                    List = userNames.Select(p => new
+                    {
+                        EncryChatRoomId = "",
+                        UserName = p
+                    })
+                };
+                string json = JsonConvert.SerializeObject(body);
+                byte[] bytes = BaseService.Request(StaticUrl.Url_wxbatchgetcontact + DateTime.Now.ToTimeStamp() + "&pass_ticket=" + LoginService.Pass_Ticket, MethodEnum.POST, json);
+                string res_str = Encoding.UTF8.GetString(bytes);
+
+                return JsonConvert.DeserializeObject(res_str) as JObject;
             }
             else
-            {
-                _iconUrl = StaticUrl.stringWx + StaticUrl.Url_GetIcon +_userName;
-            }
-            return _iconUrl;
+                throw new Exception("sid或uin为null");
         }
 
         /// <summary>

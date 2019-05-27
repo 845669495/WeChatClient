@@ -19,5 +19,10 @@ namespace WeChatClient.Core.Interfaces
         /// </summary>
         /// <param name="messages"></param>
         void SyncMessage(params WeChatMessage[] messages);
+        /// <summary>
+        /// 更新初始化的群成员
+        /// </summary>
+        /// <param name="groupChats"></param>
+        void UpdateInitGroupMember(params WeChatUser[] groupChats);
     }
 }

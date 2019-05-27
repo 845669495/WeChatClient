@@ -16,8 +16,8 @@
                     <DataTemplate DataType="{x:Type model:WeChatMessage}">
                         <StackPanel Height="70" Cursor="Hand" Background="Transparent">
                             <StackPanel Orientation="Horizontal" Margin="18,10,18,9">
-                                <Image Width="30" Height="30" Source="{Binding FromUser.Image}"></Image>
-                                <TextBlock Text="{Binding FromUser.ShowName}" VerticalAlignment="Center" FontSize="13" Foreground="#fff" Margin="10,0" MaxWidth="150" TextTrimming="CharacterEllipsis"></TextBlock>
+                                <Image Width="30" Height="30" Source="{Binding Image}"></Image>
+                                <TextBlock Text="{Binding FromUserShowName}" VerticalAlignment="Center" FontSize="13" Foreground="#fff" Margin="10,0" MaxWidth="150" TextTrimming="CharacterEllipsis"></TextBlock>
                             </StackPanel>
                             <Grid Height="20">
                                 <TextBlock Text="{Binding Content}" VerticalAlignment="Center" FontSize="13" Foreground="#fff"></TextBlock>

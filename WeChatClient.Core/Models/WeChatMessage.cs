@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using WeChatClient.Core.Interfaces;
 
 namespace WeChatClient.Core.Models
 {
     /// <summary>
     /// 微信消息
     /// </summary>
-    public class WeChatMessage
+    public class WeChatMessage: BaseNotifyModel, INeedDownloadImageModel
     {
         /// <summary>
         /// 消息id
@@ -19,6 +21,10 @@ namespace WeChatClient.Core.Models
         /// 消息发送人
         /// </summary>
         public string FromUserName { get; set; }
+        /// <summary>
+        /// 消息发送人显示名称
+        /// </summary>
+        public string FromUserShowName { get; set; }
         /// <summary>
         /// 消息接收人
         /// </summary>
@@ -47,9 +53,17 @@ namespace WeChatClient.Core.Models
         /// </summary>
         public bool IsReceive { get; set; }
 
-        /// <summary>
-        /// 当前消息发送人
-        /// </summary>
-        public WeChatUser FromUser { get; set; }
+        public string Uri { get; set; }
+
+        private ImageSource _image;
+        public ImageSource Image
+        {
+            get { return _image; }
+            set
+            {
+                _image = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

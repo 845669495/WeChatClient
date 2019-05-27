@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
+using Unity.Attributes;
 using WeChatClient.Core.Dependency;
 using WeChatClient.Core.Helpers;
 using WeChatClient.Core.Interfaces;
@@ -20,6 +22,9 @@ namespace WeChatClient.Core.Http
         /// </summary>
         private readonly Queue<INeedDownloadImageModel> _modelQueue = new Queue<INeedDownloadImageModel>();
         private readonly object _sync = new object();
+
+        [Dependency]
+        protected ImageCacheService ImageCacheService { get; set; }
         public ImageDownloadService()
         {
             StartDownloadTask();
@@ -60,6 +65,13 @@ namespace WeChatClient.Core.Http
                         {
                             if (model.Image != null)
                                 continue;
+
+                            ImageSource image;
+                            if (ImageCacheService.TryGetValue(model.Uri,out image))
+                            {
+                                model.Image = image;
+                                continue;
+                            }
                             byte[] bytes = BaseService.Request(model.Uri, MethodEnum.GET);
                             //这里赋值ImageSource时，需要在UI线程上执行，才能绑定到界面
                             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
@@ -67,6 +79,7 @@ namespace WeChatClient.Core.Http
                                 try
                                 {
                                     model.Image = ImageHelper.MemoryToImageSourceOther(new MemoryStream(bytes));
+                                    ImageCacheService.Add(model.Uri, model.Image);
                                 }
                                 catch (Exception)
                                 {

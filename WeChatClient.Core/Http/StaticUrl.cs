@@ -41,9 +41,9 @@ namespace WeChatClient.Core.Http
         /// </summary>
         public static string Url_GetContact = "/cgi-bin/mmwebwx-bin/webwxgetcontact";
         /// <summary>
-        /// 获取群组列表
+        /// 获取指定用户或群组列表
         /// </summary>
-        public static string Url_GetGroupContact = stringWx + "/cgi-bin/mmwebwx-bin/webwxbatchgetcontact?type=ex";
+        public static string Url_wxbatchgetcontact = stringWx + "/cgi-bin/mmwebwx-bin/webwxbatchgetcontact?type=ex";
         /// <summary>
         /// 消息检查
         /// </summary>

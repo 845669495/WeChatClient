@@ -88,7 +88,9 @@
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\RandomHelper.cs" />
     <Compile Include="Helpers\TimeStampHelper.cs" />
+    <Compile Include="Http\BaseRequest.cs" />
     <Compile Include="Http\BaseService.cs" />
+    <Compile Include="Http\ImageCacheService.cs" />
     <Compile Include="Http\ImageDownloadService.cs" />
     <Compile Include="Http\LoginService.cs" />
     <Compile Include="Http\MethodEnum.cs" />
@@ -100,6 +102,7 @@
     <Compile Include="Interfaces\IImageDownloadService.cs" />
     <Compile Include="Interfaces\IMainManager.cs" />
     <Compile Include="Interfaces\INeedDownloadImageModel.cs" />
+    <Compile Include="Models\BaseNotifyModel.cs" />
     <Compile Include="Models\ChatRoomMember.cs" />
     <Compile Include="Models\WeChatMessage.cs" />
     <Compile Include="Models\WxStatus.cs" />

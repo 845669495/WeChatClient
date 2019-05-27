@@ -11,7 +11,7 @@ using WeChatClient.Core.Interfaces;
 
 namespace WeChatClient.Core.Models
 {
-    public class WeChatUser : INeedDownloadImageModel, INotifyPropertyChanged
+    public class WeChatUser : BaseNotifyModel, INeedDownloadImageModel
     {
         /// <summary>
         /// 用户id
@@ -174,14 +174,6 @@ namespace WeChatClient.Core.Models
         /// 消息列表
         /// </summary>
         public ObservableCollection<WeChatMessage> MessageList { get; private set; } = new ObservableCollection<WeChatMessage>();
-
-        #region INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName]string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
     }
 
     public class WeChatUserComparer : IEqualityComparer<WeChatUser>

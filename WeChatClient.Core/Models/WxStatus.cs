@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WeChatClient.Core.Http;
 
 namespace WeChatClient.Core.Models
 {
@@ -17,7 +18,7 @@ namespace WeChatClient.Core.Models
         /// </summary>
         private const int CHATROOM_NOTIFY_CLOSE = 0;
 
-        private static bool IsRoomContact(WeChatUser user)
+        public static bool IsRoomContact(this WeChatUser user)
         {
             return user.UserName.StartsWith("@@");
         }
@@ -56,6 +57,35 @@ namespace WeChatClient.Core.Models
                 start_char = string.IsNullOrEmpty(user.ShowPinYin) ? string.Empty : user.ShowPinYin[0].ToString().ToUpper();
             }
             return start_char;
+        }
+
+        /// <summary>
+        /// 根据用户名获取图片地址
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public static string GetIconUrl(this string userName)
+        {
+            if (string.IsNullOrEmpty(userName))
+            {
+                return null;
+            }
+            string _iconUrl;
+            //讨论组
+            if (userName.Contains("@@"))
+            {
+                _iconUrl = StaticUrl.stringWx + StaticUrl.Url_GetHeadImg + userName;
+            }
+            //好友
+            else if (userName.Contains("@"))
+            {
+                _iconUrl = StaticUrl.stringWx + StaticUrl.Url_GetIcon + userName;
+            }
+            else
+            {
+                _iconUrl = StaticUrl.stringWx + StaticUrl.Url_GetIcon + userName;
+            }
+            return _iconUrl;
         }
     }
 }

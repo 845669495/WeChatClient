@@ -75,6 +75,8 @@ namespace WeChatClient.Main.ViewModels
 
             await LoadAllContact();
 
+            await UpdateInitGroupMember(list.Where(p => p.IsRoomContact()).Select(p => p.UserName).Distinct().ToArray());
+
             StartWeChatSyncTask();
         }
 
@@ -96,11 +98,28 @@ namespace WeChatClient.Main.ViewModels
             ContactListManager.AddContact(list);
         }
 
+        /// <summary>
+        /// 加载初始化的群组聊天成员（这里很奇怪，微信初始化接口返回的群组成员信息不全，没有昵称）
+        /// </summary>
+        /// <returns></returns>
+        private async Task UpdateInitGroupMember(string[] userNames)
+        {
+            var list = await Task.Run(() =>
+            {
+                JObject contact_result = wcs.WxBatchGetContact(userNames);
+                return contact_result["ContactList"]
+                .Select(contact => JObjectToUser(contact)).ToArray();
+            });
+
+            //将初始化的群组聊天成员传输到聊天列表组件
+            ChatListManager.UpdateInitGroupMember(list);
+        }
+
         private WeChatUser JObjectToUser(JToken jObject)
         {
             WeChatUser user = jObject.ToObject<WeChatUser>();
 
-            user.HeadImgUrl = wcs.GetIconUrl(user.UserName);
+            user.HeadImgUrl = user.UserName.GetIconUrl();
             user.ChatNotifyClose = user.IsChatNotifyClose();
             user.StartChar = user.GetStartChar();
             //user.MemberList = jObject["MemberList"].Select(p => p.ToObject<ChatRoomMember>()).ToList();
@@ -113,7 +132,7 @@ namespace WeChatClient.Main.ViewModels
         private WeChatMessage JObjectToMessage(JToken jObject)
         {
             WeChatMessage message = jObject.ToObject<WeChatMessage>();
-            message.Content = message.MsgType == 1 ? message.Content : "请在其他设备上查看消息";//只接受文本消息
+            //message.Content = message.MsgType == 1 ? message.Content : "请在其他设备上查看消息";//只接受文本消息
             message.CreateDateTime = message.CreateTime.ToTime();
             message.GroupDateTime = message.CreateDateTime;
             message.GroupShortTime = message.CreateDateTime.ToString("HH:mm");

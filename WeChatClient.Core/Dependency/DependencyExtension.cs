@@ -44,12 +44,15 @@ namespace WeChatClient.Core.Dependency
         {
             foreach (var exposedServices in GetExposedServices(type))
             {
+                if(exposedServices.ServiceLifetime == ServiceLifetime.Singleton)
+                {
+                    //Prism.Ioc使用Unity框架，默认注册为Transient，这里需要改变自身为Singleton
+                    container.RegisterSingleton(type);
+                }
                 foreach (var serviceType in exposedServices.ExposedServiceTypes)
                 {
                     if (exposedServices.ServiceLifetime == ServiceLifetime.Singleton)
                     {
-                        //Prism.Ioc使用Unity框架，默认注册为Transient，这里需要改变自身为Singleton
-                        container.RegisterSingleton(type);  
                         container.RegisterSingleton(serviceType, type);
                     }
                     else if(exposedServices.ServiceLifetime == ServiceLifetime.Transient)

@@ -26,8 +26,8 @@ namespace WeChatClient.ChatList.ViewModels
         [Dependency]
         protected IContactListManager ContactListManager { get; set; }
         
-        [Dependency]
-        protected Lazy<IMainManager> MainManager { get; set; }
+        //[Dependency]
+        //protected Lazy<IMainManager> MainManager { get; set; }
 
         public ChatListViewModel(IChatContentManager chatContentManager)
         {
@@ -50,8 +50,8 @@ namespace WeChatClient.ChatList.ViewModels
             var selected = SelectedItem;
             foreach (var msg in messages)
             {
-                string userName = msg.IsReceive ? msg.FromUserName : msg.ToUserName;
-                var chat = ChatList.FirstOrDefault(p => p.UserName == userName);
+                string chatUserName = msg.IsReceive ? msg.FromUserName : msg.ToUserName;
+                var chat = ChatList.FirstOrDefault(p => p.UserName == chatUserName);
                 if (chat != null)
                 {
                     //消息在当前聊天列表中产生
@@ -60,7 +60,7 @@ namespace WeChatClient.ChatList.ViewModels
                 else
                 {
                     //当前列表没有找到
-                    chat = ContactListManager.FindContact(userName);
+                    chat = ContactListManager.FindContact(chatUserName);
                     if (chat == null)
                         continue;
                     ChatList.Insert(0, chat);
@@ -70,7 +70,31 @@ namespace WeChatClient.ChatList.ViewModels
                     chat.LastMessage = msg.Content;
                     chat.LastShortTime = msg.GroupShortTime;
 
-                    msg.FromUser = msg.IsReceive ? chat : MainManager.Value.WeChatUser;
+
+                    if (msg.IsReceive)  //只有收到消息需要显示名称
+                    {
+                        //是收到消息
+                        if (chat.IsRoomContact())
+                        {
+                            //如果是群消息
+                            var member = chat.MemberList.FirstOrDefault(p => msg.Content.StartsWith(p.UserName));
+                            if (member == null)
+                                continue;
+                            msg.Content = msg.Content.Replace(member.UserName + ":<br/>", "");
+                            chat.LastMessage = member.ShowName + ":" + msg.Content;
+                            msg.FromUserName = member.UserName;
+                            msg.FromUserShowName = member.ShowName;
+                        }
+                        else
+                        {
+                            //不是群消息则显示对方显示名称
+                            msg.FromUserShowName = chat.ShowName;
+                        }
+                    }
+
+                    msg.Uri = msg.FromUserName.GetIconUrl();
+                    ImageDownloadService.Add(msg);
+
                     var last = chat.MessageList.LastOrDefault();
                     if (last != null && (msg.CreateDateTime - last.GroupDateTime).Minutes <= 3)
                     {
@@ -82,6 +106,16 @@ namespace WeChatClient.ChatList.ViewModels
                 ImageDownloadService.Add(chat);
             }
             SelectedItem = selected;
+        }
+
+        public void UpdateInitGroupMember(params WeChatUser[] groupChats)
+        {
+            foreach (var item in groupChats)
+            {
+                var chat = ChatList.FirstOrDefault(p => p.UserName == item.UserName);
+                if (chat == null) continue;
+                chat.MemberList = item.MemberList;
+            }
         }
     }
 }
