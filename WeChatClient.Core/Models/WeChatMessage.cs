@@ -49,6 +49,20 @@ namespace WeChatClient.Core.Models
         public string GroupShortTime { get; set; }
 
         /// <summary>
+        /// 状态通知码（如果为4，则加载更多聊天列表）
+        /// </summary>
+        public int StatusNotifyCode { get; set; }
+        /// <summary>
+        /// 状态通知用户名（如果状态通知码为4，则加载这些用户，添加到聊天列表）
+        /// </summary>
+        public string StatusNotifyUserName { get; set; }
+
+        /// <summary>
+        /// 是否为加载更多聊天列表消息
+        /// </summary>
+        public bool IsLoadMoreChats => MsgType == 51 && StatusNotifyCode == 4 && FromUserName == ToUserName;
+
+        /// <summary>
         /// 是否为收到的消息
         /// </summary>
         public bool IsReceive { get; set; }

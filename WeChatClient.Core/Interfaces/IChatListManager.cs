@@ -15,6 +15,12 @@ namespace WeChatClient.Core.Interfaces
         /// <param name="chat"></param>
         void AddChat(params WeChatUser[] chat);
         /// <summary>
+        /// 是否包含该用户名的聊天
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        bool Contains(string userName);
+        /// <summary>
         /// 同步消息
         /// </summary>
         /// <param name="messages"></param>

@@ -45,11 +45,23 @@ namespace WeChatClient.ChatList.ViewModels
             }          
         }
 
+        /// <summary>
+        /// 是否包含
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public bool Contains(string userName)
+        {
+            return ChatList.Any(p => p.UserName == userName);
+        }
+
         public void SyncMessage(params WeChatMessage[] messages)
         {
             var selected = SelectedItem;
             foreach (var msg in messages)
             {
+                if (msg.IsLoadMoreChats)
+                    continue;
                 string chatUserName = msg.IsReceive ? msg.FromUserName : msg.ToUserName;
                 var chat = ChatList.FirstOrDefault(p => p.UserName == chatUserName);
                 if (chat != null)

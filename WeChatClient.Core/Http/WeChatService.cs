@@ -43,9 +43,43 @@ namespace WeChatClient.Core.Http
             else
                 throw new Exception("sid或uin为null");
         }
+        /// <summary>
+        /// 开启微信状态通知
+        /// </summary>
+        /// <param name="meUserName"></param>
+        /// <returns></returns>
+        public JObject WxStatusNotify(string meUserName)
+        {
+            Cookie sid = BaseService.GetCookie("wxsid");
+            Cookie uin = BaseService.GetCookie("wxuin");
+            if (sid != null && uin != null)
+            {
+                var body = new
+                {
+                    BaseRequest = new BaseRequest
+                    {
+                        DeviceID = "e" + RandomHelper.RandomNum(15),
+                        Sid = sid.Value,
+                        Uin = int.Parse(uin.Value),
+                        Skey = LoginService.SKey
+                    },
+                    ClientMsgId = DateTime.Now.ToTimeStamp(),
+                    FromUserName = meUserName,
+                    ToUserName = meUserName,
+                    Code = 3
+                };
+                string json = JsonConvert.SerializeObject(body);
+                byte[] bytes = BaseService.Request(StaticUrl.Url_StatusNotify + LoginService.Pass_Ticket, MethodEnum.POST, json);
+                string res_str = Encoding.UTF8.GetString(bytes);
+
+                return JsonConvert.DeserializeObject(res_str) as JObject;
+            }
+            else
+                throw new Exception("sid或uin为null");
+        }
 
         /// <summary>
-        /// 获取指定用户或群组列表
+        /// 获取指定用户或群组列表（每次最多查询50条数据）
         /// </summary>
         /// <param name="userNames"></param>
         /// <returns></returns>

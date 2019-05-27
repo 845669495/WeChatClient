@@ -73,8 +73,15 @@ namespace WeChatClient.Main.ViewModels
             //将数据传输到聊天列表组件
             ChatListManager.AddChat(list.Distinct(new WeChatUserComparer()).ToArray());
 
-            await LoadAllContact();
+            //开启微信状态通知
+            await Task.Run(() =>
+            {
+                wcs.WxStatusNotify(WeChatUser.UserName);
+            });
 
+            //加载通讯录
+            await LoadAllContact();
+            //加载群组成员
             await UpdateInitGroupMember(list.Where(p => p.IsRoomContact()).Select(p => p.UserName).Distinct().ToArray());
 
             StartWeChatSyncTask();
@@ -107,8 +114,7 @@ namespace WeChatClient.Main.ViewModels
             var list = await Task.Run(() =>
             {
                 JObject contact_result = wcs.WxBatchGetContact(userNames);
-                return contact_result["ContactList"]
-                .Select(contact => JObjectToUser(contact)).ToArray();
+                return contact_result["ContactList"].Select(contact => JObjectToUser(contact)).ToArray();
             });
 
             //将初始化的群组聊天成员传输到聊天列表组件
@@ -140,6 +146,9 @@ namespace WeChatClient.Main.ViewModels
             return message;
         }
 
+        /// <summary>
+        /// 开启微信同步任务
+        /// </summary>
         private void StartWeChatSyncTask()
         {
             Task.Run(() =>
@@ -170,6 +179,21 @@ namespace WeChatClient.Main.ViewModels
                             if (sync_result["AddMsgCount"] != null && sync_result["AddMsgCount"].ToString() != "0")
                             {
                                 var messageList = sync_result["AddMsgList"].Select(p => JObjectToMessage(p));
+                                
+                                foreach (var item in messageList.Where(p => p.IsLoadMoreChats))
+                                {
+                                    //加载更多聊天列表
+                                    string[] userNames = item.StatusNotifyUserName.Split(',').Where(p => !ChatListManager.Contains(p)).ToArray();
+                                    for (int i = 0; i < Math.Ceiling(userNames.Length / 50.0); i++)  //每次最多查询50条数据
+                                    {
+                                        JObject contact_result = wcs.WxBatchGetContact(userNames.Skip(i * 50).Take(50).ToArray());
+                                        var chatList = contact_result["ContactList"].Select(contact => JObjectToUser(contact)).ToArray();
+                                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                                        {
+                                            ChatListManager.AddChat(chatList);
+                                        }));
+                                    }                                 
+                                }
                                 Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                                 {
                                     ChatListManager.SyncMessage(messageList.ToArray());
