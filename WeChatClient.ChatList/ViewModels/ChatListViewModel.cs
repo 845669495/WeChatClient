@@ -83,12 +83,12 @@ namespace WeChatClient.ChatList.ViewModels
                 {
                     chat.LastMessage = msg.Content;
                     chat.LastShortTime = msg.GroupShortTime;
-
+                    msg.IsRoom = chat.IsRoomContact();
 
                     if (msg.IsReceive)  //只有收到消息需要显示名称
                     {
                         //是收到消息
-                        if (chat.IsRoomContact())
+                        if (msg.IsRoom)
                         {
                             //如果是群消息
                             var member = chat.MemberList.FirstOrDefault(p => msg.Content.StartsWith(p.UserName));

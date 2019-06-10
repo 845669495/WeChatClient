@@ -14,7 +14,7 @@
                 <ResourceDictionary>
                     <DataTemplate DataType="{x:Type model:WeChatUser}">
                         <StackPanel Height="64" Cursor="Hand" Background="Transparent">
-                            <Grid Margin="18,12,18,11">
+                            <Grid Margin="18,12,9,11">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition></ColumnDefinition>
                                     <ColumnDefinition Width="auto"></ColumnDefinition>

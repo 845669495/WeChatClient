@@ -21,7 +21,7 @@
                             </Grid.ColumnDefinitions>
                             <Image VerticalAlignment="Top" Width="40" Height="40" Source="{Binding Image}"></Image>
                             <DockPanel Grid.Column="1" Margin="10,0">
-                                <Grid Height="22" DockPanel.Dock="Top">
+                                <Grid Height="22" DockPanel.Dock="Top" Visibility="{Binding NeedShowName,Converter={StaticResource BoolToValue},ConverterParameter=Visible,FallbackValue=Collapsed}">
                                     <TextBlock Text="{Binding FromUserShowName}" FontSize="12" Foreground="#4f4f4f" MaxWidth="350" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" HorizontalAlignment="Left"></TextBlock>
                                 </Grid>
                                 <Border CornerRadius="3" MaxWidth="500" HorizontalAlignment="Left" Background="#fff">

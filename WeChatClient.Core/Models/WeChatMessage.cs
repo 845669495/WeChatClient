@@ -66,6 +66,14 @@ namespace WeChatClient.Core.Models
         /// 是否为收到的消息
         /// </summary>
         public bool IsReceive { get; set; }
+        /// <summary>
+        /// 是否为群消息
+        /// </summary>
+        public bool IsRoom { get; set; }
+        /// <summary>
+        /// 只有收到的群消息需要显示发消息的人的名字
+        /// </summary>
+        public bool NeedShowName => IsReceive && IsRoom;
 
         public string Uri { get; set; }
 
