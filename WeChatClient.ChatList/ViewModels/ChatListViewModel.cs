@@ -22,7 +22,9 @@ namespace WeChatClient.ChatList.ViewModels
         public WeChatUser SelectedItem { get; set; }
 
         [Dependency]
-        protected IImageDownloadService ImageDownloadService { get; set; }
+        protected IImageDownloadService ChatImageDownloadService { get; set; }
+        [Dependency]
+        protected IImageDownloadService MessageImageDownloadService { get; set; }
         [Dependency]
         protected IContactListManager ContactListManager { get; set; }
         
@@ -41,7 +43,7 @@ namespace WeChatClient.ChatList.ViewModels
                 if (ChatList.Any(p => p.UserName == item.UserName))
                     continue;
                 ChatList.Add(item);
-                ImageDownloadService.Add(item);
+                ChatImageDownloadService.Add(item);
             }          
         }
 
@@ -105,7 +107,7 @@ namespace WeChatClient.ChatList.ViewModels
                     }
 
                     msg.Uri = msg.FromUserName.GetIconUrl();
-                    ImageDownloadService.Add(msg);
+                    MessageImageDownloadService.Add(msg);
 
                     var last = chat.MessageList.LastOrDefault();
                     if (last != null && (msg.CreateDateTime - last.GroupDateTime).Minutes <= 3)
@@ -115,7 +117,7 @@ namespace WeChatClient.ChatList.ViewModels
                     }
                     chat.MessageList.Add(msg);
                 }                    
-                ImageDownloadService.Add(chat);
+                ChatImageDownloadService.Add(chat);
             }
             SelectedItem = selected;
         }

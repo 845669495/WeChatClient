@@ -179,20 +179,13 @@ namespace WeChatClient.Main.ViewModels
                             if (sync_result["AddMsgCount"] != null && sync_result["AddMsgCount"].ToString() != "0")
                             {
                                 var messageList = sync_result["AddMsgList"].Select(p => JObjectToMessage(p));
-                                
-                                foreach (var item in messageList.Where(p => p.IsLoadMoreChats))
+
+                                var loadMore = messageList.FirstOrDefault(p => p.IsLoadMoreChats);
+                                if (loadMore != null)
                                 {
                                     //加载更多聊天列表
-                                    string[] userNames = item.StatusNotifyUserName.Split(',').Where(p => !ChatListManager.Contains(p)).ToArray();
-                                    for (int i = 0; i < Math.Ceiling(userNames.Length / 50.0); i++)  //每次最多查询50条数据
-                                    {
-                                        JObject contact_result = wcs.WxBatchGetContact(userNames.Skip(i * 50).Take(50).ToArray());
-                                        var chatList = contact_result["ContactList"].Select(contact => JObjectToUser(contact)).ToArray();
-                                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                                        {
-                                            ChatListManager.AddChat(chatList);
-                                        }));
-                                    }                                 
+                                    string[] userNames = loadMore.StatusNotifyUserName.Split(',').Where(p => !ChatListManager.Contains(p)).ToArray();
+                                    LoadMoreChats(userNames);
                                 }
                                 Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                                 {
@@ -202,6 +195,23 @@ namespace WeChatClient.Main.ViewModels
                         }
                     }
                     Thread.Sleep(100);
+                }
+            });
+        }
+
+        private void LoadMoreChats(string[] userNames)
+        {
+            //启动新线程加载更多聊天列表
+            Task.Run(() =>
+            {
+                for (int i = 0; i < Math.Ceiling(userNames.Length / 50.0); i++)  //每次最多查询50条数据
+                {
+                    JObject contact_result = wcs.WxBatchGetContact(userNames.Skip(i * 50).Take(50).ToArray());
+                    var chatList = contact_result["ContactList"].Select(contact => JObjectToUser(contact)).ToArray();
+                    Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        ChatListManager.AddChat(chatList);
+                    }));
                 }
             });
         }

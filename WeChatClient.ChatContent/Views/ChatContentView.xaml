@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WeChatClient.ChatContent.Views"
+             xmlns:local="clr-namespace:WeChatClient.ChatContent"
              xmlns:model="clr-namespace:WeChatClient.Core.Models;assembly=WeChatClient.Core"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="720" Background="#eee">
@@ -13,17 +13,59 @@
                 <ResourceDictionary Source="pack://application:,,,/WeChatClient.Core;component/Theme/Generic.xaml"></ResourceDictionary>
 
                 <ResourceDictionary>
-                    <DataTemplate DataType="{x:Type model:WeChatMessage}">
-                        <StackPanel Height="70" Cursor="Hand" Background="Transparent">
-                            <StackPanel Orientation="Horizontal" Margin="18,10,18,9">
-                                <Image Width="30" Height="30" Source="{Binding Image}"></Image>
-                                <TextBlock Text="{Binding FromUserShowName}" VerticalAlignment="Center" FontSize="13" Foreground="#fff" Margin="10,0" MaxWidth="150" TextTrimming="CharacterEllipsis"></TextBlock>
-                            </StackPanel>
-                            <Grid Height="20">
-                                <TextBlock Text="{Binding Content}" VerticalAlignment="Center" FontSize="13" Foreground="#fff"></TextBlock>
-                            </Grid>
-                            <Line StrokeThickness="1" Stroke="#292c33" X1="0" Y1="0" X2="{Binding ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=FrameworkElement}}" Y2="0"></Line>
-                        </StackPanel>
+                    <DataTemplate DataType="{x:Type model:WeChatMessage}" x:Key="ReceiveMessageTemplate">
+                        <Grid Background="Transparent" Margin="0,0,0,16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Image VerticalAlignment="Top" Width="40" Height="40" Source="{Binding Image}"></Image>
+                            <DockPanel Grid.Column="1" Margin="10,0">
+                                <Grid Height="22" DockPanel.Dock="Top">
+                                    <TextBlock Text="{Binding FromUserShowName}" FontSize="12" Foreground="#4f4f4f" MaxWidth="350" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" HorizontalAlignment="Left"></TextBlock>
+                                </Grid>
+                                <Border CornerRadius="3" MaxWidth="500" HorizontalAlignment="Left" Background="#fff">
+                                    <Grid>
+                                        <TextBlock Text="{Binding Content}" Margin="13,9" FontSize="14" TextWrapping="Wrap" VerticalAlignment="Center"></TextBlock>
+                                        <Canvas>
+                                            <Path Fill="#fff">
+                                                <Path.Data>
+                                                    <PathGeometry>
+                                                        <PathFigure StartPoint="0,14">
+                                                            <PolyLineSegment Points="-4,20 0,26 0,14"></PolyLineSegment>
+                                                        </PathFigure>
+                                                    </PathGeometry>
+                                                </Path.Data>
+                                            </Path>
+                                        </Canvas>
+                                    </Grid>
+                                </Border>
+                            </DockPanel>
+                        </Grid>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type model:WeChatMessage}" x:Key="SelfMessageTemplate">
+                        <Grid Background="Transparent" Margin="0,0,0,16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="10"></ColumnDefinition>
+                                <ColumnDefinition Width="40"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Border CornerRadius="3" MaxWidth="500" HorizontalAlignment="Right" Background="#b2e281">
+                                <TextBlock Text="{Binding Content}" Margin="13,9" FontSize="14" TextWrapping="Wrap" VerticalAlignment="Center"></TextBlock>
+                            </Border>
+                            <Canvas Grid.Column="1">
+                                <Path Fill="#b2e281">
+                                    <Path.Data>
+                                        <PathGeometry>
+                                            <PathFigure StartPoint="0,14">
+                                                <PolyLineSegment Points="4,20 0,26 0,14"></PolyLineSegment>
+                                            </PathFigure>
+                                        </PathGeometry>
+                                    </Path.Data>
+                                </Path>
+                            </Canvas>
+                            <Image VerticalAlignment="Top" Width="40" Height="40" Source="{Binding Image}" Grid.Column="2"></Image>
+                        </Grid>
                     </DataTemplate>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
@@ -71,12 +113,15 @@
                         <!--ScrollViewer.CanContentScroll="False" 分组之后需要阻止按照子项滚动-->
                         <ItemsControl ItemsSource="{Binding SelectedChat.MessageList}" Background="Transparent"
                                  Style="{StaticResource ItemsControlScrollViewerStyle}">
+                            <ItemsControl.ItemTemplateSelector>
+                                <local:MessageTemplateSelector></local:MessageTemplateSelector>
+                            </ItemsControl.ItemTemplateSelector>
                             <ItemsControl.GroupStyle>
                                 <GroupStyle>
                                     <GroupStyle.HeaderTemplate>
                                         <DataTemplate DataType="CollectionViewGroup">
-                                            <Grid Height="24" Background="#292d32">
-                                                <TextBlock Margin="18,0" VerticalAlignment="Center" FontSize="14" Foreground="#787b87" Text="{Binding Name}"></TextBlock>
+                                            <Grid Height="48">
+                                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="#b2b2b2" Text="{Binding Name}"></TextBlock>
                                             </Grid>
                                         </DataTemplate>
                                     </GroupStyle.HeaderTemplate>
@@ -107,7 +152,9 @@
                             <ContentControl Style="{StaticResource WxResImgStyle}" Content="30,432,30,30" Width="30" Height="30"></ContentControl>
                             <ContentControl Style="{StaticResource WxResImgStyle}" Content="120,432,30,30" Width="30" Height="30"></ContentControl>
                         </StackPanel>
-                        <RichTextBox Height="84" Background="Transparent" BorderBrush="Transparent"></RichTextBox>
+                        <ScrollViewer Height="84" Focusable="False">
+                            <TextBox Background="Transparent" BorderBrush="Transparent" FontSize="14" BorderThickness="0" TextWrapping="Wrap"></TextBox>
+                        </ScrollViewer>
                         <Rectangle Height="5"></Rectangle>
                         <StackPanel Height="30" Orientation="Horizontal" HorizontalAlignment="Right">
                             <TextBlock Text="按下Ctrl+Enter换行" VerticalAlignment="Center" FontSize="12" Foreground="#888" Margin="7,0"></TextBlock>

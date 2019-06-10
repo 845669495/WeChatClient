@@ -101,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChatContentModule.cs" />
+    <Compile Include="MessageTemplateSelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ChatContentViewModel.cs" />
     <Compile Include="Views\ChatContentView.xaml.cs">

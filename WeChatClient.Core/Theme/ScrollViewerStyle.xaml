@@ -128,11 +128,20 @@
            TargetType="{x:Type ScrollViewer}">
         <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
                         <Grid Background="{TemplateBinding Background}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                            </Grid.RowDefinitions>
                             <ScrollContentPresenter  Cursor="{TemplateBinding Cursor}" Margin="{TemplateBinding Padding}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
                             <ScrollBar x:Name="PART_VerticalScrollBar"
                                        HorizontalAlignment="Right"
@@ -141,7 +150,8 @@
                                        Style="{StaticResource for_scrollbar}"
                                        ViewportSize="{TemplateBinding ViewportHeight}"
                                        Value="{TemplateBinding VerticalOffset}"
-                                       Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
+                                       Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                       Grid.Column="1"/>
                             <ScrollBar x:Name="PART_HorizontalScrollBar"
                                        Maximum="{TemplateBinding ScrollableWidth}"
                                        Orientation="Horizontal"
@@ -149,7 +159,8 @@
                                        VerticalAlignment="Bottom"
                                        Value="{TemplateBinding HorizontalOffset}"
                                        ViewportSize="{TemplateBinding ViewportWidth}"
-                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
+                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                       Grid.Row="1"/>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>

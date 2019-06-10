@@ -17,14 +17,7 @@ namespace WeChatClient.Core.Http
         private readonly Dictionary<string, ImageSource> _cache = new Dictionary<string, ImageSource>();
         public bool TryGetValue(string uri, out ImageSource image)
         {
-            try
-            {
-                return _cache.TryGetValue(uri, out image);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            return _cache.TryGetValue(uri, out image);
         }
         public void Add(string uri, ImageSource image)
         {
