@@ -41,5 +41,40 @@ namespace WeChatClient.ContactList.ViewModels
         {
             return _allContactList.FirstOrDefault(p => p.UserName == userName);
         }
+
+        public void DelContact(params string[] userNames)
+        {
+            foreach (var item in userNames)
+            {
+                var user = _allContactList.FirstOrDefault(p => p.UserName == item);
+                if(user != null)
+                {
+                    _allContactList.Remove(user);
+                    if (ContactList.Contains(user))
+                        ContactList.Remove(user);
+                }                
+            }           
+        }
+
+        public void ModContact(params WeChatUser[] contact)
+        {
+            foreach (var item in contact)  
+            {
+                if (item.IsRoomContact())  //这里不包含群聊
+                    continue;
+
+                var local = _allContactList.FirstOrDefault(p => p.UserName == item.UserName);
+                if (local != null)
+                {
+                    _allContactList.Remove(local);
+                    ContactList.Remove(local);
+                }
+                _allContactList.Add(item);
+                if (local.StartChar != "公众号")
+                    ContactList.Add(item);
+            }
+
+            ImageDownloadService.Add(contact.ToArray());
+        }
     }
 }

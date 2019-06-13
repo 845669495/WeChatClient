@@ -15,6 +15,16 @@ namespace WeChatClient.Core.Interfaces
         /// <param name="chat"></param>
         void AddChat(params WeChatUser[] chat);
         /// <summary>
+        /// 修改聊天
+        /// </summary>
+        /// <param name="chat"></param>
+        void ModChat(params WeChatUser[] chat);
+        /// <summary>
+        /// 删除聊天
+        /// </summary>
+        /// <param name="userNames"></param>
+        void DelChat(params string[] userNames);
+        /// <summary>
         /// 是否包含该用户名的聊天
         /// </summary>
         /// <param name="userName"></param>

@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Unity.Attributes;
 using WeChatClient.Core.Dependency;
 using WeChatClient.Core.Helpers;
@@ -22,6 +23,8 @@ namespace WeChatClient.Core.Http
         /// </summary>
         private readonly Queue<INeedDownloadImageModel> _modelQueue = new Queue<INeedDownloadImageModel>();
         private readonly object _sync = new object();
+
+        private readonly static BitmapImage _default = new BitmapImage(new Uri("pack://application:,,,/WeChatClient.Core;component/Resources/2KriyDK.png", UriKind.Absolute));
 
         [Dependency]
         protected ImageCacheService ImageCacheService { get; set; }
@@ -78,7 +81,7 @@ namespace WeChatClient.Core.Http
                             {
                                 try
                                 {
-                                    model.Image = ImageHelper.MemoryToImageSourceOther(new MemoryStream(bytes));
+                                    model.Image = bytes.Length == 0 ? _default : ImageHelper.MemoryToImageSourceOther(new MemoryStream(bytes));
                                     ImageCacheService.Add(model.Uri, model.Image);
                                 }
                                 catch (Exception)

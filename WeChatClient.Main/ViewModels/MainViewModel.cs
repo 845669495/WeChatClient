@@ -168,15 +168,26 @@ namespace WeChatClient.Main.ViewModels
                         JObject sync_result = wcs.WeChatSync();//进行同步
                         if (sync_result != null)
                         {
-                            if (sync_result["ModContactCount"] != null && sync_result["ModContactCount"].ToString() != "0")
+                            if (sync_result["DelContactCount"] != null && sync_result["DelContactCount"].ToString() != "0")  //删除联系人
                             {
-                                var addChatList = sync_result["ModContactList"].Select(p => JObjectToUser(p));
+                                var delContacts = sync_result["DelContactList"].Select(p => p.Value<string>("UserName")).ToArray();
                                 Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                                 {
-                                    ChatListManager.AddChat(addChatList.ToArray());
+                                    //同时删除聊天和联系人
+                                    ChatListManager.DelChat(delContacts);
+                                    ContactListManager.DelContact(delContacts);
                                 }));
                             }
-                            if (sync_result["AddMsgCount"] != null && sync_result["AddMsgCount"].ToString() != "0")
+                            if (sync_result["ModContactCount"] != null && sync_result["ModContactCount"].ToString() != "0")  //添加或者修改联系人
+                            {
+                                var modContactList = sync_result["ModContactList"].Select(p => JObjectToUser(p)).ToArray();
+                                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                                {
+                                    ChatListManager.ModChat(modContactList);
+                                    ContactListManager.ModContact(modContactList);                                
+                                }));
+                            }
+                            if (sync_result["AddMsgCount"] != null && sync_result["AddMsgCount"].ToString() != "0")  //新消息
                             {
                                 var messageList = sync_result["AddMsgList"].Select(p => JObjectToMessage(p));
 
@@ -189,6 +200,7 @@ namespace WeChatClient.Main.ViewModels
                                 }
                                 Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                                 {
+                                    //同步消息
                                     ChatListManager.SyncMessage(messageList.ToArray());
                                 }));      
                             }

@@ -9,7 +9,9 @@ namespace WeChatClient.Core.Interfaces
 {
     public interface IContactListManager
     {
-        void AddContact(params WeChatUser[] chat);
+        void AddContact(params WeChatUser[] contact);
         WeChatUser FindContact(string userName);
+        void DelContact(params string[] userNames);
+        void ModContact(params WeChatUser[] contact);
     }
 }

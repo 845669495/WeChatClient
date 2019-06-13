@@ -47,6 +47,21 @@ namespace WeChatClient.ChatList.ViewModels
             }          
         }
 
+        public void ModChat(params WeChatUser[] chat)
+        {
+            foreach (var item in chat)
+            {
+                var local = ChatList.FirstOrDefault(p => p.UserName == item.UserName);
+                if (local != null)
+                {
+                    item.MessageList.AddRange(local.MessageList);  //将本地聊天的信息拷贝过来
+                    ChatList.Remove(local);
+                }
+                ChatList.Insert(0, item);  //将修改后的聊天放在首位
+                ChatImageDownloadService.Add(item);
+            }
+        }
+
         /// <summary>
         /// 是否包含
         /// </summary>
@@ -129,6 +144,18 @@ namespace WeChatClient.ChatList.ViewModels
                 var chat = ChatList.FirstOrDefault(p => p.UserName == item.UserName);
                 if (chat == null) continue;
                 chat.MemberList = item.MemberList;
+            }
+        }
+
+        public void DelChat(params string[] userNames)
+        {
+            foreach (var item in userNames)
+            {
+                var user = ChatList.FirstOrDefault(p => p.UserName == item);
+                if (user != null)
+                {
+                    ChatList.Remove(user);
+                }
             }
         }
     }
