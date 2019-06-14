@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using Prism.Events;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
@@ -16,6 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using Unity.Attributes;
 using WeChatClient.Core.Dependency;
+using WeChatClient.Core.Events;
 using WeChatClient.Core.Helpers;
 using WeChatClient.Core.Http;
 using WeChatClient.Core.Interfaces;
@@ -35,6 +37,8 @@ namespace WeChatClient.Main.ViewModels
         [Dependency]  //属性注入，相比构造注入使用比较方便
         protected IChatListManager ChatListManager { get; set; }
         [Dependency]
+        protected IChatContentManager ChatContentManager { get; set; }
+        [Dependency]
         protected IImageDownloadService ImageDownloadService { get; set; }
 
         [Reactive]
@@ -44,11 +48,13 @@ namespace WeChatClient.Main.ViewModels
 
         public ICommand NavigateCommand { get; set; }
 
-        public MainViewModel(IRegionManager regionManager)
+        public MainViewModel(IRegionManager regionManager, IEventAggregator ea)
         {
             _regionManager = regionManager;
             LoadedCommand = ReactiveCommand.CreateFromTask(InitAsync);
             NavigateCommand = ReactiveCommand.Create<string>(Navigate);
+
+            ea.GetEvent<SendTextMsgEvent>().Subscribe(SendTextMsg);
         }
 
         private void Navigate(string navigatePath)
@@ -210,9 +216,12 @@ namespace WeChatClient.Main.ViewModels
             });
         }
 
+        /// <summary>
+        /// 启动新线程加载更多聊天列表
+        /// </summary>
+        /// <param name="userNames"></param>
         private void LoadMoreChats(string[] userNames)
         {
-            //启动新线程加载更多聊天列表
             Task.Run(() =>
             {
                 for (int i = 0; i < Math.Ceiling(userNames.Length / 50.0); i++)  //每次最多查询50条数据
@@ -225,6 +234,30 @@ namespace WeChatClient.Main.ViewModels
                     }));
                 }
             });
+        }
+
+        /// <summary>
+        /// 发送文本消息
+        /// </summary>
+        /// <param name="msg"></param>
+        private void SendTextMsg(string msg)
+        {
+            var selectedChat = ChatContentManager.SelectedChat;
+
+            WeChatMessage weChatMessage = new WeChatMessage
+            {
+                Content = msg,
+                CreateDateTime = DateTime.Now,
+                FromUserName = WeChatUser.UserName,
+                MsgType = 1,
+                ToUserName = selectedChat.UserName,
+                ShortTime = DateTime.Now.ToString("HH:mm"),
+                IsReceive = false
+            };
+
+            ChatListManager.SyncMessage(weChatMessage);
+
+            wcs.SendMsg(msg, WeChatUser.UserName, selectedChat.UserName, 1);
         }
     }
 }

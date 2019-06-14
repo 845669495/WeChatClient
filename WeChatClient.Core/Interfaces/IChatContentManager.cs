@@ -12,6 +12,6 @@ namespace WeChatClient.Core.Interfaces
         /// <summary>
         /// 设置当前选中的聊天
         /// </summary>
-        WeChatUser SelectedChat { set; }
+        WeChatUser SelectedChat { set; get; }
     }
 }

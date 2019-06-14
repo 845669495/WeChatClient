@@ -21,7 +21,7 @@
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Horizontal">
                                     <Image Width="40" Height="40" Source="{Binding Image}"></Image>
-                                    <Grid>
+                                    <Grid Height="40">
                                         <Grid.RowDefinitions>
                                             <RowDefinition></RowDefinition>
                                             <RowDefinition></RowDefinition>

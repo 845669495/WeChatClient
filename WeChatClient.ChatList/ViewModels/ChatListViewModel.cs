@@ -102,7 +102,7 @@ namespace WeChatClient.ChatList.ViewModels
                 }
                 if (msg.MsgType != 51)  //51类型消息不插入消息列表
                 {
-                    chat.LastMessage = msg.Content;
+                    chat.LastMessage = msg.Content?.Trim();
                     chat.LastShortTime = msg.ShortTime;
                     msg.IsRoom = chat.IsRoomContact();
 
