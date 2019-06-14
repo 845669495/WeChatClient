@@ -13,10 +13,8 @@ namespace WeChatClient.ChatContent
     {
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            var fe = container as FrameworkElement;
-            var obj = item as WeChatMessage;
             DataTemplate dt = null;
-            if (obj != null && fe != null)
+            if (item is WeChatMessage obj && container is FrameworkElement fe)
             {
                 if (obj.IsReceive)
                     dt = fe.FindResource("ReceiveMessageTemplate") as DataTemplate;

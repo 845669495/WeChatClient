@@ -23,8 +23,7 @@ namespace WeChatClient.Core.Converters
                 return null;
 
             string uri = value.ToString();
-            ImageSource res;
-            if (!ImageCache.TryGetValue(uri, out res))
+            if (!ImageCache.TryGetValue(uri, out ImageSource res))
             {
                 try
                 {
