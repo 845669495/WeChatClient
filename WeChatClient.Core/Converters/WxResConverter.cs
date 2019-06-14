@@ -15,7 +15,7 @@ namespace WeChatClient.Core.Converters
         /// <summary>
         /// 从微信Web版扒下来的资源
         /// </summary>
-        private static BitmapFrame WxRes = BitmapFrame.Create(new Uri("pack://application:,,,/WeChatClient.Core;component/Resources/wx_res.png", UriKind.Absolute));
+        private static readonly BitmapFrame WxRes = BitmapFrame.Create(new Uri("pack://application:,,,/WeChatClient.Core;component/Resources/wx_res.png", UriKind.Absolute));
 
         #region IMultiValueConverter
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)

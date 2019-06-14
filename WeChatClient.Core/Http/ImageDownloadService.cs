@@ -69,8 +69,7 @@ namespace WeChatClient.Core.Http
                             if (model.Image != null)
                                 continue;
 
-                            ImageSource image;
-                            if (ImageCacheService.TryGetValue(model.Uri,out image))
+                            if (ImageCacheService.TryGetValue(model.Uri, out ImageSource image))
                             {
                                 model.Image = image;
                                 continue;
