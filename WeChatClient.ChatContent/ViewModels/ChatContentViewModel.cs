@@ -32,16 +32,6 @@ namespace WeChatClient.ChatContent.ViewModels
         {
             var observable = this.WhenAnyValue(p => p.SelectedChat);
             observable.Select(p => p != null).ToPropertyEx(this, p => p.HasChatSelected);
-            observable.Subscribe(SetGroup);
-        }
-
-        private void SetGroup(WeChatUser chat)
-        {
-            if (chat == null)
-                return;
-            ICollectionView cv = CollectionViewSource.GetDefaultView(chat.MessageList);
-            cv.GroupDescriptions.Clear();
-            cv.GroupDescriptions.Add(new PropertyGroupDescription(nameof(WeChatMessage.GroupShortTime)));
         }
     }
 }

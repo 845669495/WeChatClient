@@ -16,7 +16,9 @@ namespace WeChatClient.ChatContent
             DataTemplate dt = null;
             if (item is WeChatMessage obj && container is FrameworkElement fe)
             {
-                if (obj.IsReceive)
+                if (obj.MsgType == 10000)
+                    dt = fe.FindResource("SystemMessageTemplate") as DataTemplate;
+                else if (obj.IsReceive)
                     dt = fe.FindResource("ReceiveMessageTemplate") as DataTemplate;
                 else
                     dt = fe.FindResource("SelfMessageTemplate") as DataTemplate;

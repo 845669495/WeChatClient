@@ -140,8 +140,7 @@ namespace WeChatClient.Main.ViewModels
             WeChatMessage message = jObject.ToObject<WeChatMessage>();
             //message.Content = message.MsgType == 1 ? message.Content : "请在其他设备上查看消息";//只接受文本消息
             message.CreateDateTime = message.CreateTime.ToTime();
-            message.GroupDateTime = message.CreateDateTime;
-            message.GroupShortTime = message.CreateDateTime.ToString("HH:mm");
+            message.ShortTime = message.CreateDateTime.ToString("HH:mm");
             message.IsReceive = message.ToUserName == WeChatUser.UserName;
             return message;
         }

@@ -49,17 +49,22 @@ namespace WeChatClient.ChatList.ViewModels
 
         public void ModChat(params WeChatUser[] chat)
         {
+            var selected = SelectedItem;
             foreach (var item in chat)
             {
                 var local = ChatList.FirstOrDefault(p => p.UserName == item.UserName);
                 if (local != null)
                 {
+                    if (SelectedItem == local)
+                        selected = item;
+
                     item.MessageList.AddRange(local.MessageList);  //将本地聊天的信息拷贝过来
                     ChatList.Remove(local);
                 }
                 ChatList.Insert(0, item);  //将修改后的聊天放在首位
                 ChatImageDownloadService.Add(item);
             }
+            SelectedItem = selected;
         }
 
         /// <summary>
@@ -93,46 +98,49 @@ namespace WeChatClient.ChatList.ViewModels
                     if (chat == null)
                         continue;
                     ChatList.Insert(0, chat);
+                    ChatImageDownloadService.Add(chat);
                 }
-                if (msg.MsgType != 51)  //如果不是系统消息
+                if (msg.MsgType != 51)  //51类型消息不插入消息列表
                 {
                     chat.LastMessage = msg.Content;
-                    chat.LastShortTime = msg.GroupShortTime;
+                    chat.LastShortTime = msg.ShortTime;
                     msg.IsRoom = chat.IsRoomContact();
 
-                    if (msg.IsReceive)  //只有收到消息需要显示名称
+                    if (msg.MsgType != 10000)  //如果不是系统消息
                     {
-                        //是收到消息
-                        if (msg.IsRoom)
+                        if (msg.IsReceive)  //只有收到消息需要显示名称
                         {
-                            //如果是群消息
-                            var member = chat.MemberList.FirstOrDefault(p => msg.Content.StartsWith(p.UserName));
-                            if (member == null)
-                                continue;
-                            msg.Content = msg.Content.Replace(member.UserName + ":<br/>", "");
-                            chat.LastMessage = member.ShowName + ":" + msg.Content;
-                            msg.FromUserName = member.UserName;
-                            msg.FromUserShowName = member.ShowName;
+                            //是收到消息
+                            if (msg.IsRoom)
+                            {
+                                //如果是群消息，且不是邀请人进群的消息
+                                var member = chat.MemberList.FirstOrDefault(p => msg.Content.StartsWith(p.UserName));
+                                if (member == null)
+                                    continue;
+                                msg.Content = msg.Content.Replace(member.UserName + ":<br/>", "");
+                                chat.LastMessage = member.ShowName + ":" + msg.Content;
+                                msg.FromUserName = member.UserName;
+                                msg.FromUserShowName = member.ShowName;
+                            }
+                            else
+                            {
+                                //不是群消息则显示对方显示名称
+                                msg.FromUserShowName = chat.ShowName;
+                            }
                         }
-                        else
+
+                        //处理消息头像
+                        msg.Uri = msg.FromUserName.GetIconUrl();
+                        MessageImageDownloadService.Add(msg);
+
+                        var last = chat.MessageList.Where(p => p.ShowShortTime).LastOrDefault();
+                        if (last == null || (msg.CreateDateTime - last.CreateDateTime).Minutes > 3)  //如果新消息之前的消息不存在或者不在三分钟内，则显示时间
                         {
-                            //不是群消息则显示对方显示名称
-                            msg.FromUserShowName = chat.ShowName;
+                            msg.ShowShortTime = true;
                         }
-                    }
-
-                    msg.Uri = msg.FromUserName.GetIconUrl();
-                    MessageImageDownloadService.Add(msg);
-
-                    var last = chat.MessageList.LastOrDefault();
-                    if (last != null && (msg.CreateDateTime - last.GroupDateTime).Minutes <= 3)
-                    {
-                        msg.GroupShortTime = last.GroupShortTime;
-                        msg.GroupDateTime = last.GroupDateTime;
                     }
                     chat.MessageList.Add(msg);
-                }                    
-                ChatImageDownloadService.Add(chat);
+                }
             }
             SelectedItem = selected;
         }

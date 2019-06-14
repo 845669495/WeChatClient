@@ -13,59 +13,85 @@
                 <ResourceDictionary Source="pack://application:,,,/WeChatClient.Core;component/Theme/Generic.xaml"></ResourceDictionary>
 
                 <ResourceDictionary>
+                    <!--收到消息数据模板-->
                     <DataTemplate DataType="{x:Type model:WeChatMessage}" x:Key="ReceiveMessageTemplate">
                         <Grid Background="Transparent" Margin="0,0,0,16">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="40"></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Image VerticalAlignment="Top" Width="40" Height="40" Source="{Binding Image}"></Image>
-                            <DockPanel Grid.Column="1" Margin="10,0">
-                                <Grid Height="22" DockPanel.Dock="Top" Visibility="{Binding NeedShowName,Converter={StaticResource BoolToValue},ConverterParameter=Visible,FallbackValue=Collapsed}">
-                                    <TextBlock Text="{Binding FromUserShowName}" FontSize="12" Foreground="#4f4f4f" MaxWidth="350" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" HorizontalAlignment="Left"></TextBlock>
-                                </Grid>
-                                <Border CornerRadius="3" MaxWidth="500" HorizontalAlignment="Left" Background="#fff">
-                                    <Grid>
-                                        <TextBlock Text="{Binding Content}" Margin="13,9" FontSize="14" TextWrapping="Wrap" VerticalAlignment="Center"></TextBlock>
-                                        <Canvas>
-                                            <Path Fill="#fff">
-                                                <Path.Data>
-                                                    <PathGeometry>
-                                                        <PathFigure StartPoint="0,14">
-                                                            <PolyLineSegment Points="-4,20 0,26 0,14"></PolyLineSegment>
-                                                        </PathFigure>
-                                                    </PathGeometry>
-                                                </Path.Data>
-                                            </Path>
-                                        </Canvas>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <ContentControl Height="48" Visibility="{Binding ShowShortTime,Converter={StaticResource BoolToValue},ConverterParameter=Visible,FallbackValue=Collapsed}">
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="#b2b2b2" Text="{Binding ShortTime}"></TextBlock>
+                            </ContentControl>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Image VerticalAlignment="Top" Width="40" Height="40" Source="{Binding Image}"></Image>
+                                <DockPanel Grid.Column="1" Margin="10,0">
+                                    <Grid Height="22" DockPanel.Dock="Top" Visibility="{Binding NeedShowName,Converter={StaticResource BoolToValue},ConverterParameter=Visible,FallbackValue=Collapsed}">
+                                        <TextBlock Text="{Binding FromUserShowName}" FontSize="12" Foreground="#4f4f4f" MaxWidth="350" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" HorizontalAlignment="Left"></TextBlock>
                                     </Grid>
-                                </Border>
-                            </DockPanel>
+                                    <Border CornerRadius="3" MaxWidth="500" HorizontalAlignment="Left" Background="#fff">
+                                        <Grid>
+                                            <TextBlock Text="{Binding Content}" Margin="13,9" FontSize="14" TextWrapping="Wrap" VerticalAlignment="Center"></TextBlock>
+                                            <Canvas>
+                                                <Path Fill="#fff">
+                                                    <Path.Data>
+                                                        <PathGeometry>
+                                                            <PathFigure StartPoint="0,14">
+                                                                <PolyLineSegment Points="-4,20 0,26 0,14"></PolyLineSegment>
+                                                            </PathFigure>
+                                                        </PathGeometry>
+                                                    </Path.Data>
+                                                </Path>
+                                            </Canvas>
+                                        </Grid>
+                                    </Border>
+                                </DockPanel>
+                            </Grid>
                         </Grid>
                     </DataTemplate>
+                    <!--发送消息数据模板-->
                     <DataTemplate DataType="{x:Type model:WeChatMessage}" x:Key="SelfMessageTemplate">
                         <Grid Background="Transparent" Margin="0,0,0,16">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition Width="10"></ColumnDefinition>
-                                <ColumnDefinition Width="40"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Border CornerRadius="3" MaxWidth="500" HorizontalAlignment="Right" Background="#b2e281">
-                                <TextBlock Text="{Binding Content}" Margin="13,9" FontSize="14" TextWrapping="Wrap" VerticalAlignment="Center"></TextBlock>
-                            </Border>
-                            <Canvas Grid.Column="1">
-                                <Path Fill="#b2e281">
-                                    <Path.Data>
-                                        <PathGeometry>
-                                            <PathFigure StartPoint="0,14">
-                                                <PolyLineSegment Points="4,20 0,26 0,14"></PolyLineSegment>
-                                            </PathFigure>
-                                        </PathGeometry>
-                                    </Path.Data>
-                                </Path>
-                            </Canvas>
-                            <Image VerticalAlignment="Top" Width="40" Height="40" Source="{Binding Image}" Grid.Column="2"></Image>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <ContentControl Height="48" Visibility="{Binding ShowShortTime,Converter={StaticResource BoolToValue},ConverterParameter=Visible,FallbackValue=Collapsed}">
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="#b2b2b2" Text="{Binding ShortTime}"></TextBlock>
+                            </ContentControl>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="10"></ColumnDefinition>
+                                    <ColumnDefinition Width="40"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Border CornerRadius="3" MaxWidth="500" HorizontalAlignment="Right" Background="#b2e281">
+                                    <TextBlock Text="{Binding Content}" Margin="13,9" FontSize="14" TextWrapping="Wrap" VerticalAlignment="Center"></TextBlock>
+                                </Border>
+                                <Canvas Grid.Column="1">
+                                    <Path Fill="#b2e281">
+                                        <Path.Data>
+                                            <PathGeometry>
+                                                <PathFigure StartPoint="0,14">
+                                                    <PolyLineSegment Points="4,20 0,26 0,14"></PolyLineSegment>
+                                                </PathFigure>
+                                            </PathGeometry>
+                                        </Path.Data>
+                                    </Path>
+                                </Canvas>
+                                <Image VerticalAlignment="Top" Width="40" Height="40" Source="{Binding Image}" Grid.Column="2"></Image>
+                            </Grid>
                         </Grid>
+                    </DataTemplate>
+                    <!--系统消息数据模板-->
+                    <DataTemplate DataType="{x:Type model:WeChatMessage}" x:Key="SystemMessageTemplate">
+                        <ContentControl Height="45">
+                            <TextBlock Text="{Binding Content}" FontSize="12" Foreground="#b2b2b2" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                        </ContentControl>
                     </DataTemplate>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
@@ -110,37 +136,11 @@
                         </Grid>
                     </StackPanel>
                     <Grid Visibility="{Binding SelectedChat.MessageList.Count,Converter={StaticResource BoolToVisibility}}">
-                        <!--ScrollViewer.CanContentScroll="False" 分组之后需要阻止按照子项滚动-->
                         <ItemsControl ItemsSource="{Binding SelectedChat.MessageList}" Background="Transparent"
                                  Style="{StaticResource ItemsControlScrollViewerStyle}">
                             <ItemsControl.ItemTemplateSelector>
                                 <local:MessageTemplateSelector></local:MessageTemplateSelector>
                             </ItemsControl.ItemTemplateSelector>
-                            <ItemsControl.GroupStyle>
-                                <GroupStyle>
-                                    <GroupStyle.HeaderTemplate>
-                                        <DataTemplate DataType="CollectionViewGroup">
-                                            <Grid Height="48">
-                                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="#b2b2b2" Text="{Binding Name}"></TextBlock>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </GroupStyle.HeaderTemplate>
-                                </GroupStyle>
-                            </ItemsControl.GroupStyle>
-                            <ItemsControl.Resources>
-                                <Style TargetType="GroupItem">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="GroupItem">
-                                                <StackPanel>
-                                                    <ContentPresenter x:Name="PART_Header"></ContentPresenter>
-                                                    <ItemsPresenter></ItemsPresenter>
-                                                </StackPanel>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </ItemsControl.Resources>
                         </ItemsControl>
                     </Grid>
                 </Grid>

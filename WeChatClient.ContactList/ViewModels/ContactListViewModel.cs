@@ -70,7 +70,7 @@ namespace WeChatClient.ContactList.ViewModels
                     ContactList.Remove(local);
                 }
                 _allContactList.Add(item);
-                if (local.StartChar != "公众号")
+                if (item.StartChar != "公众号")
                     ContactList.Add(item);
             }
 

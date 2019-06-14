@@ -44,9 +44,11 @@ namespace WeChatClient.Core.Models
 
         public DateTime CreateDateTime { get; set; }
 
-        public DateTime GroupDateTime { get; set; }
-
-        public string GroupShortTime { get; set; }
+        public string ShortTime { get; set; }
+        /// <summary>
+        /// 是否显示时间
+        /// </summary>
+        public bool ShowShortTime { get; set; }
 
         /// <summary>
         /// 状态通知码（如果为4，则加载更多聊天列表）
