@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WeChatClient.ChatContent"
              xmlns:model="clr-namespace:WeChatClient.Core.Models;assembly=WeChatClient.Core"
+             xmlns:extensions="clr-namespace:WeChatClient.Core.Extensions;assembly=WeChatClient.Core"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="720" Background="#eee">
     <UserControl.Resources>
@@ -136,11 +137,17 @@
                         </Grid>
                     </StackPanel>
                     <Grid Margin="-19,0" Visibility="{Binding SelectedChat.MessageList.Count,Converter={StaticResource BoolToVisibility}}">
-                        <ItemsControl ItemsSource="{Binding SelectedChat.MessageList}" Background="Transparent"
-                                 Style="{StaticResource ItemsControlScrollViewerStyle}">
+                        <ItemsControl ItemsSource="{Binding SelectedChat.MessageList}" Background="Transparent">
                             <ItemsControl.ItemTemplateSelector>
                                 <local:MessageTemplateSelector></local:MessageTemplateSelector>
                             </ItemsControl.ItemTemplateSelector>
+                            <ItemsControl.Template>
+                                <ControlTemplate TargetType="ItemsControl">
+                                    <ScrollViewer Focusable="False" extensions:ScrollViewerExtensions.AlwaysScrollToEnd="True">
+                                        <ItemsPresenter />
+                                    </ScrollViewer>
+                                </ControlTemplate>
+                            </ItemsControl.Template>
                         </ItemsControl>
                     </Grid>
                 </Grid>
