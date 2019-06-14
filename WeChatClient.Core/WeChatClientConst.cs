@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace WeChatClient
 {
-    public static class WeChatClientConst
+    public class WeChatClientConst
     {
         #region Modules
         /// <summary>
@@ -35,7 +36,7 @@ namespace WeChatClient
         /// <summary>
         /// 主程序区域
         /// </summary>
-        public const string MainRegionName = "MainRegion";      
+        public static readonly string MainRegionName = "MainRegion";      
         /// <summary>
         /// 导航区域
         /// </summary>
@@ -45,5 +46,15 @@ namespace WeChatClient
         /// </summary>
         public const string ContentRegionName = "ContentRegion";
         #endregion
+
+        /// <summary>
+        /// 默认头像
+        /// </summary>
+        public readonly static BitmapImage DefaultHeadImage;
+
+        static WeChatClientConst()
+        {
+            DefaultHeadImage = new BitmapImage(new Uri("pack://application:,,,/WeChatClient.Core;component/Resources/2KriyDK.png", UriKind.Absolute));
+        }
     }
 }

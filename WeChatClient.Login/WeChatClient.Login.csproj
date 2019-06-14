@@ -104,12 +104,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Events\SwitchAccountEvent.cs" />
+    <Compile Include="Events\ShowErrorMsgEvent.cs" />
     <Compile Include="Events\UpdateHeadImageEvent.cs" />
     <Compile Include="Events\UpdateQRCodeEvent.cs" />
     <Compile Include="LoginModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ErrorViewModel.cs" />
     <Compile Include="ViewModels\HeadViewModel.cs" />
     <Compile Include="ViewModels\QRCodeViewModel.cs" />
+    <Compile Include="Views\ErrorView.xaml.cs">
+      <DependentUpon>ErrorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HeadView.xaml.cs">
       <DependentUpon>HeadView.xaml</DependentUpon>
     </Compile>
@@ -122,6 +127,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\ErrorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\HeadView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -24,7 +24,7 @@ namespace WeChatClient.Core.Http
         private readonly Queue<INeedDownloadImageModel> _modelQueue = new Queue<INeedDownloadImageModel>();
         private readonly object _sync = new object();
 
-        private readonly static BitmapImage _default = new BitmapImage(new Uri("pack://application:,,,/WeChatClient.Core;component/Resources/2KriyDK.png", UriKind.Absolute));
+        private readonly static BitmapImage _default = WeChatClientConst.DefaultHeadImage;
 
         [Dependency]
         protected ImageCacheService ImageCacheService { get; set; }

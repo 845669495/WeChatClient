@@ -88,12 +88,18 @@ namespace WeChatClient.Core.Http
             }
             else if (login_result.Contains("=" + StaticCode.LoginCode.code_LoginWait))
             {
-                string base64_image = login_result.Split(new string[] { "\'" }, StringSplitOptions.None)[1].Split(',')[1];
-                byte[] base64_image_bytes = Convert.FromBase64String(base64_image);
-                MemoryStream memoryStream = new MemoryStream(base64_image_bytes, 0, base64_image_bytes.Length);
-                //memoryStream.Write(base64_image_bytes, 0, base64_image_bytes.Length);
-                //转成图片
-                return ImageHelper.MemoryToImageSource(memoryStream);
+                if (login_result.Contains("\'"))
+                {
+                    string base64_image = login_result.Split(new string[] { "\'" }, StringSplitOptions.None)[1].Split(',')[1];
+                    byte[] base64_image_bytes = Convert.FromBase64String(base64_image);
+                    MemoryStream memoryStream = new MemoryStream(base64_image_bytes, 0, base64_image_bytes.Length);
+                    //转成图片
+                    return ImageHelper.MemoryToImageSource(memoryStream);
+                }
+                else
+                {
+                    return WeChatClientConst.DefaultHeadImage;
+                }
             }
             //注：如果用超时的话，会有问题，后期再研究
             //else if (login_result.Contains("=" + StaticCode.LoginCode.code_LoginTimeOut))
@@ -110,12 +116,22 @@ namespace WeChatClient.Core.Http
         /// 获取sid uid 结果放在cookie中
         /// </summary>
         /// <param name="login_redirect"></param>
-        public void GetSidUid(string login_redirect)
+        public bool GetSidUid(string login_redirect, out string errorMsg)
         {
+            errorMsg = null;
             byte[] bytes = BaseService.Request(login_redirect + StaticUrl.Url_redirect_ext, MethodEnum.GET);
             string pass_ticket = Encoding.UTF8.GetString(bytes);
-            Pass_Ticket = pass_ticket.Split(new string[] { "pass_ticket" }, StringSplitOptions.None)[1].TrimStart('>').TrimEnd('<', '/');
-            SKey = pass_ticket.Split(new string[] { "skey" }, StringSplitOptions.None)[1].TrimStart('>').TrimEnd('<', '/');
+            if (pass_ticket.Contains("pass_ticket"))
+            {
+                Pass_Ticket = pass_ticket.Split(new string[] { "pass_ticket" }, StringSplitOptions.None)[1].TrimStart('>').TrimEnd('<', '/');
+                SKey = pass_ticket.Split(new string[] { "skey" }, StringSplitOptions.None)[1].TrimStart('>').TrimEnd('<', '/');
+                return true;
+            }
+            else
+            {
+                errorMsg = pass_ticket;
+                return false;
+            }
         }
     }
 }

@@ -40,6 +40,7 @@ namespace WeChatClient.UI.Views
                 var moduleManager = _containerProvider.Resolve<IModuleManager>();
                 moduleManager.LoadModule(WeChatClientConst.MainModuleName);  //加载主程序模块
                 SizeToContent = SizeToContent.Manual;
+                ResizeMode = ResizeMode.CanResize;
                 Width = 1000;
                 Height = 700;
             }, ThreadOption.UIThread);
