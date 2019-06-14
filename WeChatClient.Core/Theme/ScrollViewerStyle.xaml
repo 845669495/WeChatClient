@@ -128,7 +128,8 @@
            TargetType="{x:Type ScrollViewer}">
         <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+        <!--默认情况下，不显示滚动条也占用位置，如果设置为Auto，则不显示时不占用位置-->
+        <!--<Setter Property="VerticalScrollBarVisibility" Value="Auto"/>-->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
