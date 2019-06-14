@@ -15,7 +15,7 @@
                 <ResourceDictionary>
                     <!--收到消息数据模板-->
                     <DataTemplate DataType="{x:Type model:WeChatMessage}" x:Key="ReceiveMessageTemplate">
-                        <Grid Background="Transparent" Margin="0,0,0,16">
+                        <Grid Margin="0,0,0,16">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"></RowDefinition>
                                 <RowDefinition></RowDefinition>
@@ -55,7 +55,7 @@
                     </DataTemplate>
                     <!--发送消息数据模板-->
                     <DataTemplate DataType="{x:Type model:WeChatMessage}" x:Key="SelfMessageTemplate">
-                        <Grid Background="Transparent" Margin="0,0,0,16">
+                        <Grid Margin="0,0,0,16">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"></RowDefinition>
                                 <RowDefinition></RowDefinition>
