@@ -30,6 +30,14 @@
                                         <TextBlock Grid.Row="1" Text="{Binding LastMessage}" FontSize="13" Margin="10,0" MaxWidth="150" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"
                                                    Foreground="{Binding IsSelected ,RelativeSource={RelativeSource AncestorType=ListBoxItem,Mode=FindAncestor},
                                                                 Converter={StaticResource BoolToValue},ConverterParameter=#fff,FallbackValue=#989898}"></TextBlock>
+
+                                        <Canvas Visibility="{Binding UnReadCount,Converter={StaticResource BoolToVisibility}}">
+                                            <Grid Canvas.Left="-16" Canvas.Top="-6" Width="22" Height="16" Visibility="{Binding ChatNotifyClose,Converter={StaticResource BoolToVisibilityInverse}}">
+                                                <ContentControl Style="{StaticResource WxResImgStyle}" Content="451,380,22,16" Width="22" Height="16"></ContentControl>
+                                                <TextBlock Text="{Binding UnReadCount}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" Foreground="#fff"></TextBlock>
+                                            </Grid>
+                                            <ContentControl Visibility="{Binding ChatNotifyClose,Converter={StaticResource BoolToVisibility}}" Canvas.Left="-6" Canvas.Top="-6" Style="{StaticResource WxResImgStyle}" Content="473,380,12,12" Width="12" Height="12"></ContentControl>
+                                        </Canvas>
                                     </Grid>
                                 </StackPanel>
                                 <StackPanel Grid.Column="1">

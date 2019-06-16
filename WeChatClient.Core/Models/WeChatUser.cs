@@ -91,10 +91,19 @@ namespace WeChatClient.Core.Models
         /// </summary>
         public string StartChar { get; set; }
 
+        private int _unReadCount;
         /// <summary>
         /// 未读条数
         /// </summary>
-        public int UnReadCount { get; set; }
+        public int UnReadCount
+        {
+            get { return _unReadCount; }
+            set
+            {
+                _unReadCount = value;
+                OnPropertyChanged();
+            }
+        }
 
         private string _lastShortTime;
         /// <summary>

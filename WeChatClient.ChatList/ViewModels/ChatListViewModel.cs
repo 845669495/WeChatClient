@@ -18,8 +18,18 @@ namespace WeChatClient.ChatList.ViewModels
     {
         public ObservableCollection<WeChatUser> ChatList { get; private set; } = new ObservableCollection<WeChatUser>();
 
-        [Reactive]
-        public WeChatUser SelectedItem { get; set; }
+        private WeChatUser _selectedItem;
+        //[Reactive]
+        public WeChatUser SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _selectedItem, value);
+                if (_selectedItem != null)
+                    _selectedItem.UnReadCount = 0;
+            }
+        }
 
         [Dependency]
         protected IImageDownloadService ChatImageDownloadService { get; set; }
@@ -59,6 +69,7 @@ namespace WeChatClient.ChatList.ViewModels
                         selected = item;
 
                     item.MessageList.AddRange(local.MessageList);  //将本地聊天的信息拷贝过来
+                    item.UnReadCount = local.UnReadCount;
                     ChatList.Remove(local);
                 }
                 ChatList.Insert(0, item);  //将修改后的聊天放在首位
@@ -127,6 +138,8 @@ namespace WeChatClient.ChatList.ViewModels
                                 //不是群消息则显示对方显示名称
                                 msg.FromUserShowName = chat.ShowName;
                             }
+
+                            chat.UnReadCount++;
                         }
 
                         //处理消息头像
