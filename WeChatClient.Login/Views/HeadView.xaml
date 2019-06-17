@@ -6,7 +6,19 @@
              xmlns:local="clr-namespace:WeChatClient.Login.Views"
              mc:Ignorable="d">
     <StackPanel Margin="42px">
-        <Image Width="160" Height="160" Margin="50" Source="{Binding HeadImage}"></Image>
-        <Button Command="{Binding SwitchAccountCommand}" FontSize="16" Width="220" Height="40" Background="White" Margin="30">切换账号</Button>
+        <Image Width="160" Height="160" Margin="50" Source="{Binding HeadImage}">
+            <Image.Clip>
+                <RectangleGeometry RadiusX="4" RadiusY="4" Rect="0,0,160,160"/>
+            </Image.Clip>
+        </Image>
+        <Button Command="{Binding SwitchAccountCommand}" Width="220" Height="40" Margin="30">
+            <Button.Template>
+                <ControlTemplate>
+                    <Border BorderThickness="1" CornerRadius="6" BorderBrush="#33000000" Cursor="Hand">
+                        <TextBlock FontSize="16" Foreground="#000" VerticalAlignment="Center" HorizontalAlignment="Center">切换账号</TextBlock>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
     </StackPanel>
 </UserControl>

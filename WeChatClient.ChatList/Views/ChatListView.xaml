@@ -20,7 +20,11 @@
                                     <ColumnDefinition Width="auto"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Width="40" Height="40" Source="{Binding Image}"></Image>
+                                    <Image Width="40" Height="40" Source="{Binding Image}">
+                                        <Image.Clip>
+                                            <RectangleGeometry RadiusX="2" RadiusY="2" Rect="0,0,40,40"/>
+                                        </Image.Clip>
+                                    </Image>
                                     <Grid Height="40">
                                         <Grid.RowDefinitions>
                                             <RowDefinition></RowDefinition>
