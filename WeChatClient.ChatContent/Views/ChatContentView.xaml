@@ -7,7 +7,7 @@
              xmlns:model="clr-namespace:WeChatClient.Core.Models;assembly=WeChatClient.Core"
              xmlns:extensions="clr-namespace:WeChatClient.Core.Extensions;assembly=WeChatClient.Core"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="720" Background="#eee">
+             d:DesignHeight="750" d:DesignWidth="720" Background="#eee">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

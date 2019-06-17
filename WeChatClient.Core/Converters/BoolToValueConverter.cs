@@ -17,7 +17,15 @@ namespace WeChatClient.Core.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((bool)value)
+            bool v = false;
+            if (value.GetType() == typeof(bool))
+                v = (bool)value;
+            else if (value.GetType() == typeof(int))
+                v = (int)value > 0;
+            else if (value.GetType() == typeof(string))
+                v = !string.IsNullOrWhiteSpace((string)value);
+
+            if (v)
                 return parameter;
             else
                 return DependencyProperty.UnsetValue;

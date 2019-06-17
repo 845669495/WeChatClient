@@ -30,6 +30,10 @@ namespace WeChatClient
         /// 聊天内容模块
         /// </summary>
         public const string ChatContentModuleName = "ChatContentModule";
+        /// <summary>
+        /// 联系人内容模块
+        /// </summary>
+        public const string ContactContentModuleName = "ContactContentModule";
         #endregion
 
         #region Regions

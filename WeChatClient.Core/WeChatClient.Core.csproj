@@ -80,6 +80,7 @@
     <Compile Include="Dependency\ServiceLifetime.cs" />
     <Compile Include="Events\LoginSuccessfulEvent.cs" />
     <Compile Include="Events\SendTextMsgEvent.cs" />
+    <Compile Include="Events\ChatWithContactEvent.cs" />
     <Compile Include="Extensions\ScrollViewerExtensions.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\RandomHelper.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Http\StaticCode.cs" />
     <Compile Include="Http\StaticUrl.cs" />
     <Compile Include="Http\WeChatService.cs" />
+    <Compile Include="Interfaces\IContactContentManager.cs" />
     <Compile Include="Interfaces\IChatContentManager.cs" />
     <Compile Include="Interfaces\IContactListManager.cs" />
     <Compile Include="Interfaces\IImageDownloadService.cs" />

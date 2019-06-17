@@ -44,6 +44,9 @@ namespace WeChatClient.Main.ViewModels
         [Reactive]
         public WeChatUser WeChatUser { get; private set; }
 
+        [Reactive]
+        public bool ChatNavChecked { get; set; } = true;
+
         public ICommand LoadedCommand { get; }
 
         public ICommand NavigateCommand { get; set; }
@@ -55,6 +58,7 @@ namespace WeChatClient.Main.ViewModels
             NavigateCommand = ReactiveCommand.Create<string>(Navigate);
 
             ea.GetEvent<SendTextMsgEvent>().Subscribe(SendTextMsg);
+            ea.GetEvent<ChatWithContactEvent>().Subscribe(ChatWithContact);
         }
 
         private void Navigate(string navigatePath)
@@ -258,6 +262,15 @@ namespace WeChatClient.Main.ViewModels
             ChatListManager.SyncMessage(weChatMessage);
 
             wcs.SendMsg(msg, WeChatUser.UserName, selectedChat.UserName, 1);
+        }
+
+        private void ChatWithContact(WeChatUser contact)
+        {
+            ChatListManager.ChatWithContact(contact);
+
+            //导航到聊天列表
+            NavigateCommand.Execute("ChatListView");
+            ChatNavChecked = true;
         }
     }
 }

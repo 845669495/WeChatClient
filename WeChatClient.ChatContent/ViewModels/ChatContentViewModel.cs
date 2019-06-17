@@ -26,6 +26,10 @@ namespace WeChatClient.ChatContent.ViewModels
         [Reactive]
         public WeChatUser SelectedChat { get; set; }
         /// <summary>
+        /// 有聊天被选中
+        /// </summary>
+        public bool HasChatSelected { [ObservableAsProperty]get; }
+        /// <summary>
         /// 文本框
         /// </summary>
         [Reactive]
@@ -34,10 +38,6 @@ namespace WeChatClient.ChatContent.ViewModels
         /// 发送文本消息命令
         /// </summary>
         public ICommand SendTextMsgCommand { get; private set; }
-        /// <summary>
-        /// 有聊天被选中
-        /// </summary>
-        public bool HasChatSelected { [ObservableAsProperty]get; }
 
         public ChatContentViewModel(IEventAggregator ea)
         {

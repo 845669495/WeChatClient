@@ -1,4 +1,5 @@
-﻿using ReactiveUI;
+﻿using Prism.Regions;
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ using WeChatClient.Core.Models;
 namespace WeChatClient.ChatList.ViewModels
 {
     [ExposeServices(ServiceLifetime.Singleton, typeof(IChatListManager))]   //注册为IChatListManager接口（单例）
-    public class ChatListViewModel : ReactiveObject, IChatListManager
+    public class ChatListViewModel : ReactiveObject, IChatListManager, INavigationAware
     {
         public ObservableCollection<WeChatUser> ChatList { get; private set; } = new ObservableCollection<WeChatUser>();
 
@@ -179,5 +180,37 @@ namespace WeChatClient.ChatList.ViewModels
                 }
             }
         }
+
+        public void ChatWithContact(WeChatUser contact)
+        {
+            var chat = ChatList.FirstOrDefault(p => p.UserName == contact.UserName);
+            if(chat == null)
+            {
+                chat = contact;
+                ChatList.Insert(0, chat);
+            }
+            else
+            {
+                ChatList.Move(ChatList.IndexOf(chat), 0);
+            }
+            SelectedItem = chat;
+        }
+
+        #region INavigationAware
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            navigationContext.NavigationService.Region.RegionManager.RequestNavigate(WeChatClientConst.ContentRegionName, "ChatContentView");
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+            
+        }
+        #endregion
     }
 }

@@ -1,20 +1,18 @@
 ﻿using Prism.Ioc;
 using Prism.Modularity;
-using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using WeChatClient.ContactList.Views;
+using WeChatClient.ContactContent.Views;
 using WeChatClient.Core.Dependency;
 
-namespace WeChatClient.ContactList
+namespace WeChatClient.ContactContent
 {
-    [Module(OnDemand = true)]  //按需加载模块
-    [ModuleDependency(WeChatClientConst.ContactContentModuleName)]
-    public class ContactListModule : IModule
+    [Module(OnDemand = true)]
+    public class ContactContentModule: IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
@@ -23,7 +21,7 @@ namespace WeChatClient.ContactList
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterAssembly(Assembly.GetExecutingAssembly());
-            containerRegistry.RegisterForNavigation<ContactListView>();  //将联系人列表注册到导航
+            containerRegistry.RegisterForNavigation<ContactContentView>();  //将联系人内容注册到导航
         }
     }
 }

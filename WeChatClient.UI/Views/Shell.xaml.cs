@@ -42,7 +42,7 @@ namespace WeChatClient.UI.Views
                 SizeToContent = SizeToContent.Manual;
                 ResizeMode = ResizeMode.CanResize;
                 Width = 1000;
-                Height = 700;
+                Height = 750;
             }, ThreadOption.UIThread);
         }
     }

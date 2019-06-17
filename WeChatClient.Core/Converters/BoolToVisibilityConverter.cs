@@ -23,6 +23,8 @@ namespace WeChatClient.Core.Converters
                 v = (bool)value;
             else if (value.GetType() == typeof(int))
                 v = (int)value > 0;
+            else if (value.GetType() == typeof(string))
+                v = !string.IsNullOrEmpty((string)value);
 
             if (Inverse)
                 v = !v;

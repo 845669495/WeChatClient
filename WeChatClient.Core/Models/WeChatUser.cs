@@ -32,7 +32,8 @@ namespace WeChatClient.Core.Models
         /// <summary>
         /// 性别，0-未设置（公众号、保密），1-男，2-女
         /// </summary>
-        public string Sex { get; set; }
+        public int Sex { get; set; }
+        public bool IsMan => Sex == 1;
         /// <summary>
         /// 签名
         /// </summary>
@@ -45,6 +46,7 @@ namespace WeChatClient.Core.Models
         /// 省份
         /// </summary>
         public string Province { get; set; }
+        public string ProvinceAndCity => $"{Province} {City}";
         /// <summary>
         /// 昵称全拼
         /// </summary>

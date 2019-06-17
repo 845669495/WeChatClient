@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="WeChatClient.ContactContent.Views.ContactContentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WeChatClient.ContactContent.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="720" Background="#eee">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/WeChatClient.Core;component/Theme/Generic.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Margin="19,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid Height="25" HorizontalAlignment="Center">
+                <TextBlock Text="详细信息" FontSize="14" VerticalAlignment="Center"></TextBlock>
+            </Grid>
+        </Grid>
+        <Line Grid.Row="1" StrokeThickness="1" Stroke="#c3c3c3" X1="0" Y1="0" X2="{Binding ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=FrameworkElement}}" Y2="0"></Line>
+        <Grid Grid.Row="2" Margin="-19,0">
+            <ContentControl Visibility="{Binding HasContactSelected,Converter={StaticResource BoolToVisibilityInverse}}" Margin="50" VerticalAlignment="Top" Style="{StaticResource WxResImgStyle}"  Content="0,0,150,150" Width="150" Height="150"></ContentControl>
+            <Grid Visibility="{Binding HasContactSelected,Converter={StaticResource BoolToVisibility}}" Height="500" VerticalAlignment="Top">
+                <StackPanel Height="340">
+                    <StackPanel DataContext="{Binding SelectedContact}">
+                        <Image Source="{Binding Image}" Width="100" Height="100">
+                            <Image.Clip>
+                                <RectangleGeometry RadiusX="4" RadiusY="4" Rect="0,0,100,100"/>
+                            </Image.Clip>
+                        </Image>
+                        <Rectangle Height="22"></Rectangle>
+                        <StackPanel Height="48" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="{Binding ShowName}" FontSize="24" Margin="0,0,5,10" VerticalAlignment="Center"></TextBlock>
+                            <ToggleButton Width="16" Height="16" Content="384,304,16,16 368,304,16,16" IsChecked="{Binding IsMan,Mode=OneWay}" IsEnabled="False"
+                                                    Visibility="{Binding Sex, Converter={StaticResource BoolToVisibility}}">
+                                <ContentControl.Template>
+                                    <ControlTemplate>
+                                        <Image>
+                                            <Image.Source>
+                                                <MultiBinding Converter="{StaticResource WxRes}">
+                                                    <Binding Path="Content" RelativeSource="{RelativeSource Mode=TemplatedParent}"></Binding>
+                                                    <Binding Path="IsChecked" RelativeSource="{RelativeSource Mode=TemplatedParent}"></Binding>
+                                                </MultiBinding>
+                                            </Image.Source>
+                                        </Image>
+                                    </ControlTemplate>
+                                </ContentControl.Template>
+                            </ToggleButton>
+                        </StackPanel>
+                        <ContentControl Height="22" Visibility="{Binding Signature,Converter={StaticResource BoolToValue},ConverterParameter=Visible,FallbackValue=Collapsed}">
+                            <TextBlock Text="{Binding Signature}" FontSize="14" Foreground="#888" VerticalAlignment="Center" HorizontalAlignment="Center" MaxWidth="500" TextTrimming="CharacterEllipsis"></TextBlock>
+                        </ContentControl>
+                        <StackPanel Margin="155,30,155,40" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Rectangle Width="160"></Rectangle>
+                            <StackPanel Width="250">
+                                <StackPanel Orientation="Horizontal" Height="19" Visibility="{Binding RemarkName,Converter={StaticResource BoolToValue},ConverterParameter=Visible,FallbackValue=Collapsed}">
+                                    <TextBlock Text="备注:" FontSize="12" Foreground="#888" VerticalAlignment="Center"></TextBlock>
+                                    <Rectangle Width="10"></Rectangle>
+                                    <TextBlock Text="{Binding RemarkName}" FontSize="12" Foreground="#888" VerticalAlignment="Center" Width="134"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Height="19" Visibility="{Binding ProvinceAndCity,Converter={StaticResource BoolToValue},ConverterParameter=Visible,FallbackValue=Collapsed}">
+                                    <TextBlock Text="地区:" FontSize="12" Foreground="#888" VerticalAlignment="Center"></TextBlock>
+                                    <Rectangle Width="10"></Rectangle>
+                                    <TextBlock Text="{Binding ProvinceAndCity}" FontSize="12" Foreground="#888" VerticalAlignment="Center" Width="134"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                    <Button Width="200" Height="40" Command="{Binding ToChatCommand}">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Border Background="#42ac3e" CornerRadius="4" Cursor="Hand">
+                                    <TextBlock Text="发消息" Foreground="#fff" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

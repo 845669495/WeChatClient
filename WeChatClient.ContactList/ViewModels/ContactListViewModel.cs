@@ -1,4 +1,6 @@
-﻿using ReactiveUI;
+﻿using Prism.Regions;
+using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,19 +17,24 @@ using WeChatClient.Core.Models;
 namespace WeChatClient.ContactList.ViewModels
 {
     [ExposeServices(ServiceLifetime.Singleton, typeof(IContactListManager))]  //注册为IContactListManager接口（单例）
-    public class ContactListViewModel : ReactiveObject, IContactListManager
+    public class ContactListViewModel : ReactiveObject, IContactListManager, INavigationAware
     {
         private readonly List<WeChatUser> _allContactList = new List<WeChatUser>();
 
         public ObservableCollection<WeChatUser> ContactList { get; private set; } = new ObservableCollection<WeChatUser>();
 
+        [Reactive]
+        public WeChatUser SelectedItem { get; set; }
+
         [Dependency]
         protected IImageDownloadService ImageDownloadService { get; set; }
 
-        public ContactListViewModel()
+        public ContactListViewModel(IContactContentManager contactContentManager)
         {
             ICollectionView cv = CollectionViewSource.GetDefaultView(ContactList);
             cv.GroupDescriptions.Add(new PropertyGroupDescription(nameof(WeChatUser.StartChar)));
+
+            this.WhenAnyValue(p => p.SelectedItem).Subscribe(p => contactContentManager.SelectedContact = p);
         }
 
         public void AddContact(params WeChatUser[] chat)
@@ -76,5 +83,22 @@ namespace WeChatClient.ContactList.ViewModels
 
             ImageDownloadService.Add(contact.ToArray());
         }
+
+        #region INavigationAware
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            navigationContext.NavigationService.Region.RegionManager.RequestNavigate(WeChatClientConst.ContentRegionName, "ContactContentView");
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+
+        }
+        #endregion
     }
 }

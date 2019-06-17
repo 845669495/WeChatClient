@@ -40,5 +40,10 @@ namespace WeChatClient.Core.Interfaces
         /// </summary>
         /// <param name="groupChats"></param>
         void UpdateInitGroupMember(params WeChatUser[] groupChats);
+        /// <summary>
+        /// 和联系人聊天
+        /// </summary>
+        /// <param name="contact"></param>
+        void ChatWithContact(WeChatUser contact);
     }
 }
