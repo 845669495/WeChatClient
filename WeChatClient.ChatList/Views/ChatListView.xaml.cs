@@ -26,5 +26,12 @@ namespace WeChatClient.ChatList.Views
             InitializeComponent();
             DataContext = viewModel;
         }
+
+        private void ListBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            //阻止ListBox右键选中
+            if (e.RightButton == MouseButtonState.Pressed)
+                e.Handled = true;
+        }
     }
 }

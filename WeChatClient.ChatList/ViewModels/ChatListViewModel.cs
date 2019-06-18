@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Unity.Attributes;
 using WeChatClient.Core.Dependency;
 using WeChatClient.Core.Interfaces;
@@ -32,6 +33,8 @@ namespace WeChatClient.ChatList.ViewModels
             }
         }
 
+        public ICommand CloseChatCommand { get; }
+
         [Dependency]
         protected IImageDownloadService ChatImageDownloadService { get; set; }
         [Dependency]
@@ -44,7 +47,14 @@ namespace WeChatClient.ChatList.ViewModels
 
         public ChatListViewModel(IChatContentManager chatContentManager)
         {
+            CloseChatCommand = ReactiveCommand.Create<WeChatUser>(CloseChat);
+
             this.WhenAnyValue(p => p.SelectedItem).Subscribe(p => chatContentManager.SelectedChat = p);
+        }
+
+        private void CloseChat(WeChatUser chat)
+        {
+            ChatList.Remove(chat);
         }
 
         public void AddChat(params WeChatUser[] chat)
