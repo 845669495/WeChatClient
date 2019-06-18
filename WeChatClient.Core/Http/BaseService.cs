@@ -25,7 +25,7 @@ namespace WeChatClient.Core.Http
         /// <param name="method">枚举类型的方法Get或者Post</param>
         /// <param name="body">Post时必须传值</param>
         /// <returns></returns>
-        public static byte[] Request(string url, MethodEnum method, string body = "")
+        public static byte[] Request(string url, MethodEnum method, string body = "", string contentType = null)
         {
             try
             {
@@ -36,6 +36,8 @@ namespace WeChatClient.Core.Http
                 {
                     byte[] request_body = Encoding.UTF8.GetBytes(body);
                     request.ContentLength = request_body.Length;
+                    if (contentType != null)
+                        request.ContentType = contentType;
 
                     Stream request_stream = request.GetRequestStream();
                     request_stream.Write(request_body, 0, request_body.Length);

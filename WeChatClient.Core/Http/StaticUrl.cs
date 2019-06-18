@@ -76,5 +76,6 @@ namespace WeChatClient.Core.Http
         /// 同步扩展部分
         /// </summary>
         public static string Url_Sync_ext = "sid={0}&lang=zh_CN&skey={1}&pass_ticket={2}";
+        public static string Uri_logout = stringWx + "/cgi-bin/mmwebwx-bin/webwxlogout?redirect=1&skey=";
     }
 }

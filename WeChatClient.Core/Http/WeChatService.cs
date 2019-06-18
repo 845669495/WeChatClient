@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Web;
 using System.Windows.Media;
 using WeChatClient.Core.Helpers;
 
@@ -231,6 +232,19 @@ namespace WeChatClient.Core.Http
                 msg_json = string.Format(msg_json, sid.Value, uin.Value, msg, from, to, type, LoginService.SKey, DateTime.Now.Millisecond, DateTime.Now.Millisecond, DateTime.Now.Millisecond);
                 byte[] bytes = BaseService.Request(StaticUrl.stringWx+ StaticUrl.Url_SendMsg + sid.Value + "&pass_ticket=" + LoginService.Pass_Ticket, MethodEnum.POST, msg_json);
                 string send_result = Encoding.UTF8.GetString(bytes);
+            }
+        }
+
+        public void Loginout()
+        {
+            Cookie sid = BaseService.GetCookie("wxsid");
+            Cookie uin = BaseService.GetCookie("wxuin");
+
+            if (sid != null && uin != null)
+            {
+                string formData = $"sid={sid}&uin={uin}";
+                BaseService.Request($"{StaticUrl.Uri_logout}{HttpUtility.UrlEncode(LoginService.SKey)}&type=0", MethodEnum.POST, formData, "application/x-www-form-urlencoded");
+                BaseService.Request($"{StaticUrl.Uri_logout}{HttpUtility.UrlEncode(LoginService.SKey)}&type=1", MethodEnum.POST, formData, "application/x-www-form-urlencoded");
             }
         }
     }

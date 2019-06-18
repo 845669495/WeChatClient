@@ -46,19 +46,39 @@ namespace WeChatClient.Main.ViewModels
 
         [Reactive]
         public bool ChatNavChecked { get; set; } = true;
+        [Reactive]
+        public bool ShowSystemMenu { get; set; }
 
         public ICommand LoadedCommand { get; }
-
-        public ICommand NavigateCommand { get; set; }
+        public ICommand NavigateCommand { get; }
+        public ICommand LoginoutCommand { get; }
+        public ICommand MouseLeftButtonDownCommand { get; }
 
         public MainViewModel(IRegionManager regionManager, IEventAggregator ea)
         {
             _regionManager = regionManager;
             LoadedCommand = ReactiveCommand.CreateFromTask(InitAsync);
             NavigateCommand = ReactiveCommand.Create<string>(Navigate);
+            LoginoutCommand = ReactiveCommand.Create(Loginout);
+            MouseLeftButtonDownCommand = ReactiveCommand.Create(MouseLeftButtonDown);
 
             ea.GetEvent<SendTextMsgEvent>().Subscribe(SendTextMsg);
             ea.GetEvent<ChatWithContactEvent>().Subscribe(ChatWithContact);
+        }
+
+        private void MouseLeftButtonDown()
+        {
+            Task.Run(() =>
+            {
+                Thread.Sleep(10);
+                ShowSystemMenu = false;
+            });
+        }
+
+        private void Loginout()
+        {
+            //wcs.Loginout();  //调用登出接口，移动端没有收到登出的通知，目前还不知道原因
+            Application.Current.Shutdown();
         }
 
         private void Navigate(string navigatePath)

@@ -52,6 +52,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Wpf.7.1.0.431\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -73,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Converters\BoolToValueConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\InverseConverter.cs" />
     <Compile Include="Converters\WxResConverter.cs" />
     <Compile Include="Converters\UriToBitmapConverter.cs" />
     <Compile Include="Dependency\DependencyExtension.cs" />
