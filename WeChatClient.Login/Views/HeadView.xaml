@@ -4,14 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WeChatClient.Login.Views"
-             mc:Ignorable="d">
-    <StackPanel Margin="42px">
-        <Image Width="160" Height="160" Margin="50" Source="{Binding HeadImage}">
+             mc:Ignorable="d" Width="380" Height="540">
+    <StackPanel>
+        <Rectangle Height="85"></Rectangle>
+        <Image Width="162" Height="162" Source="{Binding HeadImage}">
             <Image.Clip>
-                <RectangleGeometry RadiusX="4" RadiusY="4" Rect="0,0,160,160"/>
+                <RectangleGeometry RadiusX="4" RadiusY="4" Rect="0,0,162,162"/>
             </Image.Clip>
         </Image>
-        <Button Command="{Binding SwitchAccountCommand}" Width="220" Height="40" Margin="30">
+        <Rectangle Height="100"></Rectangle>
+        <Button Command="{Binding SwitchAccountCommand}" Width="220" Height="40">
             <Button.Template>
                 <ControlTemplate>
                     <Border BorderThickness="1" CornerRadius="6" BorderBrush="#33000000" Cursor="Hand">

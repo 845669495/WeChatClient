@@ -4,9 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WeChatClient.Login.Views"
-             mc:Ignorable="d">
-    <StackPanel Margin="42px">
-        <Image Source="{Binding QRCode}" Width="270" Height="270"></Image>
-        <TextBlock HorizontalAlignment="Center" FontSize="20" Margin="12">使用手机微信扫码登录</TextBlock>
+             mc:Ignorable="d" Width="380" Height="540">
+    <StackPanel>
+        <Image Source="{Binding QRCode}" Width="270" Height="270" Margin="55,42,55,12"></Image>
+        <ContentControl Height="32">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Foreground="#353535">使用手机微信扫码登录</TextBlock>
+        </ContentControl>
     </StackPanel>
 </UserControl>
