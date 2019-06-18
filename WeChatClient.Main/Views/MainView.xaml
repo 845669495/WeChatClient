@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:const="clr-namespace:WeChatClient;assembly=WeChatClient.Core"
+             xmlns:extensions="clr-namespace:WeChatClient.Core.Extensions;assembly=WeChatClient.Core"
              xmlns:prism="http://prismlibrary.com/"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="1000">
@@ -76,6 +77,20 @@
                     </Grid>
                 </StackPanel>
                 <Rectangle Height="18"></Rectangle>
+                <Grid Height="32" Background="#26292e">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <ContentControl Style="{StaticResource WxResImgStyle}" Content="60,432,30,30" Width="30" Height="30"></ContentControl>
+                    <Grid Grid.Column="1">
+                        <TextBlock Margin="4,0" Text="搜索" FontSize="12" Foreground="#989898" VerticalAlignment="Center" Visibility="{Binding Text,ElementName=tbSearch,Converter={StaticResource BoolToVisibilityInverse}}"></TextBlock>
+                        <TextBox x:Name="tbSearch" Background="Transparent" BorderBrush="Transparent" FontSize="12" 
+                                 BorderThickness="0" Foreground="#fff" CaretBrush="White" VerticalAlignment="Center"
+                                 extensions:TextBoxExtensions.ScrollEndWhenTextTrimmed="True" Width="214"></TextBox>
+                    </Grid>
+                </Grid>
+                <Rectangle Height="6"></Rectangle>
                 <Grid Height="35">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -118,7 +133,7 @@
                                 </Style.Triggers>
                             </Style>
                         </StackPanel.Resources>
-                        <Button Content="发起聊天" Tag="238,398,34,34"></Button>
+                        <Button Content="发起聊天" Tag="238,398,34,34"></Button>  <!--暂时还没实现-->
                         <Button Content="退出" Tag="102,398,34,34" Command="{Binding LoginoutCommand}"></Button>
                     </StackPanel>
                 </Border>
