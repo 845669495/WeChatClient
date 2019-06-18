@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WeChatClient.ContactList.Views"
              xmlns:model="clr-namespace:WeChatClient.Core.Models;assembly=WeChatClient.Core"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="280">
     <UserControl.Resources>
@@ -13,17 +14,25 @@
                 <ResourceDictionary Source="pack://application:,,,/WeChatClient.Core;component/Theme/Generic.xaml"></ResourceDictionary>
                 <ResourceDictionary>
                     <DataTemplate DataType="{x:Type model:WeChatUser}">
-                        <StackPanel Height="50" Cursor="Hand" Background="Transparent">
-                            <StackPanel Orientation="Horizontal" Margin="18,10,18,9">
-                                <Image Width="30" Height="30" Source="{Binding Image}">
-                                    <Image.Clip>
-                                        <RectangleGeometry RadiusX="2" RadiusY="2" Rect="0,0,30,30"/>
-                                    </Image.Clip>
-                                </Image>
-                                <TextBlock Text="{Binding ShowName}" VerticalAlignment="Center" FontSize="13" Foreground="#fff" Margin="10,0" MaxWidth="150" TextTrimming="CharacterEllipsis"></TextBlock>
+                        <ContentControl>
+                            <StackPanel Height="50" Cursor="Hand" Background="Transparent">
+                                <StackPanel Orientation="Horizontal" Margin="18,10,18,9">
+                                    <Image Width="30" Height="30" Source="{Binding Image}">
+                                        <Image.Clip>
+                                            <RectangleGeometry RadiusX="2" RadiusY="2" Rect="0,0,30,30"/>
+                                        </Image.Clip>
+                                    </Image>
+                                    <TextBlock Text="{Binding ShowName}" VerticalAlignment="Center" FontSize="13" Foreground="#fff" Margin="10,0" MaxWidth="150" TextTrimming="CharacterEllipsis"></TextBlock>
+                                </StackPanel>
+                                <Line StrokeThickness="1" Stroke="#292c33" X1="0" Y1="0" X2="{Binding ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=FrameworkElement}}" Y2="0"></Line>
                             </StackPanel>
-                            <Line StrokeThickness="1" Stroke="#292c33" X1="0" Y1="0" X2="{Binding ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=FrameworkElement}}" Y2="0"></Line>
-                        </StackPanel>
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding DataContext.ItemDoubleClickCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}"></i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ContentControl>
                     </DataTemplate>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Input;
 using Unity.Attributes;
 using WeChatClient.Core.Dependency;
 using WeChatClient.Core.Interfaces;
@@ -26,6 +27,8 @@ namespace WeChatClient.ContactList.ViewModels
         [Reactive]
         public WeChatUser SelectedItem { get; set; }
 
+        public ICommand ItemDoubleClickCommand { get; }
+
         [Dependency]
         protected IImageDownloadService ImageDownloadService { get; set; }
 
@@ -35,6 +38,11 @@ namespace WeChatClient.ContactList.ViewModels
             cv.GroupDescriptions.Add(new PropertyGroupDescription(nameof(WeChatUser.StartChar)));
 
             this.WhenAnyValue(p => p.SelectedItem).Subscribe(p => contactContentManager.SelectedContact = p);
+
+            ItemDoubleClickCommand = ReactiveCommand.Create(() =>
+            {
+                contactContentManager.ToChatCommand.Execute(null);
+            });
         }
 
         public void AddContact(params WeChatUser[] chat)
