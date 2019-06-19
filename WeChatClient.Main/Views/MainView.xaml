@@ -13,9 +13,6 @@
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}"></i:InvokeCommandAction>
         </i:EventTrigger>
-        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-            <i:InvokeCommandAction Command="{Binding MouseLeftButtonDownCommand}"></i:InvokeCommandAction>
-        </i:EventTrigger>
     </i:Interaction.Triggers>
     <UserControl.Resources>
         <ResourceDictionary>
@@ -73,7 +70,40 @@
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="{Binding WeChatUser.NickName}" FontSize="18" VerticalAlignment="Center" Foreground="White"></TextBlock>
-                        <ToggleButton IsChecked="{Binding ShowSystemMenu}" IsEnabled="{Binding ShowSystemMenu,Converter={StaticResource Inverse}}" Cursor="Hand" Grid.Column="1" Style="{StaticResource WxResImgStyle}" Content="434,398,30,30" Width="30" Height="30"></ToggleButton>
+                        <ToggleButton x:Name="tbSystemMenu" Cursor="Hand" Grid.Column="1" Style="{StaticResource WxResImgStyle}" Content="434,398,30,30" Width="30" Height="30"></ToggleButton>
+                        <Popup IsOpen="{Binding IsChecked,ElementName=tbSystemMenu}" StaysOpen="False" PlacementTarget="{Binding ElementName=tbSystemMenu}" Placement="Bottom" HorizontalOffset="-146" VerticalOffset="7">
+                            <Border Width="180" BorderThickness="1" BorderBrush="#d6d6d6" CornerRadius="4" Background="#fff">
+                                <StackPanel>
+                                    <StackPanel.Resources>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Background" Value="#fff"></Setter>
+                                            <Setter Property="Cursor" Value="Hand"></Setter>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Border BorderThickness="1" BorderBrush="#f1f1f1" Padding="8" Background="{TemplateBinding Background}">
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <ContentControl Style="{StaticResource WxResImgStyle}" Content="{TemplateBinding Tag}" Width="34" Height="34"></ContentControl>
+                                                                <Rectangle Width="8"></Rectangle>
+                                                                <TextBlock Text="{TemplateBinding Content}" Foreground="#000" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                                                            </StackPanel>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#f5f5f5"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Resources>
+                                    <Button Content="发起聊天" Tag="238,398,34,34"></Button>
+                                    <!--暂时还没实现-->
+                                    <Button Content="退出" Tag="102,398,34,34" Command="{Binding LoginoutCommand}"></Button>
+                                </StackPanel>
+                            </Border>
+                        </Popup>
                     </Grid>
                 </StackPanel>
                 <Rectangle Height="18"></Rectangle>
@@ -105,39 +135,6 @@
             </StackPanel>
             <Line Grid.Row="1" StrokeThickness="1" Stroke="#24272c" X1="0" Y1="0" X2="{Binding ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=FrameworkElement}}" Y2="0"></Line>
             <ContentControl Grid.Row="2" prism:RegionManager.RegionName="{x:Static const:WeChatClientConst.NavRegionName}"></ContentControl>
-
-            <Canvas Visibility="{Binding ShowSystemMenu,Converter={StaticResource BoolToVisibility}}">
-                <Border Width="180" Canvas.Top="60" Canvas.Left="85" BorderThickness="1" BorderBrush="#d6d6d6" CornerRadius="4">
-                    <StackPanel Background="#fff">
-                        <StackPanel.Resources>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="#fff"></Setter>
-                                <Setter Property="Cursor" Value="Hand"></Setter>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border BorderThickness="1" BorderBrush="#f1f1f1" Padding="8" Background="{TemplateBinding Background}">
-                                                <StackPanel Orientation="Horizontal">
-                                                    <ContentControl Style="{StaticResource WxResImgStyle}" Content="{TemplateBinding Tag}" Width="34" Height="34"></ContentControl>
-                                                    <Rectangle Width="8"></Rectangle>
-                                                    <TextBlock Text="{TemplateBinding Content}" Foreground="#000" FontSize="14" VerticalAlignment="Center"></TextBlock>
-                                                </StackPanel>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#f5f5f5"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </StackPanel.Resources>
-                        <Button Content="发起聊天" Tag="238,398,34,34"></Button>  <!--暂时还没实现-->
-                        <Button Content="退出" Tag="102,398,34,34" Command="{Binding LoginoutCommand}"></Button>
-                    </StackPanel>
-                </Border>
-            </Canvas>
         </Grid>
         <ContentControl Grid.Column="1" prism:RegionManager.RegionName="{x:Static const:WeChatClientConst.ContentRegionName}"></ContentControl>
     </Grid>

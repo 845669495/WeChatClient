@@ -46,13 +46,10 @@ namespace WeChatClient.Main.ViewModels
 
         [Reactive]
         public bool ChatNavChecked { get; set; } = true;
-        [Reactive]
-        public bool ShowSystemMenu { get; set; }
 
         public ICommand LoadedCommand { get; }
         public ICommand NavigateCommand { get; }
         public ICommand LoginoutCommand { get; }
-        public ICommand MouseLeftButtonDownCommand { get; }
 
         public MainViewModel(IRegionManager regionManager, IEventAggregator ea)
         {
@@ -60,19 +57,9 @@ namespace WeChatClient.Main.ViewModels
             LoadedCommand = ReactiveCommand.CreateFromTask(InitAsync);
             NavigateCommand = ReactiveCommand.Create<string>(Navigate);
             LoginoutCommand = ReactiveCommand.Create(Loginout);
-            MouseLeftButtonDownCommand = ReactiveCommand.Create(MouseLeftButtonDown);
 
             ea.GetEvent<SendTextMsgEvent>().Subscribe(SendTextMsg);
             ea.GetEvent<ChatWithContactEvent>().Subscribe(ChatWithContact);
-        }
-
-        private void MouseLeftButtonDown()
-        {
-            Task.Run(() =>
-            {
-                Thread.Sleep(10);
-                ShowSystemMenu = false;
-            });
         }
 
         private void Loginout()
