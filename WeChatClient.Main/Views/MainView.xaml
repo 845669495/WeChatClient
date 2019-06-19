@@ -71,8 +71,9 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="{Binding WeChatUser.NickName}" FontSize="18" VerticalAlignment="Center" Foreground="White"></TextBlock>
                         <ToggleButton x:Name="tbSystemMenu" Cursor="Hand" Grid.Column="1" Style="{StaticResource WxResImgStyle}"
-                                      Content="434,398,30,30" Width="30" Height="30"></ToggleButton>
-                        <Popup IsOpen="{Binding IsChecked,ElementName=tbSystemMenu}" StaysOpen="{Binding IsMouseOver,ElementName=tbSystemMenu}" 
+                                      Content="434,398,30,30" Width="30" Height="30"
+                                       IsHitTestVisible="{Binding IsOpen,ElementName=popSystemMenu,Mode=OneWay,Converter={StaticResource Inverse}}"></ToggleButton>
+                        <Popup x:Name="popSystemMenu" IsOpen="{Binding IsChecked,ElementName=tbSystemMenu}" StaysOpen="False" 
                                PlacementTarget="{Binding ElementName=tbSystemMenu}" Placement="Bottom" HorizontalOffset="-146" VerticalOffset="7">
                             <Border Width="180" BorderThickness="1" BorderBrush="#d6d6d6" CornerRadius="4" Background="#fff">
                                 <StackPanel>
@@ -100,7 +101,7 @@
                                             </Style.Triggers>
                                         </Style>
                                     </StackPanel.Resources>
-                                    <!--暂时还没实现-->
+                                    <!--暂时还没实现发起聊天-->
                                     <ToggleButton IsChecked="{Binding IsChecked,ElementName=tbSystemMenu}" Content="发起聊天" Tag="238,398,34,34"></ToggleButton>
                                     <ToggleButton IsChecked="{Binding IsChecked,ElementName=tbSystemMenu}" Content="退出" Tag="102,398,34,34" Command="{Binding LoginoutCommand}"></ToggleButton>
                                 </StackPanel>
