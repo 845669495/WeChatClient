@@ -70,17 +70,19 @@
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="{Binding WeChatUser.NickName}" FontSize="18" VerticalAlignment="Center" Foreground="White"></TextBlock>
-                        <ToggleButton x:Name="tbSystemMenu" Cursor="Hand" Grid.Column="1" Style="{StaticResource WxResImgStyle}" Content="434,398,30,30" Width="30" Height="30"></ToggleButton>
-                        <Popup IsOpen="{Binding IsChecked,ElementName=tbSystemMenu}" StaysOpen="False" PlacementTarget="{Binding ElementName=tbSystemMenu}" Placement="Bottom" HorizontalOffset="-146" VerticalOffset="7">
+                        <ToggleButton x:Name="tbSystemMenu" Cursor="Hand" Grid.Column="1" Style="{StaticResource WxResImgStyle}"
+                                      Content="434,398,30,30" Width="30" Height="30"></ToggleButton>
+                        <Popup IsOpen="{Binding IsChecked,ElementName=tbSystemMenu}" StaysOpen="{Binding IsMouseOver,ElementName=tbSystemMenu}" 
+                               PlacementTarget="{Binding ElementName=tbSystemMenu}" Placement="Bottom" HorizontalOffset="-146" VerticalOffset="7">
                             <Border Width="180" BorderThickness="1" BorderBrush="#d6d6d6" CornerRadius="4" Background="#fff">
                                 <StackPanel>
                                     <StackPanel.Resources>
-                                        <Style TargetType="Button">
+                                        <Style TargetType="ToggleButton">
                                             <Setter Property="Background" Value="#fff"></Setter>
                                             <Setter Property="Cursor" Value="Hand"></Setter>
                                             <Setter Property="Template">
                                                 <Setter.Value>
-                                                    <ControlTemplate TargetType="Button">
+                                                    <ControlTemplate TargetType="ToggleButton">
                                                         <Border BorderThickness="1" BorderBrush="#f1f1f1" Padding="8" Background="{TemplateBinding Background}">
                                                             <StackPanel Orientation="Horizontal">
                                                                 <ContentControl Style="{StaticResource WxResImgStyle}" Content="{TemplateBinding Tag}" Width="34" Height="34"></ContentControl>
@@ -98,9 +100,9 @@
                                             </Style.Triggers>
                                         </Style>
                                     </StackPanel.Resources>
-                                    <Button Content="发起聊天" Tag="238,398,34,34"></Button>
                                     <!--暂时还没实现-->
-                                    <Button Content="退出" Tag="102,398,34,34" Command="{Binding LoginoutCommand}"></Button>
+                                    <ToggleButton IsChecked="{Binding IsChecked,ElementName=tbSystemMenu}" Content="发起聊天" Tag="238,398,34,34"></ToggleButton>
+                                    <ToggleButton IsChecked="{Binding IsChecked,ElementName=tbSystemMenu}" Content="退出" Tag="102,398,34,34" Command="{Binding LoginoutCommand}"></ToggleButton>
                                 </StackPanel>
                             </Border>
                         </Popup>
