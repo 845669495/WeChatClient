@@ -142,5 +142,8 @@
   <ItemGroup>
     <Resource Include="Resources\2KriyDK.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\NTI4MWU5.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

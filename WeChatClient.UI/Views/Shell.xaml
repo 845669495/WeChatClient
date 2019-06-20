@@ -6,6 +6,7 @@
         xmlns:const="clr-namespace:WeChatClient;assembly=WeChatClient.Core"
         xmlns:prism="http://prismlibrary.com/"
         mc:Ignorable="d"
-        Title="Shell" SizeToContent="WidthAndHeight" Loaded="Window_Loaded" ResizeMode="NoResize">
+        Icon="pack://application:,,,/WeChatClient.Core;component/Resources/NTI4MWU5.ico"
+        Title="微信" SizeToContent="WidthAndHeight" Loaded="Window_Loaded" ResizeMode="NoResize">
     <ContentControl prism:RegionManager.RegionName="{x:Static const:WeChatClientConst.MainRegionName}"></ContentControl>
 </Window>
