@@ -93,6 +93,11 @@ namespace WeChatClient.Core.Models
         /// </summary>
         public string StartChar { get; set; }
 
+        /// <summary>
+        /// 搜索时的类型分组描述
+        /// </summary>
+        public string SearchGroupDesc => this.IsRoomContact() ? "群组" : "好友";
+
         private int _unReadCount;
         /// <summary>
         /// 未读条数

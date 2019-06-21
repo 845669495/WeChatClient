@@ -7,20 +7,19 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using WeChatClient.Core;
 using WeChatClient.Core.Dependency;
-using WeChatClient.Main.Views;
+using WeChatClient.Search.Views;
 
-namespace WeChatClient.Main
+namespace WeChatClient.Search
 {
-    [Module(OnDemand = true)]  //按需加载模块   
-    [ModuleDependency(WeChatClientConst.SearchModuleName)]    //设置模块依赖
-    public class MainModule : IModule
+    [Module(OnDemand = true)]
+    [ModuleDependency(WeChatClientConst.ChatListModuleName)]
+    public class SearchModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
             var regionManager = containerProvider.Resolve<IRegionManager>();
-            regionManager.RegisterViewWithRegion(WeChatClientConst.MainRegionName, typeof(MainView));
+            regionManager.RegisterViewWithRegion(WeChatClientConst.SearchRegionName, typeof(SearchView));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

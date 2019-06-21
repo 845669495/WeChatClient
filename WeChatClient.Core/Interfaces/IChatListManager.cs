@@ -45,5 +45,11 @@ namespace WeChatClient.Core.Interfaces
         /// </summary>
         /// <param name="contact"></param>
         void ChatWithContact(WeChatUser contact);
+        /// <summary>
+        /// 搜索群聊
+        /// </summary>
+        /// <param name="searchText"></param>
+        /// <returns></returns>
+        WeChatUser[] SearchRoomChat(string searchText);
     }
 }

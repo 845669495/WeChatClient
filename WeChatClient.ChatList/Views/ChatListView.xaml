@@ -114,7 +114,7 @@
 
     </UserControl.Resources>
 
-    <ListBox ItemsSource="{Binding ChatList}" Background="Transparent" HorizontalContentAlignment="Stretch"
+    <ListBox ItemsSource="{Binding ChatList}"
              VirtualizingStackPanel.IsVirtualizing="True"
              VirtualizingStackPanel.VirtualizationMode="Recycling"
              Style="{StaticResource ListBoxStyle}"

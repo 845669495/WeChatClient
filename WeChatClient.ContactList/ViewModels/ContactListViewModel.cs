@@ -48,7 +48,7 @@ namespace WeChatClient.ContactList.ViewModels
         public void AddContact(params WeChatUser[] chat)
         {
             _allContactList.AddRange(chat);
-            ContactList.AddRange(chat.Where(p => p.StartChar != "公众号"));
+            ContactList.AddRange(chat.Where(p => p.StartChar.Length == 1));
             ImageDownloadService.Add(ContactList.ToArray());
         }
 
@@ -85,11 +85,16 @@ namespace WeChatClient.ContactList.ViewModels
                     ContactList.Remove(local);
                 }
                 _allContactList.Add(item);
-                if (item.StartChar != "公众号")
+                if (item.StartChar.Length == 1)
                     ContactList.Add(item);
             }
 
             ImageDownloadService.Add(contact.ToArray());
+        }
+
+        public WeChatUser[] SearchContact(string searchText)
+        {
+            return ContactList.Where(p => p.ShowName?.Contains(searchText) == true || p.ShowPinYin?.Contains(searchText) == true).ToArray();
         }
 
         #region INavigationAware

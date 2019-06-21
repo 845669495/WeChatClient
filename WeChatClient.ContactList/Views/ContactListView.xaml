@@ -41,7 +41,7 @@
     </UserControl.Resources>
 
     <!--ScrollViewer.CanContentScroll="False" 分组之后需要阻止按照子项滚动-->
-    <ListBox ItemsSource="{Binding ContactList}" Background="Transparent" HorizontalContentAlignment="Stretch"
+    <ListBox ItemsSource="{Binding ContactList}"
              SelectedItem="{Binding SelectedItem}"
              ScrollViewer.CanContentScroll="False"
              Style="{StaticResource ListBoxStyle}"

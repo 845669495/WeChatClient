@@ -34,13 +34,17 @@ namespace WeChatClient
         /// 联系人内容模块
         /// </summary>
         public const string ContactContentModuleName = "ContactContentModule";
+        /// <summary>
+        /// 搜索模块
+        /// </summary>
+        public const string SearchModuleName = "SearchModule";
         #endregion
 
         #region Regions
         /// <summary>
         /// 主程序区域
         /// </summary>
-        public static readonly string MainRegionName = "MainRegion";      
+        public static readonly string MainRegionName = "MainRegion";  
         /// <summary>
         /// 导航区域
         /// </summary>
@@ -49,6 +53,10 @@ namespace WeChatClient
         /// 内容区域
         /// </summary>
         public const string ContentRegionName = "ContentRegion";
+        /// <summary>
+        /// 搜索区域
+        /// </summary>
+        public const string SearchRegionName = "SearchRegion";
         #endregion
 
         /// <summary>

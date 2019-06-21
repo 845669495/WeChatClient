@@ -48,9 +48,13 @@ namespace WeChatClient.Core.Models
             {
                 start_char = "公众号";
             }
-            else if (user.UserName.Contains("@@") && user.SnsFlag.Equals("0"))
+            else if (user.UserName.StartsWith("@@") && user.SnsFlag.Equals("0"))
             {
                 start_char = "群聊";
+            }
+            else if (!user.UserName.StartsWith("@"))
+            {
+                start_char = "微信官方号";
             }
             else
             {

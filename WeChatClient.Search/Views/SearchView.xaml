@@ -1,0 +1,100 @@
+﻿<UserControl x:Class="WeChatClient.Search.Views.SearchView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WeChatClient.Search.Views"
+             xmlns:model="clr-namespace:WeChatClient.Core.Models;assembly=WeChatClient.Core"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:extensions="clr-namespace:WeChatClient.Core.Extensions;assembly=WeChatClient.Core"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/WeChatClient.Core;component/Theme/Generic.xaml"></ResourceDictionary>
+                <ResourceDictionary>
+                    <DataTemplate DataType="{x:Type model:WeChatUser}">
+                        <ContentControl>
+                            <StackPanel Height="50" Cursor="Hand" Background="Transparent">
+                                <StackPanel Orientation="Horizontal" Margin="9,10,9,9">
+                                    <Image Width="30" Height="30" Source="{Binding Image}">
+                                        <Image.Clip>
+                                            <RectangleGeometry RadiusX="2" RadiusY="2" Rect="0,0,30,30"/>
+                                        </Image.Clip>
+                                    </Image>
+                                    <TextBlock Text="{Binding ShowName}" VerticalAlignment="Center" FontSize="14" Foreground="#fff" Margin="10,0" MaxWidth="150" TextTrimming="CharacterEllipsis"></TextBlock>
+                                </StackPanel>
+                                <Line StrokeThickness="1" Stroke="#2e3238" X1="0" Y1="0" X2="{Binding ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=FrameworkElement}}" Y2="0"></Line>
+                            </StackPanel>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <i:InvokeCommandAction Command="{Binding DataContext.SelectCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}" CommandParameter="{Binding }"></i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ContentControl>
+                    </DataTemplate>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Height="32" Background="#26292e" x:Name="layout">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ContentControl Style="{StaticResource WxResImgStyle}" Content="60,432,30,30" Width="30" Height="30"></ContentControl>
+        <Grid Grid.Column="1">
+            <TextBlock Margin="4,0" Text="搜索" FontSize="12" Foreground="#989898" VerticalAlignment="Center" Visibility="{Binding Text,ElementName=tbSearch,Converter={StaticResource BoolToVisibilityInverse}}"></TextBlock>
+            <TextBox x:Name="tbSearch" Text="{Binding SearchText,UpdateSourceTrigger=PropertyChanged}" Background="Transparent" BorderBrush="Transparent" FontSize="12" 
+                                 BorderThickness="0" Foreground="#fff" CaretBrush="White" VerticalAlignment="Center"
+                                 extensions:TextBoxExtensions.ScrollEndWhenTextTrimmed="True" Width="214"></TextBox>
+        </Grid>
+
+        <Popup IsOpen="{Binding IsOpen}" StaysOpen="False" VerticalOffset="4">
+            <Border Background="#33363b" CornerRadius="2" Width="{Binding ActualWidth,ElementName=layout}" MaxHeight="420">
+                <Grid>
+                    <ContentControl Height="31" Background="#393c43" Visibility="{Binding ContactList.Count,Converter={StaticResource BoolToVisibilityInverse}}">
+                        <TextBlock Text="找不到匹配的结果" Foreground="#787b87" VerticalAlignment="Center" Margin="9,0" FontSize="16"></TextBlock>
+                    </ContentControl>
+                    <ListBox ItemsSource="{Binding ContactList}" ScrollViewer.CanContentScroll="False" 
+                         Style="{StaticResource ListBoxStyle}" ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+                         Visibility="{Binding ContactList.Count,Converter={StaticResource BoolToVisibility}}">
+                        <ListBox.GroupStyle>
+                            <GroupStyle>
+                                <GroupStyle.HeaderTemplate>
+                                    <DataTemplate DataType="CollectionViewGroup">
+                                        <StackPanel>
+                                            <Rectangle Height="10" Name="Bd" Fill="#2e3238"></Rectangle>
+                                            <ContentControl Height="31" Background="#393c43">
+                                                <TextBlock Text="{Binding Name}" Foreground="#787b87" VerticalAlignment="Center" Margin="9,0" FontSize="16"></TextBlock>
+                                            </ContentControl>
+                                        </StackPanel>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                                <Setter TargetName="Bd" Property="Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </GroupStyle.HeaderTemplate>
+                            </GroupStyle>
+                        </ListBox.GroupStyle>
+                        <ListBox.Resources>
+                            <Style TargetType="GroupItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="GroupItem">
+                                            <StackPanel>
+                                                <ContentPresenter x:Name="PART_Header"></ContentPresenter>
+                                                <ItemsPresenter></ItemsPresenter>
+                                            </StackPanel>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.Resources>
+                    </ListBox>
+                </Grid>
+            </Border>
+        </Popup>
+    </Grid>
+</UserControl>

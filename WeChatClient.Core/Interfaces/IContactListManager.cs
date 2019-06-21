@@ -13,5 +13,6 @@ namespace WeChatClient.Core.Interfaces
         WeChatUser FindContact(string userName);
         void DelContact(params string[] userNames);
         void ModContact(params WeChatUser[] contact);
+        WeChatUser[] SearchContact(string searchText);
     }
 }

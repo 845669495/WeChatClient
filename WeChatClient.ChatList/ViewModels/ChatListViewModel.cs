@@ -206,6 +206,11 @@ namespace WeChatClient.ChatList.ViewModels
             SelectedItem = chat;
         }
 
+        public WeChatUser[] SearchRoomChat(string searchText)
+        {
+            return ChatList.Where(p => p.IsRoomContact()).Where(p => p.ShowName?.Contains(searchText) == true || p.ShowPinYin?.Contains(searchText) == true).ToArray();
+        }
+
         #region INavigationAware
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
