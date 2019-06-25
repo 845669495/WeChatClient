@@ -17,8 +17,9 @@ using WeChatClient.Login.Views;
 
 namespace WeChatClient.Login
 {
+    //[Module(OnDemand = true)]  //暂时禁用登录
     public class LoginModule : IModule
-    {      
+    {
         public void OnInitialized(IContainerProvider containerProvider)
         {
             var regionManager = containerProvider.Resolve<IRegionManager>();

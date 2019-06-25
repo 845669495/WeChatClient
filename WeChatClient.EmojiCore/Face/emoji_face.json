@@ -1,0 +1,710 @@
+﻿[
+  {
+    "Code": "笑脸",
+    "Position": "0,0"
+  },
+  {
+    "Code": "生病",
+    "Position": "32,0"
+  },
+  {
+    "Code": "破涕为笑",
+    "Position": "64,0"
+  },
+  {
+    "Code": "吐舌",
+    "Position": "96,0"
+  },
+  {
+    "Code": "脸红",
+    "Position": "128,0"
+  },
+  {
+    "Code": "恐惧",
+    "Position": "160,0"
+  },
+  {
+    "Code": "失望",
+    "Position": "192,0"
+  },
+  {
+    "Code": "无语",
+    "Position": "224,0"
+  },
+  {
+    "Code": "嘿哈",
+    "Position": "256,0"
+  },
+  {
+    "Code": "捂脸",
+    "Position": "288,0"
+  },
+  {
+    "Code": "奸笑",
+    "Position": "320,0"
+  },
+  {
+    "Code": "机智",
+    "Position": "352,0"
+  },
+  {
+    "Code": "皱眉",
+    "Position": "384,0"
+  },
+  {
+    "Code": "耶",
+    "Position": "416,0"
+  },
+  {
+    "Code": "鬼魂",
+    "Position": "448,0"
+  },
+  {
+    "Code": "合十",
+    "Position": "0,32"
+  },
+  {
+    "Code": "强壮",
+    "Position": "32,32"
+  },
+  {
+    "Code": "庆祝",
+    "Position": "64,32"
+  },
+  {
+    "Code": "礼物",
+    "Position": "96,32"
+  },
+  {
+    "Code": "红包",
+    "Position": "128,32"
+  },
+  {
+    "Code": "鸡",
+    "Position": "160,32"
+  },
+  {
+    "Code": "开心",
+    "Position": "192,32"
+  },
+  {
+    "Code": "大笑",
+    "Position": "224,32"
+  },
+  {
+    "Code": "热情",
+    "Position": "256,32"
+  },
+  {
+    "Code": "眨眼",
+    "Position": "288,32"
+  },
+  {
+    "Code": "色",
+    "Position": "320,32"
+  },
+  {
+    "Code": "接吻",
+    "Position": "352,32"
+  },
+  {
+    "Code": "亲吻",
+    "Position": "384,32"
+  },
+  {
+    "Code": "露齿笑",
+    "Position": "416,32"
+  },
+  {
+    "Code": "满意",
+    "Position": "448,32"
+  },
+  {
+    "Code": "戏弄",
+    "Position": "0,64"
+  },
+  {
+    "Code": "得意",
+    "Position": "32,64"
+  },
+  {
+    "Code": "汗",
+    "Position": "64,64"
+  },
+  {
+    "Code": "低落",
+    "Position": "96,64"
+  },
+  {
+    "Code": "呸",
+    "Position": "128,64"
+  },
+  {
+    "Code": "焦虑",
+    "Position": "160,64"
+  },
+  {
+    "Code": "担心",
+    "Position": "192,64"
+  },
+  {
+    "Code": "震惊",
+    "Position": "224,64"
+  },
+  {
+    "Code": "悔恨",
+    "Position": "256,64"
+  },
+  {
+    "Code": "眼泪",
+    "Position": "288,64"
+  },
+  {
+    "Code": "哭",
+    "Position": "320,64"
+  },
+  {
+    "Code": "晕",
+    "Position": "352,64"
+  },
+  {
+    "Code": "心烦",
+    "Position": "384,64"
+  },
+  {
+    "Code": "生气",
+    "Position": "416,64"
+  },
+  {
+    "Code": "睡觉",
+    "Position": "448,64"
+  },
+  {
+    "Code": "恶魔",
+    "Position": "0,96"
+  },
+  {
+    "Code": "外星人",
+    "Position": "32,96"
+  },
+  {
+    "Code": "心",
+    "Position": "64,96"
+  },
+  {
+    "Code": "心碎",
+    "Position": "96,96"
+  },
+  {
+    "Code": "丘比特",
+    "Position": "128,96"
+  },
+  {
+    "Code": "闪烁",
+    "Position": "160,96"
+  },
+  {
+    "Code": "星星",
+    "Position": "192,96"
+  },
+  {
+    "Code": "叹号",
+    "Position": "224,96"
+  },
+  {
+    "Code": "问号",
+    "Position": "256,96"
+  },
+  {
+    "Code": "睡着",
+    "Position": "288,96"
+  },
+  {
+    "Code": "水滴",
+    "Position": "320,96"
+  },
+  {
+    "Code": "音乐",
+    "Position": "352,96"
+  },
+  {
+    "Code": "火",
+    "Position": "384,96"
+  },
+  {
+    "Code": "便便",
+    "Position": "416,96"
+  },
+  {
+    "Code": "强",
+    "Position": "448,96"
+  },
+  {
+    "Code": "弱",
+    "Position": "0,128"
+  },
+  {
+    "Code": "拳头",
+    "Position": "32,128"
+  },
+  {
+    "Code": "胜利",
+    "Position": "64,128"
+  },
+  {
+    "Code": "上",
+    "Position": "96,128"
+  },
+  {
+    "Code": "下",
+    "Position": "128,128"
+  },
+  {
+    "Code": "右",
+    "Position": "160,128"
+  },
+  {
+    "Code": "左",
+    "Position": "192,128"
+  },
+  {
+    "Code": "第一",
+    "Position": "224,128"
+  },
+  {
+    "Code": "吻",
+    "Position": "256,128"
+  },
+  {
+    "Code": "热恋",
+    "Position": "288,128"
+  },
+  {
+    "Code": "男孩",
+    "Position": "320,128"
+  },
+  {
+    "Code": "女孩",
+    "Position": "352,128"
+  },
+  {
+    "Code": "女士",
+    "Position": "384,128"
+  },
+  {
+    "Code": "男士",
+    "Position": "416,128"
+  },
+  {
+    "Code": "天使",
+    "Position": "448,128"
+  },
+  {
+    "Code": "骷髅",
+    "Position": "0,160"
+  },
+  {
+    "Code": "红唇",
+    "Position": "32,160"
+  },
+  {
+    "Code": "太阳",
+    "Position": "64,160"
+  },
+  {
+    "Code": "下雨",
+    "Position": "96,160"
+  },
+  {
+    "Code": "多云",
+    "Position": "128,160"
+  },
+  {
+    "Code": "雪人",
+    "Position": "160,160"
+  },
+  {
+    "Code": "月亮",
+    "Position": "192,160"
+  },
+  {
+    "Code": "闪电",
+    "Position": "224,160"
+  },
+  {
+    "Code": "海浪",
+    "Position": "256,160"
+  },
+  {
+    "Code": "猫",
+    "Position": "288,160"
+  },
+  {
+    "Code": "小狗",
+    "Position": "320,160"
+  },
+  {
+    "Code": "老鼠",
+    "Position": "352,160"
+  },
+  {
+    "Code": "仓鼠",
+    "Position": "384,160"
+  },
+  {
+    "Code": "兔子",
+    "Position": "416,160"
+  },
+  {
+    "Code": "狗",
+    "Position": "448,160"
+  },
+  {
+    "Code": "青蛙",
+    "Position": "0,192"
+  },
+  {
+    "Code": "老虎",
+    "Position": "32,192"
+  },
+  {
+    "Code": "考拉",
+    "Position": "64,192"
+  },
+  {
+    "Code": "熊",
+    "Position": "96,192"
+  },
+  {
+    "Code": "猪",
+    "Position": "128,192"
+  },
+  {
+    "Code": "牛",
+    "Position": "160,192"
+  },
+  {
+    "Code": "野猪",
+    "Position": "192,192"
+  },
+  {
+    "Code": "猴子",
+    "Position": "224,192"
+  },
+  {
+    "Code": "马",
+    "Position": "256,192"
+  },
+  {
+    "Code": "蛇",
+    "Position": "288,192"
+  },
+  {
+    "Code": "鸽子",
+    "Position": "320,192"
+  },
+  {
+    "Code": "鸡",
+    "Position": "352,192"
+  },
+  {
+    "Code": "企鹅",
+    "Position": "384,192"
+  },
+  {
+    "Code": "毛虫",
+    "Position": "416,192"
+  },
+  {
+    "Code": "章鱼",
+    "Position": "448,192"
+  },
+  {
+    "Code": "鱼",
+    "Position": "0,224"
+  },
+  {
+    "Code": "鲸鱼",
+    "Position": "32,224"
+  },
+  {
+    "Code": "海豚",
+    "Position": "64,224"
+  },
+  {
+    "Code": "玫瑰",
+    "Position": "96,224"
+  },
+  {
+    "Code": "花",
+    "Position": "128,224"
+  },
+  {
+    "Code": "棕榈树",
+    "Position": "160,224"
+  },
+  {
+    "Code": "仙人掌",
+    "Position": "192,224"
+  },
+  {
+    "Code": "礼盒",
+    "Position": "224,224"
+  },
+  {
+    "Code": "南瓜灯",
+    "Position": "256,224"
+  },
+  {
+    "Code": "圣诞老人",
+    "Position": "288,224"
+  },
+  {
+    "Code": "圣诞树",
+    "Position": "320,224"
+  },
+  {
+    "Code": "铃",
+    "Position": "352,224"
+  },
+  {
+    "Code": "气球",
+    "Position": "384,224"
+  },
+  {
+    "Code": "CD",
+    "Position": "416,224"
+  },
+  {
+    "Code": "相机",
+    "Position": "448,224"
+  },
+  {
+    "Code": "录像机",
+    "Position": "0,256"
+  },
+  {
+    "Code": "电脑",
+    "Position": "32,256"
+  },
+  {
+    "Code": "电视",
+    "Position": "64,256"
+  },
+  {
+    "Code": "电话",
+    "Position": "96,256"
+  },
+  {
+    "Code": "解锁",
+    "Position": "128,256"
+  },
+  {
+    "Code": "锁",
+    "Position": "160,256"
+  },
+  {
+    "Code": "钥匙",
+    "Position": "192,256"
+  },
+  {
+    "Code": "成交",
+    "Position": "224,256"
+  },
+  {
+    "Code": "灯泡",
+    "Position": "256,256"
+  },
+  {
+    "Code": "邮箱",
+    "Position": "288,256"
+  },
+  {
+    "Code": "浴缸",
+    "Position": "320,256"
+  },
+  {
+    "Code": "钱",
+    "Position": "352,256"
+  },
+  {
+    "Code": "炸弹",
+    "Position": "384,256"
+  },
+  {
+    "Code": "手枪",
+    "Position": "416,256"
+  },
+  {
+    "Code": "药丸",
+    "Position": "448,256"
+  },
+  {
+    "Code": "橄榄球",
+    "Position": "0,288"
+  },
+  {
+    "Code": "篮球",
+    "Position": "32,288"
+  },
+  {
+    "Code": "足球",
+    "Position": "64,288"
+  },
+  {
+    "Code": "棒球",
+    "Position": "96,288"
+  },
+  {
+    "Code": "高尔夫",
+    "Position": "128,288"
+  },
+  {
+    "Code": "奖杯",
+    "Position": "160,288"
+  },
+  {
+    "Code": "入侵者",
+    "Position": "192,288"
+  },
+  {
+    "Code": "唱歌",
+    "Position": "224,288"
+  },
+  {
+    "Code": "吉他",
+    "Position": "256,288"
+  },
+  {
+    "Code": "比基尼",
+    "Position": "288,288"
+  },
+  {
+    "Code": "皇冠",
+    "Position": "320,288"
+  },
+  {
+    "Code": "雨伞",
+    "Position": "352,288"
+  },
+  {
+    "Code": "手提包",
+    "Position": "384,288"
+  },
+  {
+    "Code": "口红",
+    "Position": "416,288"
+  },
+  {
+    "Code": "戒指",
+    "Position": "448,288"
+  },
+  {
+    "Code": "钻石",
+    "Position": "0,320"
+  },
+  {
+    "Code": "咖啡",
+    "Position": "32,320"
+  },
+  {
+    "Code": "啤酒",
+    "Position": "64,320"
+  },
+  {
+    "Code": "干杯",
+    "Position": "96,320"
+  },
+  {
+    "Code": "鸡尾酒",
+    "Position": "128,320"
+  },
+  {
+    "Code": "汉堡",
+    "Position": "160,320"
+  },
+  {
+    "Code": "薯条",
+    "Position": "192,320"
+  },
+  {
+    "Code": "意面",
+    "Position": "224,320"
+  },
+  {
+    "Code": "寿司",
+    "Position": "256,320"
+  },
+  {
+    "Code": "面条",
+    "Position": "288,320"
+  },
+  {
+    "Code": "煎蛋",
+    "Position": "320,320"
+  },
+  {
+    "Code": "冰激凌",
+    "Position": "352,320"
+  },
+  {
+    "Code": "蛋糕",
+    "Position": "384,320"
+  },
+  {
+    "Code": "苹果",
+    "Position": "416,320"
+  },
+  {
+    "Code": "飞机",
+    "Position": "448,320"
+  },
+  {
+    "Code": "火箭",
+    "Position": "0,352"
+  },
+  {
+    "Code": "自行车",
+    "Position": "32,352"
+  },
+  {
+    "Code": "高铁",
+    "Position": "64,352"
+  },
+  {
+    "Code": "警告",
+    "Position": "96,352"
+  },
+  {
+    "Code": "旗",
+    "Position": "128,352"
+  },
+  {
+    "Code": "男人",
+    "Position": "160,352"
+  },
+  {
+    "Code": "女人",
+    "Position": "192,352"
+  },
+  {
+    "Code": "O",
+    "Position": "224,352"
+  },
+  {
+    "Code": "X",
+    "Position": "256,352"
+  },
+  {
+    "Code": "版权",
+    "Position": "288,352"
+  },
+  {
+    "Code": "注册商标",
+    "Position": "320,352"
+  },
+  {
+    "Code": "商标",
+    "Position": "352,352"
+  }
+]

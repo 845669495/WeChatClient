@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converter="clr-namespace:WeChatClient.EmojiCore.Converters">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary>
+            <converter:FaceImgConverter x:Key="FaceImg"></converter:FaceImgConverter>
+            
+            <Style TargetType="ContentControl" x:Key="FaceImgStyle">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Image Cursor="Hand" Source="{Binding Content,RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource FaceImg}}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            
+        </ResourceDictionary>
+    </ResourceDictionary.MergedDictionaries>
+    
+</ResourceDictionary>

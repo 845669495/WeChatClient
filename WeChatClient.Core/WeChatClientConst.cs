@@ -38,6 +38,10 @@ namespace WeChatClient
         /// 搜索模块
         /// </summary>
         public const string SearchModuleName = "SearchModule";
+        /// <summary>
+        /// 表情模块
+        /// </summary>
+        public const string FaceModuleName = "FaceModule";
         #endregion
 
         #region Regions
@@ -57,6 +61,10 @@ namespace WeChatClient
         /// 搜索区域
         /// </summary>
         public const string SearchRegionName = "SearchRegion";
+        /// <summary>
+        /// 表情区域
+        /// </summary>
+        public const string FaceRegionName = "FaceRegion";
         #endregion
 
         /// <summary>

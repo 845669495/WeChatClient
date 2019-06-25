@@ -7,20 +7,18 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using WeChatClient.ChatContent.Views;
 using WeChatClient.Core.Dependency;
+using WeChatClient.Face.Views;
 
-namespace WeChatClient.ChatContent
+namespace WeChatClient.Face
 {
     [Module(OnDemand = true)]
-    [ModuleDependency(WeChatClientConst.FaceModuleName)]
-    public class ChatContentModule : IModule
+    public class FaceModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            //内容区域默认显示聊天内容
             var regionManager = containerProvider.Resolve<IRegionManager>();
-            regionManager.RegisterViewWithRegion(WeChatClientConst.ContentRegionName, typeof(ChatContentView));
+            regionManager.RegisterViewWithRegion(WeChatClientConst.FaceRegionName, typeof(FaceView));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

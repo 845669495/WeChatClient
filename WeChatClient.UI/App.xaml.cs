@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using WeChatClient.Core.Dependency;
+using WeChatClient.EmojiCore;
 using WeChatClient.UI.Views;
 
 namespace WeChatClient.UI
@@ -26,6 +27,7 @@ namespace WeChatClient.UI
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterAssembly(typeof(WeChatClientConst).Assembly);
+            containerRegistry.RegisterAssembly(typeof(EmojiModel).Assembly);
         }
 
         protected override IModuleCatalog CreateModuleCatalog()
