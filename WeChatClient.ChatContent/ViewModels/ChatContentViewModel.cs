@@ -35,7 +35,7 @@ namespace WeChatClient.ChatContent.ViewModels
         /// 文本框
         /// </summary>
         [Reactive]
-        public FlowDocument Message { get; set; }
+        public FlowDocument Message { get; private set; }
         /// <summary>
         /// 发送文本消息命令
         /// </summary>
