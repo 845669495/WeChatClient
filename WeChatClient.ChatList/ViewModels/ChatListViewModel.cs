@@ -12,6 +12,7 @@ using Unity.Attributes;
 using WeChatClient.Core.Dependency;
 using WeChatClient.Core.Interfaces;
 using WeChatClient.Core.Models;
+using WeChatClient.EmojiCore.Emoji;
 
 namespace WeChatClient.ChatList.ViewModels
 {
@@ -41,7 +42,9 @@ namespace WeChatClient.ChatList.ViewModels
         protected IImageDownloadService MessageImageDownloadService { get; set; }
         [Dependency]
         protected IContactListManager ContactListManager { get; set; }
-        
+        [Dependency]
+        protected EmojiManager EmojiManager { get; set; }
+
         //[Dependency]
         //protected Lazy<IMainManager> MainManager { get; set; }
 
@@ -162,6 +165,8 @@ namespace WeChatClient.ChatList.ViewModels
                         {
                             msg.ShowShortTime = true;
                         }
+
+                        msg.Document = EmojiManager.StringToFlowDocument(msg.Content);
                     }
                     chat.MessageList.Add(msg);
                 }

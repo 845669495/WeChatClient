@@ -12,6 +12,9 @@ namespace WeChatClient.Core.Extensions
 {
     public class RichTextBoxExtensions
     {
+        /// <summary>
+        /// 给RichTextBox提供依赖属性DocumentProperty，默认Document属性不支持数据绑定
+        /// </summary>
         public static readonly DependencyProperty DocumentProperty = DependencyProperty.RegisterAttached(
             "Document", typeof(FlowDocument), typeof(RichTextBoxExtensions),
             new PropertyMetadata(default(FlowDocument), OnDocumentChanged));
@@ -19,8 +22,12 @@ namespace WeChatClient.Core.Extensions
         private static void OnDocumentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             FlowDocument document = (FlowDocument)e.NewValue;
+            if (document.Parent is RichTextBox parent)
+            {
+                //这里很重要，WPF的控件元素有且仅有一个父对象（如果不这样设置，会报错：Document已属于另一RichTextBox）
+                parent.Document = new FlowDocument();
+            }
             document.LineHeight = 1;
-
             Binding width_bind = new Binding
             {
                 RelativeSource = new RelativeSource

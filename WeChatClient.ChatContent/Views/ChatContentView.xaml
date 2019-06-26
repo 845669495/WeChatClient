@@ -42,7 +42,9 @@
                                     </Grid>
                                     <Border CornerRadius="3" MaxWidth="500" HorizontalAlignment="Left" Background="#fff">
                                         <Grid>
-                                            <TextBlock Text="{Binding Content}" Margin="13,9" FontSize="14" TextWrapping="Wrap" VerticalAlignment="Center"></TextBlock>
+                                            <!--<TextBlock Text="{Binding Content}" Margin="13,9" FontSize="14" TextWrapping="Wrap" VerticalAlignment="Center"></TextBlock>-->
+                                            <RichTextBox Margin="13,9" extensions:RichTextBoxExtensions.Document="{Binding Document,Mode=OneTime}" FontSize="14" BorderThickness="0"
+                                                 Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Center" IsReadOnly="True"></RichTextBox>
                                             <Canvas>
                                                 <Path Fill="#fff">
                                                     <Path.Data>
@@ -77,7 +79,9 @@
                                     <ColumnDefinition Width="40"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <Border CornerRadius="3" MaxWidth="500" HorizontalAlignment="Right" Background="#b2e281">
-                                    <TextBlock Text="{Binding Content}" Margin="13,9" FontSize="14" TextWrapping="Wrap" VerticalAlignment="Center"></TextBlock>
+                                    <!--<TextBlock Text="{Binding Content}" Margin="13,9" FontSize="14" TextWrapping="Wrap" VerticalAlignment="Center"></TextBlock>-->
+                                    <RichTextBox Margin="13,9" extensions:RichTextBoxExtensions.Document="{Binding Document,Mode=OneTime}" FontSize="14" BorderThickness="0"
+                                                 Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Center" IsReadOnly="True"></RichTextBox>
                                 </Border>
                                 <Canvas Grid.Column="1">
                                     <Path Fill="#b2e281">
@@ -171,7 +175,7 @@
                             <ContentControl Style="{StaticResource WxResImgStyle}" Content="120,432,30,30" Width="30" Height="30"></ContentControl>
                         </StackPanel>
                         <ScrollViewer Height="84" Focusable="False">
-                            <RichTextBox x:Name="rtb" extensions:RichTextBoxExtensions.Document="{Binding Message}" Background="Transparent" BorderBrush="Transparent" FontSize="14" BorderThickness="0" AcceptsReturn="True">
+                            <RichTextBox x:Name="rtb" extensions:RichTextBoxExtensions.Document="{Binding Message,Mode=OneTime}" Background="Transparent" BorderBrush="Transparent" FontSize="14" BorderThickness="0" AcceptsReturn="True">
                                 <RichTextBox.InputBindings>
                                     <KeyBinding Key="Enter" Command="{Binding SendTextMsgCommand}"></KeyBinding>
                                 </RichTextBox.InputBindings>

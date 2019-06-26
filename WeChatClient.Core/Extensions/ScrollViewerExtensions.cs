@@ -10,6 +10,9 @@ namespace WeChatClient.Core.Extensions
 {
     public class ScrollViewerExtensions
     {
+        /// <summary>
+        /// 总是滚动到底部
+        /// </summary>
         public static readonly DependencyProperty AlwaysScrollToEndProperty = DependencyProperty.RegisterAttached("AlwaysScrollToEnd", typeof(bool), typeof(ScrollViewerExtensions), new PropertyMetadata(false, AlwaysScrollToEndChanged));
         private static bool _autoScroll;
 

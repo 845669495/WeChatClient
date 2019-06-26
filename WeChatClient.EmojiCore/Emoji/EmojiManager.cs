@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using WeChatClient.Core.Dependency;
@@ -104,7 +105,80 @@ namespace WeChatClient.EmojiCore.Emoji
                 }
                 rtn += Environment.NewLine;
             }
-            return rtn.TrimEnd();
+            return rtn?.TrimEnd();
+        }
+
+        /// <summary>
+        /// 将字符串转换为FlowDocument
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public FlowDocument StringToFlowDocument(string str)
+        {
+            FlowDocument document = new FlowDocument();
+            if (str == null)
+                return document;
+            Paragraph paragraph = new Paragraph();
+            string[] ss = str.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+            for (int i = 0; i < ss.Length; i++)
+            {
+                StringToFlowDocument(paragraph, ss[i]);
+                if (i < ss.Length - 1)
+                    paragraph.Inlines.Add(new LineBreak());
+            }
+            document.Blocks.Add(paragraph);
+            return document;
+        }
+
+        private void StringToFlowDocument(Paragraph paragraph, string str)
+        {
+            if (str.Contains("<span class=\"emoji emoji"))
+            {
+                foreach (var emoji in EmojiModelList)
+                {
+                    if (TryAddEmoji(emoji, paragraph, str))
+                        return;
+                }
+            }
+            if (str.Contains("["))
+            {
+                foreach (var emoji in QQEmojiModelList)
+                {
+                    if (TryAddEmoji(emoji, paragraph, str))
+                        return;
+                }
+            }
+            paragraph.Inlines.Add(new Run(str));
+        }
+
+        private bool TryAddEmoji(EmojiModel emoji, Paragraph paragraph, string str)
+        {
+            if (str.Contains(emoji.ToString()))
+            {
+                string left = str.Substring(0, str.IndexOf(emoji.ToString()));
+                if (left.Length != 0)
+                {
+                    if (left.Contains("[") || left.Contains("<span class=\"emoji emoji"))
+                        StringToFlowDocument(paragraph, left);
+                    else
+                        paragraph.Inlines.Add(new Run(left));
+                }
+                ContentControl image = new ContentControl
+                {
+                    Content = emoji,
+                    Width = 20,
+                    Height = 20,
+                    Style = (Style)Application.Current.FindResource("FaceImgStyle")
+                };
+                var container = new InlineUIContainer(image) { BaselineAlignment = BaselineAlignment.Bottom };
+                paragraph.Inlines.Add(container);
+
+                str = str.Remove(0, (left + emoji.ToString()).Length);
+                StringToFlowDocument(paragraph, str);
+                return true;
+            }
+            else
+                return false;
         }
 
         /// <summary>
