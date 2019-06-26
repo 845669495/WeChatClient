@@ -109,34 +109,31 @@ namespace WeChatClient.EmojiCore.Emoji
         }
 
         /// <summary>
-        /// 将字符串转换为FlowDocument
+        /// 将字符串转换为富文本设置到TextBlock中
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        public FlowDocument StringToFlowDocument(string str)
+        public void SetToTextBlock(string str, TextBlock document)
         {
-            FlowDocument document = new FlowDocument();
+            document.Inlines.Clear();
             if (str == null)
-                return document;
-            Paragraph paragraph = new Paragraph();
+                return;
             string[] ss = str.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
             for (int i = 0; i < ss.Length; i++)
             {
-                StringToFlowDocument(paragraph, ss[i]);
+                SetToTextBlock(document, ss[i]);
                 if (i < ss.Length - 1)
-                    paragraph.Inlines.Add(new LineBreak());
+                    document.Inlines.Add(new LineBreak());
             }
-            document.Blocks.Add(paragraph);
-            return document;
         }
 
-        private void StringToFlowDocument(Paragraph paragraph, string str)
+        private void SetToTextBlock(TextBlock document, string str)
         {
             if (str.Contains("<span class=\"emoji emoji"))
             {
                 foreach (var emoji in EmojiModelList)
                 {
-                    if (TryAddEmoji(emoji, paragraph, str))
+                    if (TryAddEmoji(emoji, document, str))
                         return;
                 }
             }
@@ -144,14 +141,14 @@ namespace WeChatClient.EmojiCore.Emoji
             {
                 foreach (var emoji in QQEmojiModelList)
                 {
-                    if (TryAddEmoji(emoji, paragraph, str))
+                    if (TryAddEmoji(emoji, document, str))
                         return;
                 }
             }
-            paragraph.Inlines.Add(new Run(str));
+            document.Inlines.Add(new Run(str));
         }
 
-        private bool TryAddEmoji(EmojiModel emoji, Paragraph paragraph, string str)
+        private bool TryAddEmoji(EmojiModel emoji, TextBlock document, string str)
         {
             if (str.Contains(emoji.ToString()))
             {
@@ -159,9 +156,9 @@ namespace WeChatClient.EmojiCore.Emoji
                 if (left.Length != 0)
                 {
                     if (left.Contains("[") || left.Contains("<span class=\"emoji emoji"))
-                        StringToFlowDocument(paragraph, left);
+                        SetToTextBlock(document, left);
                     else
-                        paragraph.Inlines.Add(new Run(left));
+                        document.Inlines.Add(new Run(left));
                 }
                 ContentControl image = new ContentControl
                 {
@@ -171,10 +168,10 @@ namespace WeChatClient.EmojiCore.Emoji
                     Style = (Style)Application.Current.FindResource("FaceImgStyle")
                 };
                 var container = new InlineUIContainer(image) { BaselineAlignment = BaselineAlignment.Bottom };
-                paragraph.Inlines.Add(container);
+                document.Inlines.Add(container);
 
                 str = str.Remove(0, (left + emoji.ToString()).Length);
-                StringToFlowDocument(paragraph, str);
+                SetToTextBlock(document, str);
                 return true;
             }
             else

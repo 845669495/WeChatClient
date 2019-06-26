@@ -42,9 +42,9 @@
                                     </Grid>
                                     <Border CornerRadius="3" MaxWidth="500" HorizontalAlignment="Left" Background="#fff">
                                         <Grid>
-                                            <!--<TextBlock Text="{Binding Content}" Margin="13,9" FontSize="14" TextWrapping="Wrap" VerticalAlignment="Center"></TextBlock>-->
-                                            <RichTextBox Margin="13,9" extensions:RichTextBoxExtensions.Document="{Binding Document,Mode=OneTime}" FontSize="14" BorderThickness="0"
-                                                 Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Center" IsReadOnly="True"></RichTextBox>
+                                            <Border Padding="13,9">
+                                                <ContentControl Content="{Binding TextBlock}"></ContentControl>
+                                            </Border>
                                             <Canvas>
                                                 <Path Fill="#fff">
                                                     <Path.Data>
@@ -78,10 +78,8 @@
                                     <ColumnDefinition Width="10"></ColumnDefinition>
                                     <ColumnDefinition Width="40"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Border CornerRadius="3" MaxWidth="500" HorizontalAlignment="Right" Background="#b2e281">
-                                    <!--<TextBlock Text="{Binding Content}" Margin="13,9" FontSize="14" TextWrapping="Wrap" VerticalAlignment="Center"></TextBlock>-->
-                                    <RichTextBox Margin="13,9" extensions:RichTextBoxExtensions.Document="{Binding Document,Mode=OneTime}" FontSize="14" BorderThickness="0"
-                                                 Background="Transparent" BorderBrush="Transparent" VerticalAlignment="Center" IsReadOnly="True"></RichTextBox>
+                                <Border CornerRadius="3" MaxWidth="500" HorizontalAlignment="Right" Background="#b2e281" Padding="13,9">
+                                    <ContentControl Content="{Binding TextBlock}"></ContentControl>
                                 </Border>
                                 <Canvas Grid.Column="1">
                                     <Path Fill="#b2e281">

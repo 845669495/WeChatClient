@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 using WeChatClient.Core.Interfaces;
@@ -34,10 +36,29 @@ namespace WeChatClient.Core.Models
         /// 消息内容
         /// </summary>
         public string Content { get; set; }
+
+        private TextBlock _textBlock;
         /// <summary>
         /// 富文本内容
         /// </summary>
-        public FlowDocument Document { get; set; }
+        public TextBlock TextBlock
+        {
+            get
+            {
+                if(_textBlock == null)
+                {
+                    _textBlock = new TextBlock
+                    {
+                        FontSize = 14,
+                        TextWrapping = TextWrapping.Wrap,
+                        VerticalAlignment = VerticalAlignment.Center
+                    };
+                }
+                return _textBlock;
+            }
+            set { _textBlock = value; }
+        }
+
         /// <summary>
         /// 消息类型
         /// </summary>
