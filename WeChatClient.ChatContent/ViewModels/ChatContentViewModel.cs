@@ -9,11 +9,13 @@ using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
 using WeChatClient.Core.Dependency;
 using WeChatClient.Core.Events;
 using WeChatClient.Core.Interfaces;
 using WeChatClient.Core.Models;
+using WeChatClient.EmojiCore.Emoji;
 
 namespace WeChatClient.ChatContent.ViewModels
 {
@@ -33,20 +35,23 @@ namespace WeChatClient.ChatContent.ViewModels
         /// 文本框
         /// </summary>
         [Reactive]
-        public string Message { get; set; }
+        public FlowDocument Message { get; set; }
         /// <summary>
         /// 发送文本消息命令
         /// </summary>
         public ICommand SendTextMsgCommand { get; private set; }
 
-        public ChatContentViewModel(IEventAggregator ea)
+        public ChatContentViewModel(IEventAggregator ea, EmojiManager emojiManager)
         {
+            Message = new FlowDocument();
+
             SendTextMsgCommand = ReactiveCommand.Create(() =>
             {
-                if (string.IsNullOrWhiteSpace(Message))
+                string msg = emojiManager.FlowDocumentToString(Message);
+                if (string.IsNullOrWhiteSpace(msg))
                     return;
-                ea.GetEvent<SendTextMsgEvent>().Publish(Message);
-                Message = null;
+                ea.GetEvent<SendTextMsgEvent>().Publish(msg);
+                Message.Blocks.Clear();
             });
 
             var observable = this.WhenAnyValue(p => p.SelectedChat);

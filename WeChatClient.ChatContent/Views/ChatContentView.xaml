@@ -171,11 +171,11 @@
                             <ContentControl Style="{StaticResource WxResImgStyle}" Content="120,432,30,30" Width="30" Height="30"></ContentControl>
                         </StackPanel>
                         <ScrollViewer Height="84" Focusable="False">
-                            <TextBox Text="{Binding Message,UpdateSourceTrigger=PropertyChanged}" Background="Transparent" BorderBrush="Transparent" FontSize="14" BorderThickness="0" TextWrapping="Wrap" AcceptsReturn="True">
-                                <TextBox.InputBindings>
-                                    <KeyBinding Key="Enter" Command="{Binding SendTextMsgCommand}"></KeyBinding> <!--Enter绑定命令-->                                   
-                                </TextBox.InputBindings>
-                            </TextBox>
+                            <RichTextBox x:Name="rtb" extensions:RichTextBoxExtensions.Document="{Binding Message}" Background="Transparent" BorderBrush="Transparent" FontSize="14" BorderThickness="0" AcceptsReturn="True">
+                                <RichTextBox.InputBindings>
+                                    <KeyBinding Key="Enter" Command="{Binding SendTextMsgCommand}"></KeyBinding>
+                                </RichTextBox.InputBindings>
+                            </RichTextBox>
                         </ScrollViewer>
                         <Rectangle Height="5"></Rectangle>
                         <StackPanel Height="30" Orientation="Horizontal" HorizontalAlignment="Right">

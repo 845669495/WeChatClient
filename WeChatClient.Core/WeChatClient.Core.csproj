@@ -83,6 +83,7 @@
     <Compile Include="Events\LoginSuccessfulEvent.cs" />
     <Compile Include="Events\SendTextMsgEvent.cs" />
     <Compile Include="Events\ChatWithContactEvent.cs" />
+    <Compile Include="Extensions\RichTextBoxExtensions.cs" />
     <Compile Include="Extensions\ScrollViewerExtensions.cs" />
     <Compile Include="Extensions\TextBoxExtensions.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />

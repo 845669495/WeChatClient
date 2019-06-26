@@ -1,0 +1,454 @@
+[
+  {
+    "Code": "微笑",
+    "Position": "0,0"
+  },
+  {
+    "Code": "撇嘴",
+    "Position": "24,0"
+  },
+  {
+    "Code": "色",
+    "Position": "48,0"
+  },
+  {
+    "Code": "发呆",
+    "Position": "72,0"
+  },
+  {
+    "Code": "得意",
+    "Position": "96,0"
+  },
+  {
+    "Code": "流泪",
+    "Position": "120,0"
+  },
+  {
+    "Code": "害羞",
+    "Position": "144,0"
+  },
+  {
+    "Code": "闭嘴",
+    "Position": "168,0"
+  },
+  {
+    "Code": "睡",
+    "Position": "192,0"
+  },
+  {
+    "Code": "大哭",
+    "Position": "216,0"
+  },
+  {
+    "Code": "尴尬",
+    "Position": "240,0"
+  },
+  {
+    "Code": "发怒",
+    "Position": "264,0"
+  },
+  {
+    "Code": "调皮",
+    "Position": "288,0"
+  },
+  {
+    "Code": "呲牙",
+    "Position": "312,0"
+  },
+  {
+    "Code": "惊讶",
+    "Position": "336,0"
+  },
+  {
+    "Code": "难过",
+    "Position": "0,24"
+  },
+  {
+    "Code": "酷",
+    "Position": "24,24"
+  },
+  {
+    "Code": "冷汗",
+    "Position": "48,24"
+  },
+  {
+    "Code": "抓狂",
+    "Position": "72,24"
+  },
+  {
+    "Code": "吐",
+    "Position": "96,24"
+  },
+  {
+    "Code": "偷笑",
+    "Position": "120,24"
+  },
+  {
+    "Code": "愉快",
+    "Position": "144,24"
+  },
+  {
+    "Code": "白眼",
+    "Position": "168,24"
+  },
+  {
+    "Code": "傲慢",
+    "Position": "192,24"
+  },
+  {
+    "Code": "饥饿",
+    "Position": "216,24"
+  },
+  {
+    "Code": "困",
+    "Position": "240,24"
+  },
+  {
+    "Code": "惊恐",
+    "Position": "264,24"
+  },
+  {
+    "Code": "流汗",
+    "Position": "288,24"
+  },
+  {
+    "Code": "憨笑",
+    "Position": "312,24"
+  },
+  {
+    "Code": "悠闲",
+    "Position": "336,24"
+  },
+  {
+    "Code": "奋斗",
+    "Position": "0,48"
+  },
+  {
+    "Code": "咒骂",
+    "Position": "24,48"
+  },
+  {
+    "Code": "疑问",
+    "Position": "48,48"
+  },
+  {
+    "Code": "嘘",
+    "Position": "72,48"
+  },
+  {
+    "Code": "晕",
+    "Position": "96,48"
+  },
+  {
+    "Code": "疯了",
+    "Position": "120,48"
+  },
+  {
+    "Code": "衰",
+    "Position": "144,48"
+  },
+  {
+    "Code": "骷髅",
+    "Position": "168,48"
+  },
+  {
+    "Code": "敲打",
+    "Position": "192,48"
+  },
+  {
+    "Code": "再见",
+    "Position": "216,48"
+  },
+  {
+    "Code": "擦汗",
+    "Position": "240,48"
+  },
+  {
+    "Code": "抠鼻",
+    "Position": "264,48"
+  },
+  {
+    "Code": "鼓掌",
+    "Position": "288,48"
+  },
+  {
+    "Code": "糗大了",
+    "Position": "312,48"
+  },
+  {
+    "Code": "坏笑",
+    "Position": "336,48"
+  },
+  {
+    "Code": "左哼哼",
+    "Position": "0,72"
+  },
+  {
+    "Code": "右哼哼",
+    "Position": "24,72"
+  },
+  {
+    "Code": "哈欠",
+    "Position": "48,72"
+  },
+  {
+    "Code": "鄙视",
+    "Position": "72,72"
+  },
+  {
+    "Code": "委屈",
+    "Position": "96,72"
+  },
+  {
+    "Code": "快哭了",
+    "Position": "120,72"
+  },
+  {
+    "Code": "阴险",
+    "Position": "144,72"
+  },
+  {
+    "Code": "亲亲",
+    "Position": "168,72"
+  },
+  {
+    "Code": "吓",
+    "Position": "192,72"
+  },
+  {
+    "Code": "可怜",
+    "Position": "216,72"
+  },
+  {
+    "Code": "菜刀",
+    "Position": "240,72"
+  },
+  {
+    "Code": "西瓜",
+    "Position": "264,72"
+  },
+  {
+    "Code": "啤酒",
+    "Position": "288,72"
+  },
+  {
+    "Code": "篮球",
+    "Position": "312,72"
+  },
+  {
+    "Code": "乒乓",
+    "Position": "336,72"
+  },
+  {
+    "Code": "咖啡",
+    "Position": "0,96"
+  },
+  {
+    "Code": "饭",
+    "Position": "24,96"
+  },
+  {
+    "Code": "猪头",
+    "Position": "48,96"
+  },
+  {
+    "Code": "玫瑰",
+    "Position": "72,96"
+  },
+  {
+    "Code": "凋谢",
+    "Position": "96,96"
+  },
+  {
+    "Code": "嘴唇",
+    "Position": "120,96"
+  },
+  {
+    "Code": "爱心",
+    "Position": "144,96"
+  },
+  {
+    "Code": "心碎",
+    "Position": "168,96"
+  },
+  {
+    "Code": "蛋糕",
+    "Position": "192,96"
+  },
+  {
+    "Code": "闪电",
+    "Position": "216,96"
+  },
+  {
+    "Code": "炸弹",
+    "Position": "240,96"
+  },
+  {
+    "Code": "刀",
+    "Position": "264,96"
+  },
+  {
+    "Code": "足球",
+    "Position": "288,96"
+  },
+  {
+    "Code": "瓢虫",
+    "Position": "312,96"
+  },
+  {
+    "Code": "便便",
+    "Position": "336,96"
+  },
+  {
+    "Code": "月亮",
+    "Position": "0,120"
+  },
+  {
+    "Code": "太阳",
+    "Position": "24,120"
+  },
+  {
+    "Code": "礼物",
+    "Position": "48,120"
+  },
+  {
+    "Code": "拥抱",
+    "Position": "72,120"
+  },
+  {
+    "Code": "强",
+    "Position": "96,120"
+  },
+  {
+    "Code": "弱",
+    "Position": "120,120"
+  },
+  {
+    "Code": "握手",
+    "Position": "144,120"
+  },
+  {
+    "Code": "胜利",
+    "Position": "168,120"
+  },
+  {
+    "Code": "抱拳",
+    "Position": "192,120"
+  },
+  {
+    "Code": "勾引",
+    "Position": "216,120"
+  },
+  {
+    "Code": "拳头",
+    "Position": "240,120"
+  },
+  {
+    "Code": "差劲",
+    "Position": "264,120"
+  },
+  {
+    "Code": "爱你",
+    "Position": "288,120"
+  },
+  {
+    "Code": "NO",
+    "Position": "312,120"
+  },
+  {
+    "Code": "OK",
+    "Position": "336,120"
+  },
+  {
+    "Code": "爱情",
+    "Position": "0,144"
+  },
+  {
+    "Code": "飞吻",
+    "Position": "24,144"
+  },
+  {
+    "Code": "跳跳",
+    "Position": "48,144"
+  },
+  {
+    "Code": "发抖",
+    "Position": "72,144"
+  },
+  {
+    "Code": "怄火",
+    "Position": "96,144"
+  },
+  {
+    "Code": "转圈",
+    "Position": "120,144"
+  },
+  {
+    "Code": "磕头",
+    "Position": "144,144"
+  },
+  {
+    "Code": "回头",
+    "Position": "168,144"
+  },
+  {
+    "Code": "跳绳",
+    "Position": "192,144"
+  },
+  {
+    "Code": "投降",
+    "Position": "216,144"
+  },
+  {
+    "Code": "激动",
+    "Position": "240,144"
+  },
+  {
+    "Code": "乱舞",
+    "Position": "264,144"
+  },
+  {
+    "Code": "献吻",
+    "Position": "288,144"
+  },
+  {
+    "Code": "左太极",
+    "Position": "312,144"
+  },
+  {
+    "Code": "右太极",
+    "Position": "336,144"
+  },
+  {
+    "Code": "嘿哈",
+    "Position": "0,168"
+  },
+  {
+    "Code": "捂脸",
+    "Position": "24,168"
+  },
+  {
+    "Code": "奸笑",
+    "Position": "48,168"
+  },
+  {
+    "Code": "机智",
+    "Position": "72,168"
+  },
+  {
+    "Code": "皱眉",
+    "Position": "96,168"
+  },
+  {
+    "Code": "耶",
+    "Position": "120,168"
+  },
+  {
+    "Code": "鸡",
+    "Position": "144,168"
+  },
+  {
+    "Code": "红包",
+    "Position": "168,168"
+  }
+]

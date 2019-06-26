@@ -15,6 +15,9 @@ namespace WeChatClient.EmojiCore.Converters
         private static readonly BitmapFrame emoji_face_res = BitmapFrame.Create(new Uri("pack://application:,,,/WeChatClient.EmojiCore;component/Resources/6AfH8-r.png", UriKind.Absolute));
         private static readonly BitmapFrame qq_face_res = BitmapFrame.Create(new Uri("pack://application:,,,/WeChatClient.EmojiCore;component/Resources/15BPafa.png", UriKind.Absolute));
 
+        private static readonly BitmapFrame emoji_res = BitmapFrame.Create(new Uri("pack://application:,,,/WeChatClient.EmojiCore;component/Resources/1BJVkIX.png", UriKind.Absolute));
+        private static readonly BitmapFrame qq_emoji_res = BitmapFrame.Create(new Uri("pack://application:,,,/WeChatClient.EmojiCore;component/Resources/3gXSfR9.png", UriKind.Absolute));
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             EmojiModel model = (EmojiModel)value;
@@ -22,7 +25,6 @@ namespace WeChatClient.EmojiCore.Converters
             BitmapFrame res = null;
             if (model.Size == EmojiSize.Medium)
             {
-
                 if (model.Type == EmojiType.Emoji)
                 {
                     res = emoji_face_res;
@@ -30,6 +32,17 @@ namespace WeChatClient.EmojiCore.Converters
                 else
                 {
                     res = qq_face_res;
+                }
+            }
+            else
+            {
+                if (model.Type == EmojiType.Emoji)
+                {
+                    res = emoji_res;
+                }
+                else
+                {
+                    res = qq_emoji_res;
                 }
             }
 

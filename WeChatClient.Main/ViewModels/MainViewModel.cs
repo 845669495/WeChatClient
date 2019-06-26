@@ -22,6 +22,7 @@ using WeChatClient.Core.Helpers;
 using WeChatClient.Core.Http;
 using WeChatClient.Core.Interfaces;
 using WeChatClient.Core.Models;
+using WeChatClient.EmojiCore.Emoji;
 
 namespace WeChatClient.Main.ViewModels
 {
@@ -40,6 +41,8 @@ namespace WeChatClient.Main.ViewModels
         protected IChatContentManager ChatContentManager { get; set; }
         [Dependency]
         protected IImageDownloadService ImageDownloadService { get; set; }
+        [Dependency]
+        protected EmojiManager EmojiManager { get; set; }
 
         [Reactive]
         public WeChatUser WeChatUser { get; private set; }
@@ -268,7 +271,7 @@ namespace WeChatClient.Main.ViewModels
 
             ChatListManager.SyncMessage(weChatMessage);
 
-            wcs.SendMsg(msg, WeChatUser.UserName, selectedChat.UserName, 1);
+            wcs.SendMsg(EmojiManager.ReplaceEmojiCode(msg), WeChatUser.UserName, selectedChat.UserName, 1);
         }
 
         private void ChatWithContact(WeChatUser contact)

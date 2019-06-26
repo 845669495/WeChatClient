@@ -125,6 +125,10 @@
       <Project>{ad3bf41c-c10b-4ccd-8907-59b7bba4d492}</Project>
       <Name>WeChatClient.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WeChatClient.EmojiCore\WeChatClient.EmojiCore.csproj">
+      <Project>{7D2E1E77-CB84-4501-A161-5AAAC97701F5}</Project>
+      <Name>WeChatClient.EmojiCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.4.2.1\build\Fody.targets" Condition="Exists('..\packages\Fody.4.2.1\build\Fody.targets')" />
