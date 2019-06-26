@@ -10,7 +10,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate>
-                            <Image Cursor="Hand" Source="{Binding Content,RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource FaceImg}}"/>
+                            <Image Source="{Binding Content,RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource FaceImg}}"/>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
