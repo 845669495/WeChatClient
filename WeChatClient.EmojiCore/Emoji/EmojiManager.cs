@@ -113,11 +113,11 @@ namespace WeChatClient.EmojiCore.Emoji
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        public void SetToTextBlock(string str, TextBlock document)
+        public TextBlock StringToTextBlock(string str, TextTrimming trimming = TextTrimming.None)
         {
-            document.Inlines.Clear();
+            TextBlock document = new TextBlock() { TextWrapping = TextWrapping.Wrap, TextTrimming = trimming };
             if (str == null)
-                return;
+                return document;
             string[] ss = str.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
             for (int i = 0; i < ss.Length; i++)
             {
@@ -125,6 +125,7 @@ namespace WeChatClient.EmojiCore.Emoji
                 if (i < ss.Length - 1)
                     document.Inlines.Add(new LineBreak());
             }
+            return document;
         }
 
         private void SetToTextBlock(TextBlock document, string str)

@@ -166,7 +166,7 @@ namespace WeChatClient.ChatList.ViewModels
                             msg.ShowShortTime = true;
                         }
 
-                        EmojiManager.SetToTextBlock(msg.Content, msg.TextBlock);
+                        msg.TbContent = EmojiManager.StringToTextBlock(msg.Content);
                     }
                     chat.MessageList.Add(msg);
                 }
