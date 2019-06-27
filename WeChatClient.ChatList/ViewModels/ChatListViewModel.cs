@@ -169,6 +169,8 @@ namespace WeChatClient.ChatList.ViewModels
                         msg.TbContent = EmojiManager.StringToTextBlock(msg.Content);
                     }
                     chat.MessageList.Add(msg);
+                    if (!string.IsNullOrWhiteSpace(chat.LastMessage))
+                        chat.TbLastMessage = EmojiManager.StringToTextBlock(chat.LastMessage, System.Windows.TextTrimming.CharacterEllipsis);
                 }
             }
             SelectedItem = selected;

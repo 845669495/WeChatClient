@@ -31,9 +31,9 @@
                                             <RowDefinition></RowDefinition>
                                         </Grid.RowDefinitions>
                                         <TextBlock Grid.Row="0" Text="{Binding ShowName}" FontSize="13" Foreground="#fff" Margin="10,0" MaxWidth="150" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"></TextBlock>
-                                        <TextBlock Grid.Row="1" Text="{Binding LastMessage}" FontSize="13" Margin="10,0" MaxWidth="150" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"
+                                        <ContentControl Grid.Row="1" Content="{Binding TbLastMessage}" FontSize="13" Margin="10,0" MaxWidth="150" VerticalAlignment="Center" ClipToBounds="True"
                                                    Foreground="{Binding IsSelected ,RelativeSource={RelativeSource AncestorType=ListBoxItem,Mode=FindAncestor},
-                                                                Converter={StaticResource BoolToValue},ConverterParameter=#fff,FallbackValue=#989898}"></TextBlock>
+                                                                Converter={StaticResource BoolToValue},ConverterParameter=#fff,FallbackValue=#989898}"></ContentControl>
 
                                         <Canvas Visibility="{Binding UnReadCount,Converter={StaticResource BoolToVisibility}}">
                                             <Grid Canvas.Left="-16" Canvas.Top="-6" Width="22" Height="16" Visibility="{Binding ChatNotifyClose,Converter={StaticResource BoolToVisibilityInverse}}">

@@ -36,7 +36,7 @@ namespace WeChatClient.Core.Models
         /// </summary>
         public string Content { get; set; }
         /// <summary>
-        /// 富文本内容
+        /// 消息内容（富文本）
         /// </summary>
         public TextBlock TbContent { get; set; }
 

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Media;
 using WeChatClient.Core.Interfaces;
 
@@ -126,16 +127,21 @@ namespace WeChatClient.Core.Models
             }
         }
 
-        private string _lastMessage;
         /// <summary>
         /// 最后的消息
         /// </summary>
-        public string LastMessage
+        public string LastMessage { get; set; }
+
+        private TextBlock _tbLastMessage;
+        /// <summary>
+        /// 最后的消息（富文本）
+        /// </summary>
+        public TextBlock TbLastMessage
         {
-            get { return _lastMessage; }
+            get { return _tbLastMessage; }
             set
             {
-                _lastMessage = value;
+                _tbLastMessage = value;
                 OnPropertyChanged();
             }
         }
