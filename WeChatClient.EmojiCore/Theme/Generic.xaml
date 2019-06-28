@@ -5,7 +5,9 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary>
             <converter:FaceImgConverter x:Key="FaceImg"></converter:FaceImgConverter>
-            
+            <converter:StringToTextBlockConverter x:Key="StringToTextBlock"></converter:StringToTextBlockConverter>
+            <converter:StringToTextBlockConverter TextTrimming="CharacterEllipsis" x:Key="StringToTextBlockEllipsis"></converter:StringToTextBlockConverter>
+
             <Style TargetType="ContentControl" x:Key="FaceImgStyle">
                 <Setter Property="Template">
                     <Setter.Value>

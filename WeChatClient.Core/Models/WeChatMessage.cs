@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using WeChatClient.Core.Interfaces;
 
@@ -35,11 +33,6 @@ namespace WeChatClient.Core.Models
         /// 消息内容
         /// </summary>
         public string Content { get; set; }
-        /// <summary>
-        /// 消息内容（富文本）
-        /// </summary>
-        public TextBlock TbContent { get; set; }
-
         /// <summary>
         /// 消息类型
         /// </summary>

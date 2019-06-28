@@ -14,6 +14,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/WeChatClient.Core;component/Theme/Generic.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="pack://application:,,,/WeChatClient.EmojiCore;component/Theme/Generic.xaml"></ResourceDictionary>
 
                 <ResourceDictionary>
                     <!--收到消息数据模板-->
@@ -43,7 +44,7 @@
                                     <Border CornerRadius="3" MaxWidth="500" HorizontalAlignment="Left" Background="#fff">
                                         <Grid>
                                             <Border Padding="13,9">
-                                                <ContentControl FontSize="14" VerticalAlignment="Center" Content="{Binding TbContent}"></ContentControl>
+                                                <ContentControl FontSize="14" VerticalAlignment="Center" Content="{Binding Content,Converter={StaticResource StringToTextBlock}}"></ContentControl>
                                             </Border>
                                             <Canvas>
                                                 <Path Fill="#fff">
@@ -79,7 +80,7 @@
                                     <ColumnDefinition Width="40"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <Border CornerRadius="3" MaxWidth="500" HorizontalAlignment="Right" Background="#b2e281" Padding="13,9">
-                                    <ContentControl FontSize="14" VerticalAlignment="Center" Content="{Binding TbContent}"></ContentControl>
+                                    <ContentControl FontSize="14" VerticalAlignment="Center" Content="{Binding Content,Converter={StaticResource StringToTextBlock}}"></ContentControl>
                                 </Border>
                                 <Canvas Grid.Column="1">
                                     <Path Fill="#b2e281">

@@ -15,6 +15,7 @@ namespace WeChatClient.EmojiCore.Emoji
     [ExposeServices(ServiceLifetime.Singleton)]
     public class EmojiManager
     {
+        public static EmojiManager Instance { get; private set; }
         private Dictionary<string, string> EmojiMap { get; }
         private Dictionary<string, int> QQEmojiMap { get; }
         private List<EmojiModel> EmojiModelList { get; }
@@ -22,6 +23,8 @@ namespace WeChatClient.EmojiCore.Emoji
         private Dictionary<string, string> EmojiCodeMap { get; }
         public EmojiManager()
         {
+            Instance = this;
+
             string emojiMapJson = File.ReadAllText("Emoji/emoji_map.json");
             EmojiMap = JsonConvert.DeserializeObject<Dictionary<string,string>>(emojiMapJson);
 

@@ -11,6 +11,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/WeChatClient.Core;component/Theme/Generic.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="pack://application:,,,/WeChatClient.EmojiCore;component/Theme/Generic.xaml"></ResourceDictionary>
                 <ResourceDictionary>
                     <DataTemplate DataType="{x:Type model:WeChatUser}">
                         <StackPanel Height="64" Cursor="Hand" Background="Transparent" Tag="{Binding DataContext,RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor}}">
@@ -31,7 +32,8 @@
                                             <RowDefinition></RowDefinition>
                                         </Grid.RowDefinitions>
                                         <TextBlock Grid.Row="0" Text="{Binding ShowName}" FontSize="13" Foreground="#fff" Margin="10,0" MaxWidth="150" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"></TextBlock>
-                                        <ContentControl Grid.Row="1" Content="{Binding TbLastMessage}" FontSize="13" Margin="10,0" MaxWidth="150" VerticalAlignment="Center" ClipToBounds="True"
+                                        <ContentControl Grid.Row="1" Content="{Binding LastMessage,Converter={StaticResource StringToTextBlockEllipsis}}"
+                                                        FontSize="13" Margin="10,0" MaxWidth="150" VerticalAlignment="Center" ClipToBounds="True"
                                                    Foreground="{Binding IsSelected ,RelativeSource={RelativeSource AncestorType=ListBoxItem,Mode=FindAncestor},
                                                                 Converter={StaticResource BoolToValue},ConverterParameter=#fff,FallbackValue=#989898}"></ContentControl>
 
