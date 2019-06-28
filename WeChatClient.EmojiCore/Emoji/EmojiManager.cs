@@ -12,19 +12,15 @@ using WeChatClient.Core.Dependency;
 
 namespace WeChatClient.EmojiCore.Emoji
 {
-    [ExposeServices(ServiceLifetime.Singleton)]
     public class EmojiManager
     {
-        public static EmojiManager Instance { get; private set; }
-        private Dictionary<string, string> EmojiMap { get; }
-        private Dictionary<string, int> QQEmojiMap { get; }
-        private List<EmojiModel> EmojiModelList { get; }
-        private List<EmojiModel> QQEmojiModelList { get; }
-        private Dictionary<string, string> EmojiCodeMap { get; }
-        public EmojiManager()
+        private static Dictionary<string, string> EmojiMap { get; }
+        private static Dictionary<string, int> QQEmojiMap { get; }
+        private static List<EmojiModel> EmojiModelList { get; }
+        private static List<EmojiModel> QQEmojiModelList { get; }
+        private static Dictionary<string, string> EmojiCodeMap { get; }
+        static EmojiManager()
         {
-            Instance = this;
-
             string emojiMapJson = File.ReadAllText("Emoji/emoji_map.json");
             EmojiMap = JsonConvert.DeserializeObject<Dictionary<string,string>>(emojiMapJson);
 

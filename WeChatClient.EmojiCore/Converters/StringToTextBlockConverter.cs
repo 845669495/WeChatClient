@@ -13,9 +13,10 @@ namespace WeChatClient.EmojiCore.Converters
     public class StringToTextBlockConverter : IValueConverter
     {
         public TextTrimming TextTrimming { get; set; }
+        private static readonly EmojiManager _emojiManager = new EmojiManager();
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return EmojiManager.Instance.StringToTextBlock(value?.ToString(), TextTrimming);
+            return _emojiManager.StringToTextBlock(value?.ToString(), TextTrimming);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
