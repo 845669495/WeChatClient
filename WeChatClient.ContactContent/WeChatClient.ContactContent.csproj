@@ -116,6 +116,10 @@
       <Project>{AD3BF41C-C10B-4CCD-8907-59B7BBA4D492}</Project>
       <Name>WeChatClient.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WeChatClient.EmojiCore\WeChatClient.EmojiCore.csproj">
+      <Project>{7d2e1e77-cb84-4501-a161-5aaac97701f5}</Project>
+      <Name>WeChatClient.EmojiCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\ContactContentView.xaml">

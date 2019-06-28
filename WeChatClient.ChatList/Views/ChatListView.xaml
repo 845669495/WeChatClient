@@ -31,7 +31,8 @@
                                             <RowDefinition></RowDefinition>
                                             <RowDefinition></RowDefinition>
                                         </Grid.RowDefinitions>
-                                        <TextBlock Grid.Row="0" Text="{Binding ShowName}" FontSize="13" Foreground="#fff" Margin="10,0" MaxWidth="150" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"></TextBlock>
+                                        <ContentControl Grid.Row="0" Content="{Binding ShowName,Converter={StaticResource StringToTextBlockEllipsis}}" ClipToBounds="True"
+                                                        FontSize="13" Foreground="#fff" Margin="10,0" MaxWidth="150" VerticalAlignment="Center"></ContentControl>
                                         <ContentControl Grid.Row="1" Content="{Binding LastMessage,Converter={StaticResource StringToTextBlockEllipsis}}"
                                                         FontSize="13" Margin="10,0" MaxWidth="150" VerticalAlignment="Center" ClipToBounds="True"
                                                    Foreground="{Binding IsSelected ,RelativeSource={RelativeSource AncestorType=ListBoxItem,Mode=FindAncestor},

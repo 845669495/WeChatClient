@@ -45,7 +45,7 @@ namespace WeChatClient.Core.Models
         /// 省份
         /// </summary>
         public string Province { get; set; }
-        public string ProvinceAndCity => $"{Province} {City}";
+        public string ProvinceAndCity => $"{Province} {City}".Trim();
         /// <summary>
         /// 昵称全拼
         /// </summary>

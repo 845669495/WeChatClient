@@ -39,7 +39,8 @@
                                 </Image>
                                 <DockPanel Grid.Column="1" Margin="10,0">
                                     <Grid Height="22" DockPanel.Dock="Top" Visibility="{Binding NeedShowName,Converter={StaticResource BoolToValue},ConverterParameter=Visible,FallbackValue=Collapsed}">
-                                        <TextBlock Text="{Binding FromUserShowName}" FontSize="12" Foreground="#4f4f4f" MaxWidth="350" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" HorizontalAlignment="Left"></TextBlock>
+                                        <ContentControl Content="{Binding FromUserShowName,Converter={StaticResource StringToTextBlockEllipsis}}" ClipToBounds="True" Height="20"
+                                                        FontSize="12" Foreground="#4f4f4f" MaxWidth="350" VerticalAlignment="Center" HorizontalAlignment="Left"></ContentControl>
                                     </Grid>
                                     <Border CornerRadius="3" MaxWidth="500" HorizontalAlignment="Left" Background="#fff">
                                         <Grid>
@@ -124,7 +125,8 @@
                 </ToggleButton.Template>
             </ToggleButton>-->
             <Grid Height="25" HorizontalAlignment="Center">
-                <TextBlock Text="{Binding SelectedChat.ContentShowName}" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                <ContentControl Content="{Binding SelectedChat.ContentShowName,Converter={StaticResource StringToTextBlockEllipsis}}"
+                                FontSize="14" VerticalAlignment="Center" ClipToBounds="True"></ContentControl>
             </Grid>
         </Grid>
         <Line Grid.Row="1" StrokeThickness="1" Stroke="#c3c3c3" X1="0" Y1="0" X2="{Binding ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=FrameworkElement}}" Y2="0"></Line>

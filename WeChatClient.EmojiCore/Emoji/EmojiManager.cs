@@ -21,6 +21,8 @@ namespace WeChatClient.EmojiCore.Emoji
         private static Dictionary<string, string> EmojiCodeMap { get; }
         static EmojiManager()
         {
+            if (!Directory.Exists("Emoji"))
+                return;
             string emojiMapJson = File.ReadAllText("Emoji/emoji_map.json");
             EmojiMap = JsonConvert.DeserializeObject<Dictionary<string,string>>(emojiMapJson);
 

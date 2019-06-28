@@ -10,6 +10,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/WeChatClient.Core;component/Theme/Generic.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="pack://application:,,,/WeChatClient.EmojiCore;component/Theme/Generic.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -37,7 +38,8 @@
                         </Image>
                         <Rectangle Height="22"></Rectangle>
                         <StackPanel Height="48" Orientation="Horizontal" HorizontalAlignment="Center">
-                            <TextBlock Text="{Binding ShowName}" FontSize="24" Margin="0,0,5,10" VerticalAlignment="Center"></TextBlock>
+                            <ContentControl Content="{Binding ShowName,Converter={StaticResource StringToTextBlockEllipsis}}" ClipToBounds="True"
+                                            FontSize="24" Margin="0,0,5,10" VerticalAlignment="Center"></ContentControl>
                             <ToggleButton Width="16" Height="16" Content="384,304,16,16 368,304,16,16" IsChecked="{Binding IsMan,Mode=OneWay}" IsEnabled="False"
                                                     Visibility="{Binding Sex, Converter={StaticResource BoolToVisibility}}">
                                 <ContentControl.Template>
@@ -55,7 +57,8 @@
                             </ToggleButton>
                         </StackPanel>
                         <ContentControl Height="22" Visibility="{Binding Signature,Converter={StaticResource BoolToValue},ConverterParameter=Visible,FallbackValue=Collapsed}">
-                            <TextBlock Text="{Binding Signature}" FontSize="14" Foreground="#888" VerticalAlignment="Center" HorizontalAlignment="Center" MaxWidth="500" TextTrimming="CharacterEllipsis"></TextBlock>
+                            <ContentControl Content="{Binding Signature,Converter={StaticResource StringToTextBlockEllipsis}}" ClipToBounds="True"
+                                       FontSize="14" Foreground="#888" VerticalAlignment="Center" HorizontalAlignment="Center" MaxWidth="500"></ContentControl>
                         </ContentControl>
                         <StackPanel Margin="155,30,155,40" Orientation="Horizontal" HorizontalAlignment="Center">
                             <Rectangle Width="160"></Rectangle>
@@ -63,7 +66,8 @@
                                 <StackPanel Orientation="Horizontal" Height="19" Visibility="{Binding RemarkName,Converter={StaticResource BoolToValue},ConverterParameter=Visible,FallbackValue=Collapsed}">
                                     <TextBlock Text="备注:" FontSize="12" Foreground="#888" VerticalAlignment="Center"></TextBlock>
                                     <Rectangle Width="10"></Rectangle>
-                                    <TextBlock Text="{Binding RemarkName}" FontSize="12" Foreground="#888" VerticalAlignment="Center" Width="134"></TextBlock>
+                                    <ContentControl Content="{Binding RemarkName,Converter={StaticResource StringToTextBlockEllipsis}}" ClipToBounds="True"
+                                               FontSize="12" Foreground="#888" VerticalAlignment="Center" Width="134"></ContentControl>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Height="19" Visibility="{Binding ProvinceAndCity,Converter={StaticResource BoolToValue},ConverterParameter=Visible,FallbackValue=Collapsed}">
                                     <TextBlock Text="地区:" FontSize="12" Foreground="#888" VerticalAlignment="Center"></TextBlock>
