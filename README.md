@@ -3,6 +3,9 @@
 
 软件中的图标和表情都是使用网页微信的资源，还有很多功能是待实现的，例如任务栏托盘图标，图片文件发送，截屏，创建群聊等。
 
+项目中用到了prism和reactiveui框架，虽然它们都是MVVM框架，这里用它们做不同的事情。使用prism是为了将应用程序划分为多个离散的、松散耦合的、半独立的组件，使用reactiveui是为了反应式编程。
+
+
 这里暂时提供一些软件截图。
 
 ![Image text](https://github.com/845669495/WeChatClient/blob/master/images/1.png)
